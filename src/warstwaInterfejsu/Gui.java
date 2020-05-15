@@ -58,6 +58,8 @@ public class Gui extends Application {
     Button startSong = new Button("Start");
     Button pauseSong = new Button("Pause");
     Button stopSong = new Button("Stop");
+    Button addSong = new Button("Dodaj utwór");
+    Button deleteSong = new Button("Usuń utwór");
     ///////////////Kierunkowskazy//////////////
     Polygon rightArrow = new Polygon();
     Polygon leftArrow = new Polygon();
@@ -290,7 +292,7 @@ public class Gui extends Application {
         radioTitleHBox.getChildren().add(radioTitle);
         radio1HBox.getChildren().addAll(previousSong, nextSong);
         radio2HBox.getChildren().add(songText);
-        radio3HBox.getChildren().addAll(pauseSong, startSong, stopSong);
+        radio3HBox.getChildren().addAll(pauseSong, startSong, stopSong, addSong, deleteSong);
         radioVBox.getChildren().addAll(radioTitleHBox, radio1HBox, radio2HBox, radio3HBox);
         grid.setConstraints(radioVBox, 1, 8);
 
@@ -700,6 +702,10 @@ public class Gui extends Application {
         });
         pauseSong.setOnAction(e ->{
             mediaPlayer.pause();
+        });
+        addSong.setOnAction(e ->{
+            InsertingBox.display("Podaj parametry dla nowego utworu");
+            //operateOnDataBase.insert();
         });
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
