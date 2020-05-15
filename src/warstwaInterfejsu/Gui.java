@@ -704,8 +704,7 @@ public class Gui extends Application {
             mediaPlayer.pause();
         });
         addSong.setOnAction(e ->{
-            InsertingBox.display("Podaj parametry dla nowego utworu");
-            //operateOnDataBase.insert();
+            InsertingBox.display("Podaj parametry dla nowego utworu", operateOnDataBase);
         });
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
