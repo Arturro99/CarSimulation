@@ -19,24 +19,30 @@ import java.util.ArrayList;
 
 public class InsertingBox {
     static ArrayList<TextField>list = new ArrayList<>();
-    static TextField textTitle = new TextField();
-    static TextField textAlbum = new TextField();
-    static TextField textDuration = new TextField();
-    static TextField textId = new TextField();
-    static TextField textPerformer = new TextField();
+    static TextField textTitle;
+    static TextField textAlbum;
+    static TextField textDuration;
+    static TextField textId;
+    static TextField textPerformer;
 
-    public static void display(String title, OperateOnDataBase operateOnDataBase){
+    public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setWidth(500);
         window.setMinHeight(300);
 
+        textId = new TextField();
+        textPerformer = new TextField();
+        textDuration = new TextField();
+        textAlbum = new TextField();
+        textTitle = new TextField();
         Label labelTitle = new Label();
         Label labelPerformer = new Label();
         Label labelAlbum = new Label();
         Label labelDuration = new Label();
         Label labelId = new Label();
+        list.clear();
         list.add(textTitle);
         list.add(textAlbum);
         list.add(textDuration);
@@ -79,6 +85,46 @@ public class InsertingBox {
         GridPane layout = new GridPane();
         layout.getChildren().addAll(labelTitle, labelDuration, labelAlbum, labelId, labelPerformer,
                 textAlbum, textDuration, textId, textPerformer, textTitle, button);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.show();
+
+    }
+
+    public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase){
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setWidth(300);
+        window.setMinHeight(200);
+
+        textId = new TextField();
+        Label labelId = new Label();
+        labelId.setText("Podaj id utworu, który zamierzasz usunąć: ");
+        Button button = new Button("Zapisz");
+        list.clear();
+        list.add(textId);
+
+        GridPane.setConstraints(labelId, 0, 0);
+        GridPane.setConstraints(textId, 1, 0);
+        GridPane.setConstraints(button, 1, 1);
+
+        button.setOnAction(e-> {
+                    if (validate()) {
+                        window.close();
+                        try {
+                            operateOnDataBase.delete(getTextId());
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    } else
+                        AlertBox.display("Alert", "Wskazane pole musi być uzupełnione!");
+                });
+
+        GridPane layout = new GridPane();
+        layout.getChildren().addAll(labelId, textId, button);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);

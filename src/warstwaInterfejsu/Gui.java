@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Gui extends Application {
     BorderPane wholeGrid = new BorderPane();
@@ -660,13 +661,22 @@ public class Gui extends Application {
             }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
+        AtomicInteger i = new AtomicInteger();
         nextSong.setOnAction(e ->{
             try {
-                if(operateOnDataBase.notInDeletedSongs(radioIndex) && radioIndex < operateOnDataBase.countSongs()) {
-                    songText.setText(operateOnDataBase.selectOne(++radioIndex));
+                    while(operateOnDataBase.selectOne(++radioIndex).equals("")) {
+                        System.out.println("Kupa");
+                        i.getAndIncrement();
+                        if(i.get() > 10)
+                            break;
+                    }
+                    if(i.get() < 10)
+                        songText.setText(operateOnDataBase.selectOne(radioIndex));
+                    else
+                        radioIndex -= i.get();
+                    i.set(0);
                     if(isMusicPlaying)
                         stopSong.fire();
-                }
                 System.out.println(radioIndex);
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -674,15 +684,24 @@ public class Gui extends Application {
         });
         previousSong.setOnAction(e ->{
             try {
-                if(operateOnDataBase.notInDeletedSongs(radioIndex) && radioIndex > 1) {
-                    songText.setText(operateOnDataBase.selectOne(--radioIndex));
-                    if(isMusicPlaying)
+                if (radioIndex > 1) {
+                    while (operateOnDataBase.selectOne(--radioIndex).equals("")) {
+                        i.getAndIncrement();
+                        if (i.get() > 10)
+                            break;
+                    }
+                    if (i.get() < 10)
+                        songText.setText(operateOnDataBase.selectOne(radioIndex));
+                    else
+                        radioIndex += i.get();
+                    i.set(0);
+                    if (isMusicPlaying)
                         stopSong.fire();
+                    System.out.println(radioIndex);
                 }
-                System.out.println(radioIndex);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            } catch(SQLException ex){
+                    ex.printStackTrace();
+                }
         });
         startSong.setOnAction(e ->{
             if(!isMusicPlaying) {
@@ -703,7 +722,8 @@ public class Gui extends Application {
         pauseSong.setOnAction(e ->{
             mediaPlayer.pause();
         });
-        addSong.setOnAction(e -> InsertingBox.display("Podaj parametry dla nowego utworu", operateOnDataBase));
+        addSong.setOnAction(e -> InsertingBox.displayNewSongStage("Podaj parametry dla nowego utworu", operateOnDataBase));
+        deleteSong.setOnAction(e -> InsertingBox.displayDeleteSongStage("Podaj id utworu", operateOnDataBase));
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
             operateOnFiles.saveToXmlFile("Próba.xml", mileage);

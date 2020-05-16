@@ -151,5 +151,4 @@ public class OperateOnDataBase {
         }
         return amount;
     }
-
 }
