@@ -720,6 +720,7 @@ public class Gui extends Application {
             this.additionalColor = Color.DARKBLUE;
             drawAll();
             showVelocity();
+            showImages(mainColor);
             grid.setStyle("-fx-background-color: DIMGRAY ");
             images.setStyle("-fx-background-color: DIMGRAY ");
             listOfGearsControls.get(1).setFill(Color.RED);
@@ -729,6 +730,7 @@ public class Gui extends Application {
             this.additionalColor = Color.CORAL;
             drawAll();
             showVelocity();
+            showImages(mainColor);
             grid.setStyle("-fx-background-color: AZURE ");
             images.setStyle("-fx-background-color: AZURE ");
             listOfGearsControls.get(1).setFill(Color.RED);
@@ -738,6 +740,7 @@ public class Gui extends Application {
             this.additionalColor = Color.BLACK;
             drawAll();
             showVelocity();
+            showImages(mainColor);
             grid.setStyle("-fx-background-color: CRIMSON ");
             images.setStyle("-fx-background-color: CRIMSON ");
             listOfGearsControls.get(1).setFill(Color.RED);
