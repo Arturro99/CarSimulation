@@ -91,6 +91,7 @@ public class Gui extends Application {
     Text dailyMileage = new Text();
     Text userMileage = new Text();
     Text time = new Text();
+    Text engineSpeed = new Text();
 
     ////////////////////////Interakcje z użytkownikiem////////////////////////////////////
     Button engineButton = new Button("Włącz silnik");
@@ -284,6 +285,9 @@ public class Gui extends Application {
         ////////////////////////ZEGAR
         GridPane.setConstraints(time, 0, 7);
         RunningTime.showTime(time, additionalColor, englishSystem);
+        ////////////////////////OBROTOMIERZ
+        GridPane.setConstraints(engineSpeed, 0, 8);
+
         ////////////////////////// TEMOPOMAT
 
         tempomatSpeedText.setFill(additionalColor);
@@ -310,7 +314,8 @@ public class Gui extends Application {
 
         /////////////////////////////////Dodawanie elemenntów do siatki///////////////////////////////////////
         grid.getChildren().addAll(leftArrow, rightArrow, velocity, lightsVBox,
-                diodesHBox, gearsVBox, statisticVBox, mileageVBox, buttonsHBox, resetUserMileageButton, tempomatHBox, radioVBox, time);
+                diodesHBox, gearsVBox, statisticVBox, mileageVBox, buttonsHBox,
+                resetUserMileageButton, tempomatHBox, radioVBox, time, engineSpeed);
 
 
         wholeGrid.setCenter(grid);
@@ -352,6 +357,15 @@ public class Gui extends Application {
             }
         }, 0, 1000);
 
+        ////////////////////////////////////Obsługa obrotomierza///////////////////////////////////////////
+        Timer engineSpeedTimer = new Timer();
+        engineSpeedTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(RunningTime.getIsEngineOn())
+                    engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))));
+            }
+        }, 0, 200);
         ////////////////////////////////////////////////////KeyEventy//////////////////////////////////////////////
         ArrayList<Timer>tmp1L = new ArrayList<>();  //pomocnicza pętla do przechowywania obiektów typu Timer
         ArrayList<Timer>tmp1R = new ArrayList<>();  // -------------------||----------------------------
@@ -495,6 +509,7 @@ public class Gui extends Application {
                 RunningTime.startCountingTimeForEngine();
                 RunningTime.setIsEngineOn(true);
                 engineButton.setText("Wyłącz silnik");
+                engineSpeed.setVisible(true);
                 mileage.checkData();
             }
             else {
@@ -502,6 +517,7 @@ public class Gui extends Application {
                     System.out.println(RunningTime.getRunningEngineTime());
                     RunningTime.setIsEngineOn(false);
                     engineButton.setText("Włącz silnik");
+                    engineSpeed.setVisible(false);
                     if(tmp4.size() != 1) {
                         for(int i = 1; i < tmp4.size(); i++)
                             tmp4.get(i).cancel();
@@ -796,7 +812,7 @@ public class Gui extends Application {
 ///////////////////////////////Obsługa zamykania symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
         stage.setOnCloseRequest(e -> {
             e.consume();
-            Boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
+            boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
                 System.exit(0);

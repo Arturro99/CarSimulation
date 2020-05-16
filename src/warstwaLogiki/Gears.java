@@ -103,4 +103,20 @@ public class Gears {
             }
         }
     }
+
+    public static double calculateEngineSpeed(ArrayList<Boolean>listOfGears){
+        if(listOfGears.get(1) || listOfGears.get(0))
+            return Accelerator.getPower()*226.66 + 200;
+        else if(listOfGears.get(2))
+            return Accelerator.getPower()*82.66 + 386.66;
+        else if(listOfGears.get(3))
+            return Accelerator.getPower()*62 - 1060;
+        else if(listOfGears.get(4))
+            return Accelerator.getPower()*51.66 - 2300;
+        else if(listOfGears.get(5))
+            return Accelerator.getPower()*56.36 - 4272.72;
+        else if(listOfGears.get(6))
+            return Accelerator.getPower()*47.7 - 4923;
+        return 0.0;
+    }
 }
