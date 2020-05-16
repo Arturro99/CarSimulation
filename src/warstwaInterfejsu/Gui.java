@@ -334,7 +334,6 @@ public class Gui extends Application {
                         e.printStackTrace();
                     }
                     diodes.get(2).setFill(mainColor);
-                    System.out.println(areSeatbeltsPutOn.get());
                 }
                 else if(areSeatbeltsPutOn.get() && RunningTime.getIsEngineOn()){
                     diodes.get(2).setFill(Color.RED);
@@ -347,9 +346,9 @@ public class Gui extends Application {
         ArrayList<Timer>tmp1L = new ArrayList<>();  //pomocnicza pętla do przechowywania obiektów typu Timer
         ArrayList<Timer>tmp1R = new ArrayList<>();  // -------------------||----------------------------
 
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->{   //Co się dzieje po wciśnięciu danego klawisza
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, (key) ->{   //Co się dzieje po wciśnięciu danego klawisza
             ////////////////////////Przyspieszenie/////////////////////////////////////////
-            if(key.getCode() == KeyCode.W && !Clutch.getIsOn() && RunningTime.getIsEngineOn() && Gears.canGoFurtherOnGear(listOfGears)) {
+            if(key.getCode() == KeyCode.UP && !Clutch.getIsOn() && RunningTime.getIsEngineOn() && Gears.canGoFurtherOnGear(listOfGears)) {
                 try {
                     Gears.checkEngineSpeed(listOfGears, diodes, mainColor);
                     accelerator.pressPedal(1);
@@ -359,7 +358,7 @@ public class Gui extends Application {
                 }
             }
             //////////////////////Hamowanie//////////////////////////////////
-            if(key.getCode() == KeyCode.S && RunningTime.getIsEngineOn()){
+            if(key.getCode() == KeyCode.DOWN && RunningTime.getIsEngineOn()){
                 Gears.checkEngineSpeed(listOfGears, diodes, mainColor);
                 brake.pressPedal(1);
                 diodes.get(0).setFill(Color.RED);
@@ -382,7 +381,7 @@ public class Gui extends Application {
                 Gears.checkEngineSpeed(listOfGears, diodes, mainColor);
             }
             /////////////////Kierunkowskaz w prawo//////////////////////////////////
-            if(key.getCode() == KeyCode.D && RunningTime.getIsEngineOn()){
+            if(key.getCode() == KeyCode.RIGHT && RunningTime.getIsEngineOn()){
                 Timer randomTimer = new Timer();
                 tmp1R.add(randomTimer);
                 if(!right.getIsOn() && !left.getIsOn()){
@@ -407,7 +406,7 @@ public class Gui extends Application {
                 }
             }
             ////////////////////Kierunkowskaz w lewo//////////////////////////////////
-            if(key.getCode() == KeyCode.A && RunningTime.getIsEngineOn()){
+            if(key.getCode() == KeyCode.LEFT && RunningTime.getIsEngineOn()){
                 Timer randomTimer = new Timer();
                 tmp1L.add(randomTimer);
                 if(!left.getIsOn() && !right.getIsOn()){
@@ -441,8 +440,8 @@ public class Gui extends Application {
         });
 
         ArrayList<Timer>tmp2 = new ArrayList<>();
-        stage.addEventHandler(KeyEvent.KEY_RELEASED, (key) ->{      //Co się dzieje po puszczeniu danego klawisza
-            if(key.getCode() == KeyCode.W){
+        stage.addEventFilter(KeyEvent.KEY_RELEASED, (key) ->{      //Co się dzieje po puszczeniu danego klawisza
+            if(key.getCode() == KeyCode.UP){
                 Timer randomTimer = new Timer();
                 tmp2.add(randomTimer);
                 randomTimer.schedule(new TimerTask() {
@@ -461,7 +460,7 @@ public class Gui extends Application {
                 }, 0,  2000);
             }
 
-            if(key.getCode() == KeyCode.S && RunningTime.getIsEngineOn())
+            if(key.getCode() == KeyCode.DOWN && RunningTime.getIsEngineOn())
             {
                 brake.releasePedal(null);
                 diodes.get(0).setFill(mainColor);
@@ -594,10 +593,11 @@ public class Gui extends Application {
         ////////////////Tempomat////////////////////////////
         ArrayList<Timer>tmp5= new ArrayList<>();
         tempomatButton.setOnAction(e -> {
-            if(!isTempomatOn) {
+            if(!isTempomatOn && RunningTime.getIsEngineOn()) {
                 isTempomatOn = true;
                 tempomatButton.setText("Wyłącz tempomat");
                 showImages(mainColor);
+                tempomatSpeedValue = roundUp(Accelerator.getPower());
                 for (Timer timer : tmp2) timer.cancel();
                 Timer tempomatTimer = new Timer();
                 tmp5.add(tempomatTimer);
@@ -642,8 +642,9 @@ public class Gui extends Application {
         });
 
         plusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue))
-                tempomatSpeedValue += 5;
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue)) {
+                    tempomatSpeedValue += 5;
+            }
             else {
                 tempomatSpeedValue = roundUp(Accelerator.getPower());
             }
@@ -652,10 +653,10 @@ public class Gui extends Application {
         });
 
         minusButton.setOnAction(e -> {
-            if(isTempomatOn)
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue))
                 tempomatSpeedValue -= 5;
             else {
-                tempomatSpeedValue = roundUp(Accelerator.getPower())-5;
+                tempomatSpeedValue = roundUp(Accelerator.getPower());
             }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
@@ -702,9 +703,7 @@ public class Gui extends Application {
         pauseSong.setOnAction(e ->{
             mediaPlayer.pause();
         });
-        addSong.setOnAction(e ->{
-            InsertingBox.display("Podaj parametry dla nowego utworu", operateOnDataBase);
-        });
+        addSong.setOnAction(e -> InsertingBox.display("Podaj parametry dla nowego utworu", operateOnDataBase));
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
             operateOnFiles.saveToXmlFile("Próba.xml", mileage);
