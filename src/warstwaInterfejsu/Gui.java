@@ -147,7 +147,8 @@ public class Gui extends Application {
         MenuItem exit = new MenuItem("Zakończ program");
         fileMenu.getItems().addAll(save, exit);
         Menu helpMenu = new Menu("Pomoc");
-        helpMenu.getItems().addAll(new MenuItem("Informacje o programie"));
+        MenuItem programInfo = new MenuItem("Informacje o programie");
+        helpMenu.getItems().addAll(programInfo);
         Menu infoMenu = new Menu("Info");
         infoMenu.getItems().addAll(new MenuItem("Informacje o samochodzie"), new MenuItem("Gwarancja"));
         Menu editMenu = new Menu("Edycja");
@@ -745,6 +746,7 @@ public class Gui extends Application {
             images.setStyle("-fx-background-color: CRIMSON ");
             listOfGearsControls.get(1).setFill(Color.RED);
         });
+        programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
 
 ///////////////////////////////Obsługa zamykania symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
         stage.setOnCloseRequest(e -> {
