@@ -43,6 +43,7 @@ public class Gui extends Application {
     boolean isTempomatOn = false;
     boolean isFogLightsOn = false;
     boolean isMusicPlaying = false;
+    boolean englishSystem = false;
     int radioIndex = 0;
     int whichLightOn = 0;
     int tempomatSpeedValue = 0;
@@ -89,6 +90,7 @@ public class Gui extends Application {
     Text totalMileage = new Text();
     Text dailyMileage = new Text();
     Text userMileage = new Text();
+    Text time = new Text();
 
     ////////////////////////Interakcje z użytkownikiem////////////////////////////////////
     Button engineButton = new Button("Włącz silnik");
@@ -133,7 +135,6 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        RunningTime.startCountingTimeForApp();  //Obliczanie czasu trwania programu
         ////////////////////////////Ustawianie okienka////////////////////////////////////
         stage.setTitle("Fiat 126p");
 
@@ -157,8 +158,12 @@ public class Gui extends Application {
         MenuItem dark = new MenuItem("Motyw ciemny");
         MenuItem light = new MenuItem("Motyw jasny");
         MenuItem retro = new MenuItem("Motyw retro");
+        Menu changeTimeFormat = new Menu("Zmień format czasu");
+        MenuItem englishFormat = new MenuItem("12 - godzinny");
+        MenuItem normalFormat = new MenuItem("24 - godzinny");
+        changeTimeFormat.getItems().addAll(englishFormat, normalFormat);
         changeTheme.getItems().addAll(dark, light, retro);
-        editMenu.getItems().addAll(changeTheme);
+        editMenu.getItems().addAll(changeTheme, changeTimeFormat);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, editMenu, infoMenu, helpMenu);
         HBox menu = new HBox();
@@ -275,6 +280,10 @@ public class Gui extends Application {
 
         diodesHBox.getChildren().addAll(diodesOne,diodesTwo);
         GridPane.setConstraints(diodesHBox, 0, 4);
+
+        ////////////////////////ZEGAR
+        GridPane.setConstraints(time, 0, 7);
+        RunningTime.showTime(time, additionalColor, englishSystem);
         ////////////////////////// TEMOPOMAT
 
         tempomatSpeedText.setFill(additionalColor);
@@ -301,7 +310,7 @@ public class Gui extends Application {
 
         /////////////////////////////////Dodawanie elemenntów do siatki///////////////////////////////////////
         grid.getChildren().addAll(leftArrow, rightArrow, velocity, lightsVBox,
-                diodesHBox, gearsVBox, statisticVBox, mileageVBox, buttonsHBox, resetUserMileageButton, tempomatHBox, radioVBox);
+                diodesHBox, gearsVBox, statisticVBox, mileageVBox, buttonsHBox, resetUserMileageButton, tempomatHBox, radioVBox, time);
 
 
         wholeGrid.setCenter(grid);
@@ -741,6 +750,7 @@ public class Gui extends Application {
             drawAll();
             showVelocity();
             showImages(mainColor);
+            RunningTime.showTime(time, additionalColor, englishSystem);
             grid.setStyle("-fx-background-color: DIMGRAY ");
             images.setStyle("-fx-background-color: DIMGRAY ");
             listOfGearsControls.get(1).setFill(Color.RED);
@@ -751,6 +761,7 @@ public class Gui extends Application {
             drawAll();
             showVelocity();
             showImages(mainColor);
+            RunningTime.showTime(time, additionalColor, englishSystem);
             grid.setStyle("-fx-background-color: AZURE ");
             images.setStyle("-fx-background-color: AZURE ");
             listOfGearsControls.get(1).setFill(Color.RED);
@@ -761,11 +772,26 @@ public class Gui extends Application {
             drawAll();
             showVelocity();
             showImages(mainColor);
+            RunningTime.showTime(time, additionalColor, englishSystem);
             grid.setStyle("-fx-background-color: CRIMSON ");
             images.setStyle("-fx-background-color: CRIMSON ");
             listOfGearsControls.get(1).setFill(Color.RED);
         });
         programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
+        englishFormat.setOnAction(e->{
+            if(!englishSystem) {
+                englishSystem = true;
+                RunningTime.stopClock();
+                RunningTime.showTime(time, additionalColor, englishSystem);
+            }
+        });
+        normalFormat.setOnAction(e->{
+            if(englishSystem) {
+                englishSystem = false;
+                RunningTime.stopClock();
+                RunningTime.showTime(time, additionalColor, englishSystem);
+            }
+        });
 
 ///////////////////////////////Obsługa zamykania symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
         stage.setOnCloseRequest(e -> {
