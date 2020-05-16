@@ -36,24 +36,39 @@ public class Gears {
     public static boolean isGearInProperRange(ArrayList<Boolean> listOfGears){
         if(listOfGears.get(1) && Accelerator.getPower() >= 5||
                 listOfGears.get(2) && Accelerator.getPower() >= 30 ||
-                listOfGears.get(3) && Accelerator.getPower() >= 50 ||
-                listOfGears.get(4) && Accelerator.getPower() >= 70 ||
-                listOfGears.get(5) && Accelerator.getPower() >= 100)
+                listOfGears.get(3) && Accelerator.getPower() >= 60 ||
+                listOfGears.get(4) && Accelerator.getPower() >= 90 ||
+                listOfGears.get(5) && Accelerator.getPower() >= 120)
             return true;
         return false;
     }
 
     /**
-     *Sprawdzanie, czy na danym biegu można szybciej pojechać
+     *Sprawdzanie, czy na danym biegu można szybciej/wolniej pojechać
      */
     public static boolean canGoFurtherOnGear(ArrayList<Boolean> listOfGears){
         if(listOfGears.get(0) && Accelerator.getPower() < 30 ||
-                listOfGears.get(1) && Accelerator.getPower() < 30 ||
-                listOfGears.get(2) && Accelerator.getPower() < 100 ||
-                listOfGears.get(3) && Accelerator.getPower() < 150 ||
-                listOfGears.get(4) && Accelerator.getPower() < 180 ||
-                listOfGears.get(5) && Accelerator.getPower() < 200 ||
-                listOfGears.get(6) && Accelerator.getPower() < 250)
+                listOfGears.get(1) && Accelerator.getPower() < 30||
+                listOfGears.get(2) && Accelerator.getPower() < 80 && Accelerator.getPower() > 5||
+                listOfGears.get(3) && Accelerator.getPower() < 130 && Accelerator.getPower() > 30||
+                listOfGears.get(4) && Accelerator.getPower() < 180 && Accelerator.getPower() > 60||
+                listOfGears.get(5) && Accelerator.getPower() < 200 && Accelerator.getPower() > 90||
+                listOfGears.get(6) && Accelerator.getPower() < 250 && Accelerator.getPower() > 120)
+            return true;
+        return false;
+    }
+
+    /**
+     *Sprawdzanie, czy na danym biegu można zwiekszyc predkosc na tempomacie
+     */
+    public static boolean canGoFurtherOnGear(ArrayList<Boolean> listOfGears, int speed){
+        if(listOfGears.get(0) && Accelerator.getPower() < 30 ||
+                listOfGears.get(1) && speed < 30 ||
+                listOfGears.get(2) && speed < 80 ||
+                listOfGears.get(3) && speed < 130 ||
+                listOfGears.get(4) && speed < 180 ||
+                listOfGears.get(5) && speed < 200 ||
+                listOfGears.get(6) && speed < 250)
             return true;
         return false;
     }

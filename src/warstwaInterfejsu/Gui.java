@@ -336,8 +336,6 @@ public class Gui extends Application {
                     System.out.println(areSeatbeltsPutOn.get());
                 }
                 else if(areSeatbeltsPutOn.get() && RunningTime.getIsEngineOn()){
-                    beltTimer.cancel();
-                    beltTimer.purge();
                     diodes.get(2).setFill(Color.RED);
                 }
 
@@ -643,7 +641,7 @@ public class Gui extends Application {
         });
 
         plusButton.setOnAction(e -> {
-            if(isTempomatOn)
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue))
                 tempomatSpeedValue += 5;
             else {
                 tempomatSpeedValue = roundUp(Accelerator.getPower());
