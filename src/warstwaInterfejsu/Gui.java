@@ -642,7 +642,7 @@ public class Gui extends Application {
         });
 
         plusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue)) {
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue + 5)) {
                     tempomatSpeedValue += 5;
             }
             else {
@@ -653,7 +653,7 @@ public class Gui extends Application {
         });
 
         minusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue))
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5))
                 tempomatSpeedValue -= 5;
             else {
                 tempomatSpeedValue = roundUp(Accelerator.getPower());

@@ -58,13 +58,16 @@ public class Gears {
      *Sprawdzanie, czy na danym biegu można zwiekszyc/zmniejszyć predkosc na tempomacie
      */
     public static boolean canGoFurtherOnGear(ArrayList<Boolean> listOfGears, int speed){
-        return listOfGears.get(0) && Accelerator.getPower() < 30 ||
-                listOfGears.get(1) && speed < 30 ||
-                listOfGears.get(2) && speed < 80 && speed > 5 ||
-                listOfGears.get(3) && speed < 130 && speed > 30 ||
-                listOfGears.get(4) && speed < 180 && speed > 60 ||
-                listOfGears.get(5) && speed < 200 && speed > 90 ||
-                listOfGears.get(6) && speed < 250 && speed > 120;
+         if(listOfGears.get(0) && Accelerator.getPower() < 30 ||
+                listOfGears.get(1) && speed <= 30 ||
+                listOfGears.get(2) && speed <= 80 && speed >= 0 ||
+                listOfGears.get(3) && speed <= 130 && speed >= 25 ||
+                listOfGears.get(4) && speed <= 180 && speed >= 55 ||
+                listOfGears.get(5) && speed <= 200 && speed >= 85 ||
+                listOfGears.get(6) && speed <= 250 && speed >= 115)
+             return true;
+         else
+             return false;
     }
 
     /**
