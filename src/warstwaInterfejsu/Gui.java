@@ -209,6 +209,25 @@ public class Gui extends Application {
         grid.setStyle("-fx-background-color: CRIMSON ");
         images.setStyle("-fx-background-color: CRIMSON ");
 
+        noLights.setFocusTraversable(false);
+        passingLightsRadio.setFocusTraversable(false);
+        dayLightsRadio.setFocusTraversable(false);
+        fogLightsRadio.setFocusTraversable(false);
+        headlightsRadio.setFocusTraversable(false);
+        engineButton.setFocusTraversable(false);
+        emergencyLightsButton.setFocusTraversable(false);
+        resetUserMileageButton.setFocusTraversable(false);
+        tempomatButton.setFocusTraversable(false);
+        plusButton.setFocusTraversable(false);
+        minusButton.setFocusTraversable(false);
+        nextSong.setFocusTraversable(false);
+        previousSong.setFocusTraversable(false);
+        pauseSong.setFocusTraversable(false);
+        startSong.setFocusTraversable(false);
+        stopSong.setFocusTraversable(false);
+        addSong.setFocusTraversable(false);
+        deleteSong.setFocusTraversable(false);
+
         noLights.setSelected(true); //domyślnie -> światła są wyłączone
         listOfGears.set(1, true);   //domyślnie -> włączony pierwszy bieg
         listOfGearsControls.get(1).setFill(Color.RED); //-------||-----------
@@ -359,11 +378,19 @@ public class Gui extends Application {
 
         ////////////////////////////////////Obsługa obrotomierza///////////////////////////////////////////
         Timer engineSpeedTimer = new Timer();
+        final boolean[] turnOff = {false};
         engineSpeedTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(RunningTime.getIsEngineOn())
+                if(RunningTime.getIsEngineOn()) {
                     engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))));
+
+                    if (Math.round(Gears.calculateEngineSpeed(listOfGears)) < 800 && !listOfGears.get(1)) {
+                        engineButton.fire();
+                        engineSpeedTimer.cancel();
+                        turnOff[0] = true;
+                    }
+                }
             }
         }, 0, 200);
         ////////////////////////////////////////////////////KeyEventy//////////////////////////////////////////////
@@ -374,6 +401,8 @@ public class Gui extends Application {
             ////////////////////////Przyspieszenie/////////////////////////////////////////
             if(key.getCode() == KeyCode.UP && !Clutch.getIsOn() && RunningTime.getIsEngineOn() && Gears.canGoFurtherOnGear(listOfGears)) {
                 try {
+                    if(turnOff[0])
+                        engineButton.fire();
                     Gears.checkEngineSpeed(listOfGears, diodes, mainColor);
                     accelerator.pressPedal(1);
                     showVelocity();
@@ -959,6 +988,7 @@ public class Gui extends Application {
         else
             tmp.getChildren().add(tempomatczarnobiale);
         wholeGrid.setLeft(tmp);
+
     }
 
     private int roundUp(int n) {
