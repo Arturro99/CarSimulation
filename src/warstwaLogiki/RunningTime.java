@@ -14,7 +14,11 @@ import java.time.Instant;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Date;
-
+/**
+ *
+ *  Odpowiada za liczenie czasu
+ *
+ */
 public class RunningTime {
     private static long startCountingEngine;
     private static boolean IsEngineOn = false;

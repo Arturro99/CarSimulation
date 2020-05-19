@@ -5,7 +5,11 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
-
+/**
+ *
+ *  Wyswietla nowe okno z podanym komunikatem i zwraca odp. Tak lub Nie
+ *
+ */
 public class ConfirmBox {
     static boolean answer;
 

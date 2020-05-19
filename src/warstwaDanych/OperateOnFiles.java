@@ -6,10 +6,18 @@ import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ *
+ *  Pozwala na zapisywanie i odczytywanie z pliku
+ *
+ */
 public class OperateOnFiles {
     private static boolean wasLoaded = false;
-
+    /**
+     *
+     *  Zapisywanie do pliku XML
+     *
+     */
     public void saveToXmlFile(String nazwa, Object obj)
     {
         XStream xstream = new XStream(new DomDriver());
@@ -30,7 +38,11 @@ public class OperateOnFiles {
         catch (Exception se)
         {System.err.println("blad sec");}
     }
-
+    /**
+     *
+     *  Wczytywanie z pliku XML do Mileage
+     *
+     */
     public Mileage loadFromXmlFile(String nazwa, Mileage obj) throws SuchFileDoesNotExist {
         XStream xstream = new XStream(new DomDriver());
         File file = new File(nazwa);
@@ -42,7 +54,11 @@ public class OperateOnFiles {
             throw new SuchFileDoesNotExist("Plik o podanej nazwie nie istnieje, nie wczytano danych");
         return obj;
     }
-
+    /**
+     *
+     *  Wczytywanie z pliku XML do ListOfSongs
+     *
+     */
     public ListOfSongs loadFromXmlFile(String nazwa, ListOfSongs obj) throws SuchFileDoesNotExist {
         XStream xstream = new XStream(new DomDriver());
         File file = new File(nazwa);
@@ -55,14 +71,11 @@ public class OperateOnFiles {
         return obj;
     }
 
-    public static boolean getWasLoaded() {
-        return wasLoaded;
-    }
-
-    public static void setWasLoaded(boolean wasLoaded) {
-        OperateOnFiles.wasLoaded = wasLoaded;
-    }
-
+    /**
+     *
+     *  Zapisuje piosenki do pliku tekstowego
+     *
+     */
     public void saveToTxtFile(String nazwa)
     {
         File file = new File(nazwa);
@@ -76,7 +89,11 @@ public class OperateOnFiles {
         catch(IOException io){System.out.println(io.getMessage());}
         catch(Exception se){System.err.println("blad sec");}
     }
-
+    /**
+     *
+     *  Wczytuje piosenki z pliku tekstowego
+     *
+     */
     public void readFromTxtFile(String nazwa, ListOfSongs obj)
     {
         ArrayList<Character> readedSongs = new ArrayList<>();

@@ -980,7 +980,11 @@ public class Gui extends Application {
             i.setStroke(color.BLACK);
         }
     }
-
+    /**
+     *
+     *     Rysuje obrazki kontrolek
+     *
+     */
     private void showImages(Color color) {
         VBox tmp = new VBox();
         if(color == Color.DIMGRAY)
@@ -1010,7 +1014,11 @@ public class Gui extends Application {
         wholeGrid.setLeft(tmp);
 
     }
-
+    /**
+     *
+     *     Zaokrągla liczbę do wielokrotności 5
+     *
+     */
     private int roundUp(int n) {
         return (n + 4) / 5 * 5;
     }

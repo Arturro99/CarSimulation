@@ -7,7 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+/**
+ *
+ *  Wyswietla nowe okno z podanym komunikatem
+ *
+ */
 public class AlertBox {
     public static void display(String title, String message){
         Stage window = new Stage();
