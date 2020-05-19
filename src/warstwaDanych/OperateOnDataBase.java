@@ -132,23 +132,4 @@ public class OperateOnDataBase {
         statement.executeUpdate("UPDATE piosenki SET Album = " + "'" + newAlbum + "'" +
                 "WHERE id = " + "'" + id + "'");
     }
-
-    public boolean notInDeletedSongs(int index) {
-        for (Integer i : listOfDeletedSongs) {
-            if (i == index)
-                return false;
-        }
-        return true;
-    }
-
-    public int countSongs() throws SQLException {
-        int amount = 0;
-        con = DriverManager.getConnection(dbURL, user, password);
-        statement = con.createStatement();
-        ResultSet result = statement.executeQuery("SELECT * FROM piosenki");
-        while(result.next()){
-            amount++;
-        }
-        return amount;
-    }
 }

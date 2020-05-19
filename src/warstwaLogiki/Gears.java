@@ -81,6 +81,7 @@ public class Gears {
                         listOfGears.set(i, false);
                         listOfGears.set(i + 1, true);
                         System.out.println("Włączono bieg: " + "(" + listOfGears.get(i + 1) + ")" + listOfGearsCaption.get(i + 1).getText());
+                        System.out.println("Wyłączono bieg: " + "(" + listOfGears.get(i) + ")" + listOfGearsCaption.get(i).getText());
                         listOfGearsControls.get(i + 1).setFill(Color.RED);
                         listOfGearsControls.get(i).setFill(mainColor);
                         break;

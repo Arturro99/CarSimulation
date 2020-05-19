@@ -98,6 +98,7 @@ public class Gui extends Application {
     Button emergencyLightsButton = new Button("Światła awaryjne");
     Button resetUserMileageButton = new Button("Zresetuj przebieg");
     RadioButton noLights = new RadioButton("Światła wyłączone");
+    RadioButton positionLightsRadio = new RadioButton("Światła pozycyjne");
     RadioButton passingLightsRadio = new RadioButton("Światła mijania");
     RadioButton headlightsRadio = new RadioButton("Światła długie");
     RadioButton dayLightsRadio = new RadioButton("Światła dzienne");
@@ -117,6 +118,7 @@ public class Gui extends Application {
     Clutch clutch = new Clutch();
     Indicator left = new Indicator(Side.left);
     Indicator right = new Indicator(Side.right);
+    PositionLights positionLights = new PositionLights();
     PassingLights passingLights = new PassingLights();
     FogLights fogLights = new FogLights();
     Headlights headlights = new Headlights();
@@ -197,11 +199,12 @@ public class Gui extends Application {
         }
 
         ///////////////////////////////Dodawanie świateł do grupy///////////////////////////////////////////////////
+        positionLightsRadio.setToggleGroup(groupOfLights);
         passingLightsRadio.setToggleGroup(groupOfLights);
         headlightsRadio.setToggleGroup(groupOfLights);
         dayLightsRadio.setToggleGroup(groupOfLights);
         noLights.setToggleGroup(groupOfLights);
-        images.getChildren().addAll(mijaniaczarnobiale, dlugieczarnobiale, dzienneczarnobiale, przeciwmgielneczarnobiale, tempomatczarnobiale);
+        images.getChildren().addAll(pozycyjneczarnobiale, mijaniaczarnobiale, dlugieczarnobiale, dzienneczarnobiale, przeciwmgielneczarnobiale, tempomatczarnobiale);
         ////////////////////////Pokazanie wszystkiego w okienku////////////////////////////////////////////////////
         drawAll();
         showVelocity();
@@ -209,6 +212,7 @@ public class Gui extends Application {
         grid.setStyle("-fx-background-color: CRIMSON ");
         images.setStyle("-fx-background-color: CRIMSON ");
 
+        ////////////////////////////////////Ustawienie braku skupienia na elementach///////////////////////////////
         noLights.setFocusTraversable(false);
         passingLightsRadio.setFocusTraversable(false);
         dayLightsRadio.setFocusTraversable(false);
@@ -250,7 +254,7 @@ public class Gui extends Application {
         /////////////////////////ŚWIATŁA
         VBox lightsVBox = new VBox();
         lightsVBox.setSpacing(5);
-        lightsVBox.getChildren().addAll(noLights, passingLightsRadio, headlightsRadio, dayLightsRadio, fogLightsRadio);
+        lightsVBox.getChildren().addAll(noLights, positionLightsRadio, passingLightsRadio, headlightsRadio, dayLightsRadio, fogLightsRadio);
         GridPane.setConstraints(lightsVBox, 0, 3);
 
         //////////////////////////STATYSTYKI
@@ -339,7 +343,7 @@ public class Gui extends Application {
 
         wholeGrid.setCenter(grid);
         wholeGrid.setLeft(images);
-        Scene scene = new Scene(wholeGrid, 800, 600);
+        Scene scene = new Scene(wholeGrid, 800, 650);
         stage.setScene(scene);
         stage.show();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -598,6 +602,8 @@ public class Gui extends Application {
         noLights.setOnAction(e->{
             if(passingLights.getIsOn())
                 passingLights.turnOff();
+            else if(positionLights.getIsOn())
+                positionLights.turnOff();
             else if(headlights.getIsOn())
                 headlights.turnOff();
             else if(dayLights.getIsOn())
@@ -610,30 +616,43 @@ public class Gui extends Application {
             showImages(mainColor);
         });
 
+        ///////////Światła pozycyjne////////////////////////
+        positionLightsRadio.setOnAction(e->{
+            if(passingLights.getIsOn()) passingLights.turnOff();
+            if(headlights.getIsOn()) headlights.turnOff();
+            if(dayLights.getIsOn()) dayLights.turnOff();
+            positionLights.turnOn();
+            whichLightOn = 1;
+            showImages(mainColor);
+        });
+
         ///////////Światła mijania////////////////////////
         passingLightsRadio.setOnAction(e->{
+            if(positionLights.getIsOn()) positionLights.turnOff();
             if(headlights.getIsOn()) headlights.turnOff();
             if(dayLights.getIsOn()) dayLights.turnOff();
             passingLights.turnOn();
-            whichLightOn = 1;
+            whichLightOn = 2;
             showImages(mainColor);
         });
 
         //////////////Światłą długie///////////////////////
         headlightsRadio.setOnAction(e->{
+            if(positionLights.getIsOn()) positionLights.turnOff();
             if(passingLights.getIsOn()) passingLights.turnOff();
             if(dayLights.getIsOn()) dayLights.turnOff();
             headlights.turnOn();
-            whichLightOn = 2;
+            whichLightOn = 3;
             showImages(mainColor);
         });
 
         ////////////////Światła dzienne/////////////////////
         dayLightsRadio.setOnAction(e->{
+            if(positionLights.getIsOn()) positionLights.turnOff();
             if(passingLights.getIsOn()) passingLights.turnOff();
             if(headlights.getIsOn()) headlights.turnOff();
             dayLights.turnOn();
-            whichLightOn = 3;
+            whichLightOn = 4;
             showImages(mainColor);
         });
 
@@ -719,7 +738,6 @@ public class Gui extends Application {
         nextSong.setOnAction(e ->{
             try {
                     while(operateOnDataBase.selectOne(++radioIndex).equals("")) {
-                        System.out.println("Kupa");
                         i.getAndIncrement();
                         if(i.get() > 10)
                             break;
@@ -972,13 +990,15 @@ public class Gui extends Application {
         else if(color == Color.CRIMSON)
             tmp.setStyle("-fx-background-color: CRIMSON ");
         if(whichLightOn==0)
-            tmp.getChildren().addAll(mijaniaczarnobiale, dlugieczarnobiale, dzienneczarnobiale);
+            tmp.getChildren().addAll(pozycyjneczarnobiale, mijaniaczarnobiale, dlugieczarnobiale, dzienneczarnobiale);
         else if(whichLightOn == 1)
-            tmp.getChildren().addAll(mijania, dlugieczarnobiale, dzienneczarnobiale);
+            tmp.getChildren().addAll(pozycyjne, mijaniaczarnobiale, dlugieczarnobiale, dzienneczarnobiale);
         else if(whichLightOn == 2)
-            tmp.getChildren().addAll(mijaniaczarnobiale, dlugie, dzienneczarnobiale);
+            tmp.getChildren().addAll(pozycyjneczarnobiale, mijania, dlugieczarnobiale, dzienneczarnobiale);
         else if(whichLightOn == 3)
-            tmp.getChildren().addAll(mijaniaczarnobiale, dlugieczarnobiale, dzienne);
+            tmp.getChildren().addAll(pozycyjneczarnobiale, mijaniaczarnobiale, dlugie, dzienneczarnobiale);
+        else if(whichLightOn == 4)
+            tmp.getChildren().addAll(pozycyjneczarnobiale, mijaniaczarnobiale, dlugieczarnobiale, dzienne);
         if(isFogLightsOn)
             tmp.getChildren().add(przeciwmgielne);
         else
@@ -993,9 +1013,5 @@ public class Gui extends Application {
 
     private int roundUp(int n) {
         return (n + 4) / 5 * 5;
-    }
-
-    private void tempomatTimer(ArrayList<Timer> tmp2) {
-
     }
 }
