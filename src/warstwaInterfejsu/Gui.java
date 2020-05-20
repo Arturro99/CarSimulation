@@ -459,6 +459,8 @@ public class Gui extends Application {
             }
             /////////////////Kierunkowskaz w prawo//////////////////////////////////
             if(key.getCode() == KeyCode.RIGHT && RunningTime.getIsEngineOn()){
+                song = new Media(new File("Indicator.mp3").toURI().toString());
+                mediaPlayer = new MediaPlayer(song);
                 Timer randomTimer = new Timer();
                 tmp1R.add(randomTimer);
                 if(!right.getIsOn() && !left.getIsOn()){
@@ -466,15 +468,19 @@ public class Gui extends Application {
                     randomTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
+                            mediaPlayer.stop();
+                            mediaPlayer.play();
                             drawArrows(Color.LAWNGREEN, Arrows.rightArrow);
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(300);
+                                mediaPlayer.stop();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            mediaPlayer.play();
                             drawArrows(mainColor, Arrows.rightArrow);
                         }
-                    }, 0,  2000);
+                    }, 0,  1000);
                 }
                 else if(right.getIsOn() && !left.getIsOn()){
                     right.turnOff();
@@ -484,6 +490,8 @@ public class Gui extends Application {
             }
             ////////////////////Kierunkowskaz w lewo//////////////////////////////////
             if(key.getCode() == KeyCode.LEFT && RunningTime.getIsEngineOn()){
+                song = new Media(new File("Indicator.mp3").toURI().toString());
+                mediaPlayer = new MediaPlayer(song);
                 Timer randomTimer = new Timer();
                 tmp1L.add(randomTimer);
                 if(!left.getIsOn() && !right.getIsOn()){
@@ -491,15 +499,19 @@ public class Gui extends Application {
                     randomTimer.schedule(new TimerTask() {
                         @Override
                         public void run() {
+                            mediaPlayer.stop();
+                            mediaPlayer.play();
                             drawArrows(Color.LAWNGREEN, Arrows.leftArrow);
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(300);
+                                mediaPlayer.stop();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            mediaPlayer.play();
                             drawArrows(mainColor, Arrows.leftArrow);
                         }
-                    }, 0,  2000);
+                    }, 0,  1000);
                 }
                 else if(left.getIsOn() && !right.getIsOn()){
                     left.turnOff();
@@ -596,6 +608,8 @@ public class Gui extends Application {
         ArrayList<Timer>tmp3 = new ArrayList<>();
         emergencyLightsButton.setOnAction(e ->{
             if(Indicator.getNumberOfTurningSignals() != 2) {
+                song = new Media(new File("Indicator.mp3").toURI().toString());
+                mediaPlayer = new MediaPlayer(song);
                 left.turnOn();
                 right.turnOn();
                 Timer randomTimer = new Timer();
@@ -603,17 +617,21 @@ public class Gui extends Application {
                 randomTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
+                        mediaPlayer.stop();
+                        mediaPlayer.play();
                         drawArrows(Color.LAWNGREEN, Arrows.leftArrow);
                         drawArrows(Color.LAWNGREEN, Arrows.rightArrow);
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(300);
+                            mediaPlayer.stop();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        mediaPlayer.play();
                         drawArrows(mainColor, Arrows.leftArrow);
                         drawArrows(mainColor, Arrows.rightArrow);
                     }
-                }, 0, 2000);
+                }, 0, 1000);
             }
             else{
                 for (Timer timer : tmp3) timer.cancel();
