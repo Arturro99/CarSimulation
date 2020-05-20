@@ -38,14 +38,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Gui extends Application {
-    BorderPane wholeGrid = new BorderPane();
+    static BorderPane wholeGrid = new BorderPane();
 
-    boolean isTempomatOn = false;
-    boolean isFogLightsOn = false;
+    static boolean isTempomatOn = false;
+    static boolean isFogLightsOn = false;
     boolean isMusicPlaying = false;
-    boolean englishSystem = false;
+    static boolean englishSystem = false;
     int radioIndex = 0;
-    int whichLightOn = 0;
+    static int whichLightOn = 0;
     int tempomatSpeedValue = 0;
     Button tempomatButton = new Button("Włącz tempomat");
     Button plusButton = new Button("+");
@@ -63,25 +63,34 @@ public class Gui extends Application {
     Button addSong = new Button("Dodaj utwór");
     Button deleteSong = new Button("Usuń utwór");
     ///////////////Kierunkowskazy//////////////
-    Polygon rightArrow = new Polygon();
-    Polygon leftArrow = new Polygon();
+    static Polygon rightArrow = new Polygon();
+    static Polygon leftArrow = new Polygon();
     ///////////////Swiatla/////////////////////
-    ImageView dlugie = new ImageView(new Image(new FileInputStream("swiatla\\dlugie.png")));
-    ImageView dlugieczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\dlugieczarnobiale.png")));
-    ImageView dzienne = new ImageView(new Image(new FileInputStream("swiatla\\dzienne.png")));
-    ImageView dzienneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\dzienneczarnobiale.png")));
-    ImageView mijania = new ImageView(new Image(new FileInputStream("swiatla\\mijania.png")));
-    ImageView mijaniaczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\mijaniaczarnobiale.png")));
-    ImageView pozycyjne = new ImageView(new Image(new FileInputStream("swiatla\\pozycyjne.png")));
-    ImageView pozycyjneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\pozycyjneczarnobiale.png")));
-    ImageView przeciwmgielne = new ImageView(new Image(new FileInputStream("swiatla\\przeciwmgielne.png")));
-    ImageView przeciwmgielneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\przeciwmgielneczarnobiale.png")));
-    ImageView tempomat = new ImageView(new Image(new FileInputStream("swiatla\\tempomat.png")));
-    ImageView tempomatczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\tempomatczarnobiale.png")));
-    VBox images = new VBox();
+    static ImageView dlugie, dlugieczarnobiale, dzienne, dzienneczarnobiale, mijania, mijaniaczarnobiale, pozycyjne, pozycyjneczarnobiale,
+    przeciwmgielne, przeciwmgielneczarnobiale, tempomat, tempomatczarnobiale;
+
+    static {
+        try {
+            dlugie = new ImageView(new Image(new FileInputStream("swiatla\\dlugie.png")));
+            dlugieczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\dlugieczarnobiale.png")));
+            dzienne = new ImageView(new Image(new FileInputStream("swiatla\\dzienne.png")));
+            dzienneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\dzienneczarnobiale.png")));
+            mijania = new ImageView(new Image(new FileInputStream("swiatla\\mijania.png")));
+            mijaniaczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\mijaniaczarnobiale.png")));
+            pozycyjne = new ImageView(new Image(new FileInputStream("swiatla\\pozycyjne.png")));
+            pozycyjneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\pozycyjneczarnobiale.png")));
+            przeciwmgielne = new ImageView(new Image(new FileInputStream("swiatla\\przeciwmgielne.png")));
+            przeciwmgielneczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\przeciwmgielneczarnobiale.png")));
+            tempomat = new ImageView(new Image(new FileInputStream("swiatla\\tempomat.png")));
+            tempomatczarnobiale = new ImageView(new Image(new FileInputStream("swiatla\\tempomatczarnobiale.png")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    static VBox images = new VBox();
 
     //////////////Podpisy//////////////////////
-    Text velocity = new Text();
+    static Text velocity = new Text();
     Text avgSpeed = new Text();
     Text maxSpeed = new Text();
     Text travelTime = new Text();
@@ -90,7 +99,7 @@ public class Gui extends Application {
     Text totalMileage = new Text();
     Text dailyMileage = new Text();
     Text userMileage = new Text();
-    Text time = new Text();
+    static Text time = new Text();
     Text engineSpeed = new Text();
 
     ////////////////////////Interakcje z użytkownikiem////////////////////////////////////
@@ -106,10 +115,10 @@ public class Gui extends Application {
     ToggleGroup groupOfLights = new ToggleGroup();
 
     /////////////////////Listy pomocnicze do grupowania elementów/////////////////////////
-    ArrayList<Circle> listOfGearsControls = new ArrayList<>();
+    static ArrayList<Circle> listOfGearsControls = new ArrayList<>();
     ArrayList<Boolean> listOfGears = new ArrayList<>();
     ArrayList<Text> listOfGearsCaption = new ArrayList<>();
-    ArrayList<Circle> diodes = new ArrayList<>();
+    static ArrayList<Circle> diodes = new ArrayList<>();
     ArrayList<Text> diodesCaption = new ArrayList<>();
 
     ////////////////////////Obiekty klas z innych plików///////////////////////////////////
@@ -128,20 +137,31 @@ public class Gui extends Application {
     OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
     Media song;
     MediaPlayer mediaPlayer;
+    Settings  settings = new Settings();
 
     ////////////Kolory w programie///////////////
-    Color mainColor = Color.CRIMSON;
-    Color additionalColor = Color.BLACK;
+    static Color mainColor;
+    static Color additionalColor;
 
-    public Gui() throws FileNotFoundException {
-    }
+    static GridPane grid = new GridPane();
 
     @Override
     public void start(Stage stage) throws Exception {
+        /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
+        try {
+            mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
+            settings = operateOnFiles.loadFromXmlFile("Config.xml", settings);
+        }
+        catch(SuchFileDoesNotExist exc) {
+            System.err.println(exc);
+            AlertBox.display("Alert", "Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
+
+        additionalColor = settings.getAdditionalColor();
+        mainColor = settings.getMainColor();
+        englishSystem = settings.getEnglishSystem();
         ////////////////////////////Ustawianie okienka////////////////////////////////////
         stage.setTitle("Fiat 126p");
 
-        GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setHgap(20);
         grid.setVgap(10);
@@ -156,19 +176,16 @@ public class Gui extends Application {
         helpMenu.getItems().addAll(programInfo);
         Menu infoMenu = new Menu("Info");
         infoMenu.getItems().addAll(new MenuItem("Informacje o samochodzie"), new MenuItem("Gwarancja"));
-        Menu editMenu = new Menu("Edycja");
+        Menu settingsMenu = new Menu("Ustawienia");
+        MenuItem settingsItem = new MenuItem("Dostosuj");
         Menu changeTheme = new Menu("Zmień motyw");
-        MenuItem dark = new MenuItem("Motyw ciemny");
-        MenuItem light = new MenuItem("Motyw jasny");
-        MenuItem retro = new MenuItem("Motyw retro");
         Menu changeTimeFormat = new Menu("Zmień format czasu");
         MenuItem englishFormat = new MenuItem("12 - godzinny");
         MenuItem normalFormat = new MenuItem("24 - godzinny");
         changeTimeFormat.getItems().addAll(englishFormat, normalFormat);
-        changeTheme.getItems().addAll(dark, light, retro);
-        editMenu.getItems().addAll(changeTheme, changeTimeFormat);
+        settingsMenu.getItems().addAll(settingsItem);
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(fileMenu, editMenu, infoMenu, helpMenu);
+        menuBar.getMenus().addAll(fileMenu, settingsMenu, infoMenu, helpMenu);
         HBox menu = new HBox();
         menu.getChildren().add(menuBar);
         wholeGrid.setTop(menu);
@@ -209,8 +226,18 @@ public class Gui extends Application {
         drawAll();
         showVelocity();
         showStatistics();
-        grid.setStyle("-fx-background-color: CRIMSON ");
-        images.setStyle("-fx-background-color: CRIMSON ");
+        if(settings.getMainColor().toString().substring(2).equals("696969ff")) {
+            grid.setStyle("-fx-background-color: DIMGRAY");
+            images.setStyle("-fx-background-color: DIMGRAY");
+        }
+        else if(settings.getMainColor().toString().substring(2).equals("f0ffffff")){
+            grid.setStyle("-fx-background-color: AZURE");
+            images.setStyle("-fx-background-color: AZURE");
+        }
+        else{
+            grid.setStyle("-fx-background-color: CRIMSON");
+            images.setStyle("-fx-background-color: CRIMSON");
+        }
 
         ////////////////////////////////////Ustawienie braku skupienia na elementach///////////////////////////////
         noLights.setFocusTraversable(false);
@@ -348,13 +375,6 @@ public class Gui extends Application {
         stage.show();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
-        try {
-            mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
-        }
-        catch(SuchFileDoesNotExist exc) {
-            System.err.println(exc);
-            AlertBox.display("Alert", "Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 
         AtomicBoolean areSeatbeltsPutOn = new AtomicBoolean(false); //zmienna informująca o zapiętych pasach
@@ -799,64 +819,20 @@ public class Gui extends Application {
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
             operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+            operateOnFiles.saveToXmlFile("Config.xml", settings);
         });
         exit.setOnAction(e->{
-            Boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
+            boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
                 System.exit(0);
             }
         });
-        dark.setOnAction(e->{
-            this.mainColor = Color.DIMGRAY;
-            this.additionalColor = Color.DARKBLUE;
-            drawAll();
-            showVelocity();
-            showImages(mainColor);
-            RunningTime.showTime(time, additionalColor, englishSystem);
-            grid.setStyle("-fx-background-color: DIMGRAY ");
-            images.setStyle("-fx-background-color: DIMGRAY ");
-            listOfGearsControls.get(1).setFill(Color.RED);
-        });
-        light.setOnAction(e->{
-            this.mainColor = Color.AZURE;
-            this.additionalColor = Color.CORAL;
-            drawAll();
-            showVelocity();
-            showImages(mainColor);
-            RunningTime.showTime(time, additionalColor, englishSystem);
-            grid.setStyle("-fx-background-color: AZURE ");
-            images.setStyle("-fx-background-color: AZURE ");
-            listOfGearsControls.get(1).setFill(Color.RED);
-        });
-        retro.setOnAction(e->{
-            this.mainColor = Color.CRIMSON;
-            this.additionalColor = Color.BLACK;
-            drawAll();
-            showVelocity();
-            showImages(mainColor);
-            RunningTime.showTime(time, additionalColor, englishSystem);
-            grid.setStyle("-fx-background-color: CRIMSON ");
-            images.setStyle("-fx-background-color: CRIMSON ");
-            listOfGearsControls.get(1).setFill(Color.RED);
-        });
-        programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
-        englishFormat.setOnAction(e->{
-            if(!englishSystem) {
-                englishSystem = true;
-                RunningTime.stopClock();
-                RunningTime.showTime(time, additionalColor, englishSystem);
-            }
-        });
-        normalFormat.setOnAction(e->{
-            if(englishSystem) {
-                englishSystem = false;
-                RunningTime.stopClock();
-                RunningTime.showTime(time, additionalColor, englishSystem);
-            }
-        });
+        settingsItem.setOnAction(e->{settings.display(); System.out.println("Kupa");});
 
-///////////////////////////////Obsługa zamykania symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
+        programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
+
+///////////////////////////////Obsługa zamykaniFsea symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
         stage.setOnCloseRequest(e -> {
             e.consume();
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
@@ -872,7 +848,7 @@ public class Gui extends Application {
      *     Rysuje wszystkie elementy kokpitu
      *
      */
-    private void drawAll(){
+    static void drawAll(){
         drawArrows(mainColor, Arrows.leftArrow);
         drawArrows(mainColor, Arrows.rightArrow);
         drawGears(mainColor);
@@ -884,29 +860,29 @@ public class Gui extends Application {
      *     Rysuje kierunkowskazy
      *
      */
-    private void drawArrows(Color color, Arrows arrow){
+    private static void drawArrows(Color color, Arrows arrow){
 
         if(arrow == Arrows.leftArrow) {
-            this.leftArrow.getPoints().addAll(100.0, 60.0,
+            leftArrow.getPoints().addAll(100.0, 60.0,
                     100.0, 40.0,
                     40.0, 40.0,
                     40.0, 20.0,
                     0.0, 50.0,
                     40.0, 80.0,
                     40.0, 60.0);
-            this.leftArrow.setFill(color);
-            this.leftArrow.setStroke(Color.LAVENDER);
+            leftArrow.setFill(color);
+            leftArrow.setStroke(Color.LAVENDER);
         }
         else {
-            this.rightArrow.getPoints().addAll(100.0, 60.0,
+            rightArrow.getPoints().addAll(100.0, 60.0,
                     100.0, 40.0,
                     160.0, 40.0,
                     160.0, 20.0,
                     200.0, 50.0,
                     160.0, 80.0,
                     160.0, 60.0);
-            this.rightArrow.setFill(color);
-            this.rightArrow.setStroke(Color.LAVENDER);
+            rightArrow.setFill(color);
+            rightArrow.setStroke(Color.LAVENDER);
         }
     }
 
@@ -915,7 +891,7 @@ public class Gui extends Application {
      *     Pokazuje prędkość pojazdu
      *
      */
-    private void showVelocity(){
+    static void showVelocity(){
         velocity.setText(Accelerator.getPower() + " km/h");
         velocity.setFill(additionalColor);
         velocity.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
@@ -962,7 +938,7 @@ public class Gui extends Application {
      *     Rysuje kontrolki biegów
      *
      */
-    private void drawGears(Color color){
+    private static void drawGears(Color color){
         for(Circle i: listOfGearsControls) {
             i.setFill(color);
             i.setStroke(Color.DARKGREEN);
@@ -974,7 +950,7 @@ public class Gui extends Application {
      *     Rysuje diody
      *
      */
-    private void drawDiodes(Color color){
+    private static void drawDiodes(Color color){
         for(Circle i: diodes){
             i.setFill(color);
             i.setStroke(color.BLACK);
@@ -985,7 +961,7 @@ public class Gui extends Application {
      *     Rysuje obrazki kontrolek
      *
      */
-    private void showImages(Color color) {
+    static void showImages(Color color) {
         VBox tmp = new VBox();
         if(color == Color.DIMGRAY)
             tmp.setStyle("-fx-background-color: DIMGRAY ");

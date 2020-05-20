@@ -2,6 +2,7 @@ package warstwaDanych;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import warstwaInterfejsu.Settings;
 import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
 
 import java.io.*;
@@ -49,6 +50,22 @@ public class OperateOnFiles {
         if(file.exists()) {
             wasLoaded = true;
             obj = (Mileage)xstream.fromXML(file);
+        }
+        else
+            throw new SuchFileDoesNotExist("Plik o podanej nazwie nie istnieje, nie wczytano danych");
+        return obj;
+    }
+    /**
+     *
+     *  Wczytywanie z pliku XML do Settings
+     *
+     */
+    public Settings loadFromXmlFile(String nazwa, Settings obj) throws SuchFileDoesNotExist {
+        XStream xstream = new XStream(new DomDriver());
+        File file = new File(nazwa);
+        if(file.exists()) {
+            wasLoaded = true;
+            obj = (Settings)xstream.fromXML(file);
         }
         else
             throw new SuchFileDoesNotExist("Plik o podanej nazwie nie istnieje, nie wczytano danych");
