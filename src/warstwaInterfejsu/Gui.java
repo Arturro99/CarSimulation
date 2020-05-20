@@ -514,6 +514,12 @@ public class Gui extends Application {
                 else
                     areSeatbeltsPutOn.set(false);
             }
+            ////////////////////////Klakson///////////////////////////////////
+            if(key.getCode() == KeyCode.K){
+                song = new Media(new File("ship.mp3").toURI().toString());
+                mediaPlayer = new MediaPlayer(song);
+                mediaPlayer.play();
+            }
         });
 
         ArrayList<Timer>tmp2 = new ArrayList<>();
@@ -825,6 +831,7 @@ public class Gui extends Application {
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+                operateOnFiles.saveToXmlFile("Config.xml", settings);
                 System.exit(0);
             }
         });
@@ -838,6 +845,7 @@ public class Gui extends Application {
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+                operateOnFiles.saveToXmlFile("Config.xml", settings);
                 System.exit(0);
             }
         });

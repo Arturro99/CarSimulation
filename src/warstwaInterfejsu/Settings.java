@@ -66,6 +66,7 @@ public class Settings {
             Gui.drawAll();
             Gui.showVelocity();
             Gui.showImages(Gui.mainColor);
+            RunningTime.stopClock();
             RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: DIMGRAY ");
             Gui.images.setStyle("-fx-background-color: DIMGRAY ");
@@ -80,6 +81,7 @@ public class Settings {
             Gui.drawAll();
             Gui.showVelocity();
             Gui.showImages(Gui.mainColor);
+            RunningTime.stopClock();
             RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: AZURE ");
             Gui.images.setStyle("-fx-background-color: AZURE ");
@@ -94,6 +96,7 @@ public class Settings {
             Gui.drawAll();
             Gui.showVelocity();
             Gui.showImages(Gui.mainColor);
+            RunningTime.stopClock();
             RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: CRIMSON ");
             Gui.images.setStyle("-fx-background-color: CRIMSON ");
