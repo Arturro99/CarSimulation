@@ -1,5 +1,6 @@
 package warstwaInterfejsu;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -23,17 +24,19 @@ public class Settings {
         window.setTitle("Ustawienia");
         window.setWidth(700);
         window.setHeight(400);
-        GridPane grid = new GridPane();
 
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+
+        Text themeText = new Text("Wybierz motyw:");
         RadioButton dark = new RadioButton("Motyw ciemny");
         RadioButton light = new RadioButton("Motyw jasny");
         RadioButton retro = new RadioButton("Motyw retro");
+        Text formatText = new Text("Wybierz tryb zegarka:");
         RadioButton englishFormat = new RadioButton("Format 12-godzinny");
         RadioButton normalFormat = new RadioButton("Format 24-godzinny");
-        TextField fileInput = new TextField();
         ToggleGroup groupS = new ToggleGroup();
         ToggleGroup groupL = new ToggleGroup();
-        Text text = new Text("Nazwa pliku, do którego będzie zapisywany przebieg: ");
 
         dark.setToggleGroup(groupL);
         light.setToggleGroup(groupL);
@@ -41,16 +44,16 @@ public class Settings {
         englishFormat.setToggleGroup(groupS);
         normalFormat.setToggleGroup(groupS);
 
-        grid.getChildren().addAll(dark, light, retro, englishFormat, normalFormat, text, fileInput);
+        grid.getChildren().addAll(themeText, dark, light, retro, formatText, englishFormat, normalFormat);
         grid.setHgap(200);
 
-        GridPane.setConstraints(dark, 0, 0);
-        GridPane.setConstraints(light, 0, 1);
-        GridPane.setConstraints(retro, 0, 2);
-        GridPane.setConstraints(englishFormat, 1, 0);
-        GridPane.setConstraints(normalFormat, 1, 1);
-        GridPane.setConstraints(text, 0, 3);
-        GridPane.setConstraints(fileInput, 0, 4);
+        grid.setConstraints(themeText, 0, 0);
+        grid.setConstraints(dark, 0, 1);
+        grid.setConstraints(light, 0, 2);
+        grid.setConstraints(retro, 0, 3);
+        grid.setConstraints(formatText, 1, 0);
+        grid.setConstraints(englishFormat, 1, 1);
+        grid.setConstraints(normalFormat, 1, 2);
 
         normalFormat.setSelected(normalFormatOn);
         englishFormat.setSelected(englishFormatOn);

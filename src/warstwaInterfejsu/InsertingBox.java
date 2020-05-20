@@ -97,7 +97,7 @@ public class InsertingBox {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setWidth(300);
+        window.setWidth(500);
         window.setMinHeight(200);
 
         textId = new TextField();

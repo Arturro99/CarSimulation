@@ -20,17 +20,18 @@ public class Infos {
         GridPane grid = new GridPane();
         Text text = new Text("Program ma za zadanie ukazać \"symulację\" samochodu osobowego.\n" +
                 "Użytkownik do dyspozycji ma standardowe wyposażenie, takie jak: \n" +
-                "- pedał gazu (klawisz \"W\")\n" +
-                "- pedał hamulca (klawisz\"S\")\n" +
+                "- pedał gazu (strzałka w górę)\n" +
+                "- pedał hamulca (strzałka w dół)\n" +
                 "- pedał sprzęgła (klawisz\"C\")\n" +
-                "- prawy/lewy kierunkowskaz (klawisz \"D\"/\"A\")\n"+
+                "- prawy/lewy kierunkowskaz (strzałki prawo/lewo)\n"+
                 "- zmiana biegu w górę (klawisz \"NUM8\")\n" +
                 "- zmiana biegu w dół (klawisz \"NUM2\")\n" +
                 "- zapięcie pasów (klawisz \"P\")\n" +
+                "- użycie klaksonu (klawisz \"K\")\n" +
                 "- włączenie silnika\n" +
                 "- obsługa świateł awaryjnych\n" +
                 "- obsługa tempomatu \n" +
-                "- obsługa świateł mijania/drogowych/dziennych/przeciwmgielnych\n" +
+                "- obsługa świateł pozycyjnych/mijania/drogowych/dziennych/przeciwmgielnych\n" +
                 "Ponadto istnieje możliwość odtwarzania utworów *.mp3, dodawania ich oraz usuwania." +
                 "");
         text.setFont(new Font("Verdana", 12));

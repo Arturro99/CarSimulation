@@ -330,13 +330,14 @@ public class Gui extends Application {
         }
 
         diodesHBox.getChildren().addAll(diodesOne,diodesTwo);
-        GridPane.setConstraints(diodesHBox, 0, 4);
+        grid.setConstraints(diodesHBox, 0, 4);
 
         ////////////////////////ZEGAR
-        GridPane.setConstraints(time, 0, 7);
+        grid.setConstraints(time, 3, 2);
         RunningTime.showTime(time, additionalColor, englishSystem);
         ////////////////////////OBROTOMIERZ
-        GridPane.setConstraints(engineSpeed, 0, 8);
+        engineSpeed.setTextAlignment(TextAlignment.CENTER);
+        grid.setConstraints(engineSpeed, 1, 1);
 
         ////////////////////////// TEMOPOMAT
 
@@ -344,7 +345,6 @@ public class Gui extends Application {
         tempomatSpeedText.setFont(Font.font("Verdana", FontWeight.BOLD,  24));
         HBox tempomatHBox = new HBox();
         tempomatHBox.setSpacing(10);
-        tempomatHBox.setAlignment(Pos.CENTER);
         tempomatHBox.getChildren().addAll(tempomatButton, minusButton, plusButton, tempomatSpeedText);
         grid.setConstraints(tempomatHBox, 1,6);
 
@@ -370,7 +370,7 @@ public class Gui extends Application {
 
         wholeGrid.setCenter(grid);
         wholeGrid.setLeft(images);
-        Scene scene = new Scene(wholeGrid, 800, 650);
+        Scene scene = new Scene(wholeGrid, 850, 650);
         stage.setScene(scene);
         stage.show();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -407,7 +407,7 @@ public class Gui extends Application {
             @Override
             public void run() {
                 if(RunningTime.getIsEngineOn()) {
-                    engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))));
+                    engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))) + " RPM");
 
                     if (Math.round(Gears.calculateEngineSpeed(listOfGears)) < 800 && !listOfGears.get(1)) {
                         engineButton.fire();
@@ -658,6 +658,7 @@ public class Gui extends Application {
             }
             whichLightOn = 0;
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         ///////////Światła pozycyjne////////////////////////
@@ -668,6 +669,7 @@ public class Gui extends Application {
             positionLights.turnOn();
             whichLightOn = 1;
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         ///////////Światła mijania////////////////////////
@@ -678,6 +680,7 @@ public class Gui extends Application {
             passingLights.turnOn();
             whichLightOn = 2;
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         //////////////Światłą długie///////////////////////
@@ -688,6 +691,7 @@ public class Gui extends Application {
             headlights.turnOn();
             whichLightOn = 3;
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         ////////////////Światła dzienne/////////////////////
@@ -698,6 +702,7 @@ public class Gui extends Application {
             dayLights.turnOn();
             whichLightOn = 4;
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         ////////////////Światła przeciwmgielne//////////////
@@ -706,6 +711,7 @@ public class Gui extends Application {
             else fogLights.turnOn();
             isFogLightsOn = fogLightsRadio.isSelected();
             showImages(mainColor);
+            grid.requestFocus();
         });
 
         ////////////////Tempomat////////////////////////////
@@ -957,6 +963,7 @@ public class Gui extends Application {
 
         radioTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         songText.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        engineSpeed.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
     }
 
     /**

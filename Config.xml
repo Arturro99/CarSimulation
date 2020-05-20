@@ -1,7 +1,7 @@
 <warstwaInterfejsu.Settings>
   <darkOn>false</darkOn>
-  <lightOn>true</lightOn>
-  <retroOn>false</retroOn>
-  <englishFormatOn>false</englishFormatOn>
-  <normalFormatOn>true</normalFormatOn>
+  <lightOn>false</lightOn>
+  <retroOn>true</retroOn>
+  <englishFormatOn>true</englishFormatOn>
+  <normalFormatOn>false</normalFormatOn>
 </warstwaInterfejsu.Settings>
