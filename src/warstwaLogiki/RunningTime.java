@@ -9,9 +9,9 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.time.Instant;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Date;
 /**
@@ -38,30 +38,23 @@ public class RunningTime {
     }
 
     public static void showTime(Text timeText, Color color, boolean englishFormat){
-        if(englishFormat) {
-            clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-                LocalTime currentTime = LocalTime.now();
-                timeText.setText(currentTime.get(ChronoField.HOUR_OF_AMPM) + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
-            }),
-                    new KeyFrame(Duration.seconds(1))
-            );
-            timeText.setFill(color);
-            timeText.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
-            clock.setCycleCount(Animation.INDEFINITE);
-            clock.play();
-        }
-        else{
-            clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-                LocalTime currentTime = LocalTime.now();
-                timeText.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
-            }),
-                    new KeyFrame(Duration.seconds(1))
-            );
-            timeText.setFill(color);
-            timeText.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
-            clock.setCycleCount(Animation.INDEFINITE);
-            clock.play();
-        }
+        clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalTime currentTime = LocalTime.now();
+            if(englishFormat) {
+                DateTimeFormatter dateFormer = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                timeText.setText(currentTime.format(dateFormer));
+            }
+            else {
+                DateTimeFormatter dateFormer = DateTimeFormatter.ofPattern("HH:mm:ss");
+                timeText.setText(currentTime.format(dateFormer));
+            }
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        timeText.setFill(color);
+        timeText.setFont(Font.font("Verdana", FontWeight.BOLD, 25));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
     }
 
     public static void setIsEngineOn(boolean bool) {IsEngineOn = bool;}

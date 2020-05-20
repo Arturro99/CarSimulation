@@ -333,7 +333,7 @@ public class Gui extends Application {
         grid.setConstraints(diodesHBox, 0, 4);
 
         ////////////////////////ZEGAR
-        grid.setConstraints(time, 3, 2);
+        grid.setConstraints(time, 3, 1, 4, 2);
         RunningTime.showTime(time, additionalColor, englishSystem);
         ////////////////////////OBROTOMIERZ
         engineSpeed.setTextAlignment(TextAlignment.CENTER);
