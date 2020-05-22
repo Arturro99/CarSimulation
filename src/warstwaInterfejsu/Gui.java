@@ -410,9 +410,7 @@ public class Gui extends Application {
                     engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))) + " RPM");
 
                     if (Math.round(Gears.calculateEngineSpeed(listOfGears)) < 800 && !listOfGears.get(1)) {
-                        engineButton.fire();
-                        engineSpeedTimer.cancel();
-                        turnOff[0] = true;
+                        engineSpeed.setText("800 RPM");
                     }
                 }
             }
@@ -443,7 +441,7 @@ public class Gui extends Application {
             }
             /////////////////////Sprzęgło///////////////////////////////////
             if(key.getCode() == KeyCode.C && RunningTime.getIsEngineOn()){
-                if(!Clutch.getIsOn()) {
+                if(!Clutch.getIsOn() && !isTempomatOn) {
                     clutch.pressPedal(null);
                     diodes.get(3).setFill(Color.RED);
                 }
@@ -766,22 +764,22 @@ public class Gui extends Application {
         });
 
         plusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue + 5)) {
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue + 5) && Math.round(Gears.calculateEngineSpeed(listOfGears)) >= 800 && !listOfGears.get(1)){
                     tempomatSpeedValue += 5;
             }
-            else {
-                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
-            }
+//            else {
+//                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
+//            }
 
 
         });
 
         minusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5))
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5) && Math.round(Gears.calculateEngineSpeed(listOfGears)) > 800 && !listOfGears.get(1))
                 tempomatSpeedValue -= 5;
-            else {
-                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5 - 5;
-            }
+//            else {
+//                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
+//            }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
         AtomicInteger i = new AtomicInteger();
