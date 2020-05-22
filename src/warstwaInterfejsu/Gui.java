@@ -370,7 +370,7 @@ public class Gui extends Application {
 
         wholeGrid.setCenter(grid);
         wholeGrid.setLeft(images);
-        Scene scene = new Scene(wholeGrid, 850, 650);
+        Scene scene = new Scene(wholeGrid, 800, 650);
         stage.setScene(scene);
         stage.show();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -721,7 +721,7 @@ public class Gui extends Application {
                 isTempomatOn = true;
                 tempomatButton.setText("Wyłącz tempomat");
                 showImages(mainColor);
-                tempomatSpeedValue = roundUp(Accelerator.getPower());
+                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
                 for (Timer timer : tmp2) timer.cancel();
                 Timer tempomatTimer = new Timer();
                 tmp5.add(tempomatTimer);
@@ -770,7 +770,7 @@ public class Gui extends Application {
                     tempomatSpeedValue += 5;
             }
             else {
-                tempomatSpeedValue = roundUp(Accelerator.getPower());
+                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
             }
 
 
@@ -780,7 +780,7 @@ public class Gui extends Application {
             if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5))
                 tempomatSpeedValue -= 5;
             else {
-                tempomatSpeedValue = roundUp(Accelerator.getPower());
+                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5 - 5;
             }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
@@ -1022,13 +1022,5 @@ public class Gui extends Application {
             tmp.getChildren().add(tempomatczarnobiale);
         wholeGrid.setLeft(tmp);
 
-    }
-    /**
-     *
-     *     Zaokrągla liczbę do wielokrotności 5
-     *
-     */
-    private int roundUp(int n) {
-        return (n + 4) / 5 * 5;
     }
 }

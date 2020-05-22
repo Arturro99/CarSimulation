@@ -1,14 +1,12 @@
 import warstwaDanych.Mileage;
 import warstwaDanych.OperateOnFiles;
-import warstwaInterfejsu.AlertBox;
+
 import warstwaLogiki.pl.exceptions.OutOfFrequencyException;
 import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
-import warstwaLogiki.pl.exceptions.TooFastException;
-import warstwaLogiki.pl.lights.*;
-import warstwaLogiki.pl.pedals.*;
-import warstwaInterfejsu.Radio;
+
 import warstwaDanych.OperateOnDataBase;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -74,19 +72,46 @@ public class Main {
 //        String out2 = operate.selectAll();
 //        System.out.println(out2);
 
+        try {
+            mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
+        }
+        catch(SuchFileDoesNotExist exc) {
+            System.err.println(exc);
+            System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
+        mileage.checkData();
+
 
         showMenu();
-        showListOfSongs();
-        showMileage();
 
+        char option;
+        do {
+            option = (char) System.in.read();
+            switch (option) {
+                case '1':
+                    System.out.println("Ta opcja jeszcze nie działa");
+                    break;
+                case '2':
+                    showMileage();
+                    break;
+                case '3':
+                    showListOfSongs();
+                    break;
+                case '6':
+                    System.out.println("Wyłączanie programu");
+                    break;
+                default:
+                    System.out.println("Wybrano złą opcję");
+            }
+        }while(option != '6');
     }
 
 
     public static void showMenu(){
-        System.out.println("Wciśnij:");
-        System.out.println("1 - Uruchomić auto");
-        System.out.println("2 - Pokazać statystyki auta");
-        System.out.println("3 - Pokazać listę piosenek");
+        System.out.println("Wybierz opcję i zatwierdź enterem:");
+        System.out.println("1 - Włącz samochód");
+        System.out.println("2 - Wyświetl statystyki auta");
+        System.out.println("3 - Wyświetl listę piosenek");
+        System.out.println("6 - Wyłącz program");
         System.out.println("");
     }
 
@@ -102,14 +127,6 @@ public class Main {
     }
 
     public static void showMileage(){
-        try {
-        mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
-        }
-        catch(SuchFileDoesNotExist exc) {
-            System.err.println(exc);
-            System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
-        mileage.checkData();
-
         System.out.println("Przebieg całkowity: " + mileage.getTotalMileage());
         System.out.println("Przebieg dzienny: " + mileage.getDailyMileage());
         System.out.println("Przebieg użytkownika: " + mileage.getUserMileage());
