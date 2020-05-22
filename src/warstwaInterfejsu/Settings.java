@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -66,14 +67,10 @@ public class Settings {
             this.retroOn = false;
             Gui.mainColor = Color.DIMGRAY;
             Gui.additionalColor = Color.DARKBLUE;
-            Gui.drawAll();
-            Gui.showVelocity();
-            Gui.showImages(Gui.mainColor);
-            RunningTime.stopClock();
-            RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: DIMGRAY ");
             Gui.images.setStyle("-fx-background-color: DIMGRAY ");
-            Gui.listOfGearsControls.get(1).setFill(Color.RED);
+
+            drawStuff();
         });
         light.setOnAction(e->{
             this.lightOn = true;
@@ -81,14 +78,11 @@ public class Settings {
             this.darkOn = false;
             Gui.mainColor = Color.AZURE;
             Gui.additionalColor = Color.CORAL;
-            Gui.drawAll();
-            Gui.showVelocity();
-            Gui.showImages(Gui.mainColor);
-            RunningTime.stopClock();
-            RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: AZURE ");
             Gui.images.setStyle("-fx-background-color: AZURE ");
-            Gui.listOfGearsControls.get(1).setFill(Color.RED);
+
+            drawStuff();
+
         });
         retro.setOnAction(e->{
             this.retroOn = true;
@@ -96,14 +90,11 @@ public class Settings {
             this.darkOn = false;
             Gui.mainColor = Color.CRIMSON;
             Gui.additionalColor = Color.BLACK;
-            Gui.drawAll();
-            Gui.showVelocity();
-            Gui.showImages(Gui.mainColor);
-            RunningTime.stopClock();
-            RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
             Gui.grid.setStyle("-fx-background-color: CRIMSON ");
             Gui.images.setStyle("-fx-background-color: CRIMSON ");
-            Gui.listOfGearsControls.get(1).setFill(Color.RED);
+
+            drawStuff();
+
         });
         englishFormat.setOnAction(e->{
             this.englishFormatOn = true;
@@ -147,4 +138,20 @@ public class Settings {
             return Color.CORAL;
     }
     public boolean getEnglishSystem() {return englishFormatOn;}
+
+    private void drawStuff(){
+        Gui.drawAll();
+        Gui.showVelocity();
+        Gui.showImages(Gui.mainColor);
+        RunningTime.stopClock();
+        RunningTime.showTime(Gui.time, Gui.additionalColor, Gui.englishSystem);
+        Gui.listOfGearsControls.get(1).setFill(Color.RED);
+        Gui.gearsCaption.setFill(Gui.additionalColor);
+        for(int i = 0, j = 0; j < 7; i++, j++) {
+            if(i < 4)
+                Gui.diodesCaption.get(i).setFill(Gui.additionalColor);
+            Gui.listOfGearsCaption.get(j).setFill(Gui.additionalColor);
+            Gui.tempomatSpeedText.setFill(Gui.additionalColor);
+        }
+    }
 }
