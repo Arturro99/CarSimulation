@@ -49,10 +49,9 @@ public class Gui extends Application {
     Button tempomatButton = new Button("Włącz tempomat");
     Button plusButton = new Button("+");
     Button minusButton = new Button("-");
-    Text tempomatSpeedText = new Text(tempomatSpeedValue +" km/h");
 
-    ////////////////Radio//////////////////////
-    Text radioTitle = new Text("RADIO");
+    ////////////////MP3//////////////////////
+    Text radioTitle = new Text("Odtwarzacz MP3");
     Text songText = new Text("Piosenka");
     Button previousSong = new Button("Poprzednia");
     Button nextSong = new Button("Następna");
@@ -100,6 +99,8 @@ public class Gui extends Application {
     Text userMileage = new Text();
     static Text time = new Text();
     Text engineSpeed = new Text();
+    static Text gearsCaption = new Text();
+    static Text tempomatSpeedText;
 
     ////////////////////////Interakcje z użytkownikiem////////////////////////////////////
     Button engineButton = new Button("Włącz silnik");
@@ -116,9 +117,9 @@ public class Gui extends Application {
     /////////////////////Listy pomocnicze do grupowania elementów/////////////////////////
     static ArrayList<Circle> listOfGearsControls = new ArrayList<>();
     ArrayList<Boolean> listOfGears = new ArrayList<>();
-    ArrayList<Text> listOfGearsCaption = new ArrayList<>();
+    static ArrayList<Text> listOfGearsCaption = new ArrayList<>();
     static ArrayList<Circle> diodes = new ArrayList<>();
-    ArrayList<Text> diodesCaption = new ArrayList<>();
+    static ArrayList<Text> diodesCaption = new ArrayList<>();
 
     ////////////////////////Obiekty klas z innych plików///////////////////////////////////
     Accelerator accelerator = new Accelerator();
@@ -203,7 +204,7 @@ public class Gui extends Application {
         wholeGrid.setTop(menu);
 
         ///////////////////////////////Ustawianie biegów(kontrolki, podpisy)///////////////////////////////////////
-        Text gearsCaption = new Text("Biegi:");
+        gearsCaption = new Text("Biegi:");
         gearsCaption.setFill(additionalColor);
         gearsCaption.setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 20));
 
@@ -215,6 +216,7 @@ public class Gui extends Application {
             listOfGearsCaption.get(i).setFill(additionalColor);
             listOfGearsCaption.get(i).setFont(Font.font("Verdana", FontWeight.SEMI_BOLD, 15));
         }
+       tempomatSpeedText = new Text(tempomatSpeedValue +" km/h");
 
         ////////////////////////////////////////Ustawianie diód////////////////////////////////////////////////////
         diodesCaption.add(new Text("Światła hamowania"));
@@ -360,7 +362,7 @@ public class Gui extends Application {
         tempomatHBox.getChildren().addAll(tempomatButton, minusButton, plusButton, tempomatSpeedText);
         grid.setConstraints(tempomatHBox, 1,6);
 
-        ////////////////////////// RADIO
+        ////////////////////////// MP3
         HBox radioTitleHBox = new HBox();   radioTitleHBox.setSpacing(7.5);
         HBox radio1HBox = new HBox();   radio1HBox.setSpacing(7.5);
         HBox radio2HBox = new HBox();   radio2HBox.setSpacing(7.5);
@@ -453,7 +455,7 @@ public class Gui extends Application {
             }
             /////////////////////Sprzęgło///////////////////////////////////
             if(key.getCode() == KeyCode.C && RunningTime.getIsEngineOn()){
-                if(!Clutch.getIsOn()) {
+                if(!Clutch.getIsOn() && !isTempomatOn) {
                     clutch.pressPedal(null);
                     diodes.get(3).setFill(Color.RED);
                 }
@@ -776,22 +778,22 @@ public class Gui extends Application {
         });
 
         plusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue + 5)) {
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue + 5) && Math.round(Gears.calculateEngineSpeed(listOfGears)) >= 800 && !listOfGears.get(1)){
                     tempomatSpeedValue += 5;
             }
-            else {
-                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
-            }
+//            else {
+//                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
+//            }
 
 
         });
 
         minusButton.setOnAction(e -> {
-            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5))
+            if(isTempomatOn && Gears.canGoFurtherOnGear(listOfGears, tempomatSpeedValue - 5) && Math.round(Gears.calculateEngineSpeed(listOfGears)) > 800 && !listOfGears.get(1))
                 tempomatSpeedValue -= 5;
-            else {
-                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5 - 5;
-            }
+//            else {
+//                tempomatSpeedValue = (Accelerator.getPower() + 4) / 5 * 5;
+//            }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
         //AtomicInteger i = new AtomicInteger();
