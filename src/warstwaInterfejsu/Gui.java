@@ -330,14 +330,14 @@ public class Gui extends Application {
         }
 
         diodesHBox.getChildren().addAll(diodesOne,diodesTwo);
-        grid.setConstraints(diodesHBox, 0, 4);
+        GridPane.setConstraints(diodesHBox, 0, 4);
 
         ////////////////////////ZEGAR
-        grid.setConstraints(time, 3, 1, 4, 2);
+        GridPane.setConstraints(time, 3, 1, 4, 2);
         RunningTime.showTime(time, additionalColor, englishSystem);
         ////////////////////////OBROTOMIERZ
         engineSpeed.setTextAlignment(TextAlignment.CENTER);
-        grid.setConstraints(engineSpeed, 1, 1);
+        GridPane.setConstraints(engineSpeed, 1, 1);
 
         ////////////////////////// TEMOPOMAT
 

@@ -9,8 +9,6 @@ import warstwaDanych.OperateOnDataBase;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
-
 public class Main {
     static Mileage mileage = new Mileage();
     static OperateOnFiles operateOnFiles = new OperateOnFiles();
