@@ -10,7 +10,7 @@ public class Accelerator implements Pedals {
     @Override
     public void pressPedal(Integer powerInPercentage) throws TooFastException {
             if (power + powerInPercentage > 250) {
-                throw new TooFastException("Maksymalna wartość procentowa przyspieszenia nie może przekroczyć 100% (" + (int)(power + powerInPercentage) + "%)");
+                throw new TooFastException("Maksymalna wartość prędkości nie może przekroczyć 250 km/h (" + (int)(power + powerInPercentage) + " km/h");
             }
             else {
                 power += powerInPercentage;

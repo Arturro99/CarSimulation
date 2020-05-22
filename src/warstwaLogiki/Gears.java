@@ -31,14 +31,24 @@ public class Gears {
     }
 
     /**
-     *Sprawdzanie wartości prędkości, przy której można zmienić bieg
+     *Sprawdzanie wartości prędkości, przy której można zmienić bieg na wyzszy
      */
-    public static boolean isGearInProperRange(ArrayList<Boolean> listOfGears){
+    public static boolean isGearInProperRangeUP(ArrayList<Boolean> listOfGears){
         return listOfGears.get(1) && Accelerator.getPower() >= 5 ||
                 listOfGears.get(2) && Accelerator.getPower() >= 30 ||
                 listOfGears.get(3) && Accelerator.getPower() >= 60 ||
                 listOfGears.get(4) && Accelerator.getPower() >= 90 ||
                 listOfGears.get(5) && Accelerator.getPower() >= 120;
+    }
+    /**
+     *Sprawdzanie wartości prędkości, przy której można zmienić bieg na nizszy
+     */
+    public static boolean isGearInProperRangeDOWN(ArrayList<Boolean> listOfGears){
+        return listOfGears.get(2) && Accelerator.getPower() < 30 ||
+                listOfGears.get(3) && Accelerator.getPower() < 80 ||
+                listOfGears.get(4) && Accelerator.getPower() < 130 ||
+                listOfGears.get(5) && Accelerator.getPower() < 180 ||
+                listOfGears.get(6) && Accelerator.getPower() < 200;
     }
 
     /**
@@ -51,7 +61,7 @@ public class Gears {
                 listOfGears.get(3) && Accelerator.getPower() < 130 && Accelerator.getPower() > 30 ||
                 listOfGears.get(4) && Accelerator.getPower() < 180 && Accelerator.getPower() > 60 ||
                 listOfGears.get(5) && Accelerator.getPower() < 200 && Accelerator.getPower() > 90 ||
-                listOfGears.get(6) && Accelerator.getPower() < 250 && Accelerator.getPower() > 120;
+                listOfGears.get(6) &&  Accelerator.getPower() > 120;
     }
 
     /**
@@ -77,7 +87,7 @@ public class Gears {
         if(key.getCode() == KeyCode.NUMPAD8) {
             for (int i = 0; i < listOfGears.size(); i++) {
                 if (Clutch.getIsOn()) {
-                    if(listOfGears.get(i) && i != 6 && i > 0 && Gears.isGearInProperRange(listOfGears) || (listOfGears.get(i) && i == 0 && Accelerator.getPower() == 0)) {
+                    if(listOfGears.get(i) && i != 6 && i > 0 && Gears.isGearInProperRangeUP(listOfGears) || (listOfGears.get(i) && i == 0 && Accelerator.getPower() == 0)) {
                         listOfGears.set(i, false);
                         listOfGears.set(i + 1, true);
                         System.out.println("Włączono bieg: " + "(" + listOfGears.get(i + 1) + ")" + listOfGearsCaption.get(i + 1).getText());
@@ -92,7 +102,7 @@ public class Gears {
         else if(key.getCode() == KeyCode.NUMPAD2) {
             for (int i = 0; i < listOfGears.size(); i++) {
                 if (Clutch.getIsOn()) {
-                    if(listOfGears.get(i) && i > 1 || (listOfGears.get(i) && i == 1 && Accelerator.getPower() == 0)) {
+                    if(listOfGears.get(i) && i > 1  && isGearInProperRangeDOWN(listOfGears)|| (listOfGears.get(i) && i == 1 && Accelerator.getPower() == 0)) {
                         listOfGears.set(i, false);
                         listOfGears.set(i - 1, true);
                         System.out.println("Włączono bieg: " + "(" + listOfGears.get(i - 1) + ")" + listOfGearsCaption.get(i - 1).getText());
