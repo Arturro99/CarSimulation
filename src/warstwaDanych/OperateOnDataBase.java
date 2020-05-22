@@ -17,23 +17,49 @@ public class OperateOnDataBase {
     int maxIndex = 0;
 
     /**
-     * Zwrocenie lancucha znakowego z wszystkimi rekordami z bazy danych
+     * Zwrocenie ilości rekordów w bazie danych
      */
-    public String selectAll() throws SQLException {
+    public int countRows() throws SQLException {
         con = DriverManager.getConnection(dbURL, user, password);
         statement = con.createStatement();
         ResultSet result = statement.executeQuery("SELECT * FROM piosenki");
-        StringBuilder tmp = new StringBuilder();
-        while (result.next()) {
-            for (int i = 1; i < 6; i++) {
-                if (i != 4)
-                    tmp.append(result.getString(i).strip()).append(", ");
-                else
-                    tmp.append(result.getString(i).substring(0, 6)).append(Math.round(Float.parseFloat(result.getString(i).substring(6, 15)))).append(",");
-            }
-            tmp.append('\n');
+        int numberOfSongs = 0;
+        while (result.next()){ numberOfSongs++; }
+        return numberOfSongs;
+    }
+    /**
+     * Zwrocenie lancucha znakowego z wszystkimi rekordami z bazy danych
+     */
+    public Object[][] selectAll() throws SQLException {
+        con = DriverManager.getConnection(dbURL, user, password);
+        statement = con.createStatement();
+        ResultSet result = statement.executeQuery("SELECT * FROM piosenki");
+        int numberOfSongs = countRows();
+        Object[][] tab = new String[numberOfSongs+1][5];
+        //tab[0] = new String[] {"Tytuł", "Wykonawca", "Album", "Długość", "ID"};
+        tab[0][0] = "Tytuł";
+        tab[0][1] = "               Wykonawca";
+        tab[0][2] = "                     Album";
+        tab[0][3] = "                         Długość";
+        tab[0][4] = "   ID";
+        ResultSetMetaData rsmd = result.getMetaData();
+        for(int j = 0; j < numberOfSongs; j++){
+            result.next();
+            //if(j != 0) {
+                for (int i = 1; i < 6; i++) {
+                    if (i != 4)
+                        tab[j + 1][i - 1] = (result.getString(i));
+                    else
+                        tab[j + 1][i - 1] = (result.getString(i).substring(0, 8));
+                }
+            //}
+//            else {
+//                for (int i = 1; i < 6; i++) {
+//                    tab[j][i-1] = rsmd.getColumnName(i);
+//                }
+//            }
         }
-        return tmp.toString();
+        return tab;
     }
 
     /**
