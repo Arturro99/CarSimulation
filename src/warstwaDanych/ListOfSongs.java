@@ -3,6 +3,7 @@ package warstwaDanych;
 import warstwaLogiki.SortByDuration;
 import warstwaLogiki.SortByTitle;
 
+import java.sql.Time;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +12,14 @@ import java.util.Collections;
  * Operowanie plikami do zapisywania i wczytywania piosenek
  *
  */
+
 public class ListOfSongs {
     private ArrayList<Song> songs = new ArrayList<>();
     /**
-     *
-     *  Porownuje nazwy artystow
-     *
+     * Porownuje nazwy artystow
+     * @param c1 Pierwsza piosenka
+     * @param c2 Druga piosenka
+     * @return
      */
     public int compare(Song c1, Song c2)
     {
@@ -27,9 +30,14 @@ public class ListOfSongs {
      *  Dodaje piosenke do listy
      *
      */
-    public void addSong(String title, String artist, String album, long durationInSeconds)
+    public void addSong(String title, String artist, String album, Time duration, int ID)
     {
-        songs.add(new Song(title, artist, album, durationInSeconds));
+        songs.add(new Song(title, artist, album, duration, ID));
+        System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
+    }
+    public void addSong(String title, String artist, String album, String duration, int ID)
+    {
+        songs.add(new Song(title, artist, album, duration, ID));
         System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
     /**
@@ -40,7 +48,7 @@ public class ListOfSongs {
     public void addSong(Song song)
     {
         songs.add(song);
-        System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
+        //System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
     /**
      *
@@ -50,8 +58,14 @@ public class ListOfSongs {
     public void deleteSong(Song song)
     {
         songs.remove(song);
-        System.out.println("Usunieto piosenke: " + song.toString());
+        //System.out.println("Usunieto piosenke: " + song.toString());
     }
+
+    public int getSize() {return songs.size(); }
+    public Song getSong(int index) {
+        return songs.get(index);
+    }
+
     /**
      *
      *  Zwraca wszystkie piosenki z listy
@@ -61,7 +75,7 @@ public class ListOfSongs {
     public String toString()
     {
         String tmp = "";
-        tmp += String.format("|%-23s|%-23s|%-23s|%-12s| \n", "Title", "Artist", "Album", "Duration (s)");
+        tmp += String.format("|%-23s|%-23s|%-23s|%-12s|%-5s| \n", "Title", "Artist", "Album", "Duration", "ID");
         for(int i = 0; i < songs.size(); i++)
             tmp += songs.get(i).toString() + "\n";
         return tmp;

@@ -12,6 +12,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import warstwaDanych.ListOfSongs;
 import warstwaDanych.OperateOnDataBase;
 
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class InsertingBox {
     static TextField textId;
     static TextField textPerformer;
 
-    public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase){
+    public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
@@ -77,6 +78,8 @@ public class InsertingBox {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+                listOfSongs.addSong(getTextTitle(),getTextPerformer(), getTextAlbum(),
+                        getTextDuration(), getTextId());
             }
             else
                 AlertBox.display("Alert", "Wszystkie pola muszą być uzupełnione!");
@@ -93,7 +96,7 @@ public class InsertingBox {
 
     }
 
-    public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase){
+    public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
@@ -118,6 +121,11 @@ public class InsertingBox {
                             operateOnDataBase.delete(getTextId());
                         } catch (SQLException ex) {
                             ex.printStackTrace();
+                        }
+                        for (int i = 0; i<listOfSongs.getSize(); i++){
+                            if(listOfSongs.getSong(i).getID() == getTextId()){
+                                listOfSongs.deleteSong(listOfSongs.getSong(i));
+                            }
                         }
                     } else
                         AlertBox.display("Alert", "Wskazane pole musi być uzupełnione!");

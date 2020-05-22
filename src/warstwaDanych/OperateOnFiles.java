@@ -6,6 +6,7 @@ import warstwaInterfejsu.Settings;
 import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
 
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 /**
  *
@@ -140,7 +141,7 @@ public class OperateOnFiles {
 
         for(int i = 10; i < rozdzielone.length-1; i += 10)
         {
-            obj.addSong(rozdzielone[i], rozdzielone[i+2], rozdzielone[i+4], Long.parseLong(rozdzielone[i+6]));
+            obj.addSong(rozdzielone[i], rozdzielone[i+2], rozdzielone[i+4], Time.valueOf(rozdzielone[i + 6]), Integer.parseInt(rozdzielone[i+8]));
         }
     }
 }

@@ -1,6 +1,5 @@
 package warstwaInterfejsu;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -44,9 +43,9 @@ public class Gui extends Application {
     static boolean isFogLightsOn = false;
     boolean isMusicPlaying = false;
     static boolean englishSystem = false;
-    int radioIndex = 0;
     static int whichLightOn = 0;
     int tempomatSpeedValue = 0;
+    boolean isDBworking = false;
     Button tempomatButton = new Button("Włącz tempomat");
     Button plusButton = new Button("+");
     Button minusButton = new Button("-");
@@ -135,6 +134,7 @@ public class Gui extends Application {
     Mileage mileage = new Mileage();
     OperateOnFiles operateOnFiles = new OperateOnFiles();
     OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
+    ListOfSongs listOfSongs = new ListOfSongs();
     Media song;
     MediaPlayer mediaPlayer;
     Settings  settings = new Settings();
@@ -155,6 +155,18 @@ public class Gui extends Application {
         catch(SuchFileDoesNotExist exc) {
             System.err.println(exc);
             AlertBox.display("Alert", "Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
+
+        try {
+            operateOnDataBase.fromDBToListOfSongs(listOfSongs);
+            operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
+            System.out.println("Wczytano piosenki z bazy danych");
+            isDBworking = true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
+            System.out.println("Wczytano piosenki z pliku xml");
+        }
+
 
         additionalColor = settings.getAdditionalColor();
         mainColor = settings.getMainColor();
@@ -410,9 +422,7 @@ public class Gui extends Application {
                     engineSpeed.setText(String.valueOf(Math.round(Gears.calculateEngineSpeed(listOfGears))) + " RPM");
 
                     if (Math.round(Gears.calculateEngineSpeed(listOfGears)) < 800 && !listOfGears.get(1)) {
-                        engineButton.fire();
-                        engineSpeedTimer.cancel();
-                        turnOff[0] = true;
+                        engineSpeed.setText("800 RPM");
                     }
                 }
             }
@@ -784,55 +794,31 @@ public class Gui extends Application {
             }
         });
         //////////////////////////////Odtwarzacz MP3//////////////////////////////////////
-        AtomicInteger i = new AtomicInteger();
+        //AtomicInteger i = new AtomicInteger();
+        AtomicInteger numberOfSong = new AtomicInteger();
+        numberOfSong.set(-1);
         nextSong.setOnAction(e ->{
-            try {
-                    while(operateOnDataBase.selectOne(++radioIndex).equals("")) {
-                        i.getAndIncrement();
-                        if(i.get() > 10)
-                            break;
-                    }
-                    if(i.get() < 10)
-                        songText.setText(operateOnDataBase.selectOne(radioIndex));
-                    else
-                        radioIndex -= i.get();
-                    i.set(0);
-                    if(isMusicPlaying)
-                        stopSong.fire();
-                System.out.println(radioIndex);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            if(isMusicPlaying)
+                stopSong.fire();
+            if(numberOfSong.get() < listOfSongs.getSize()-1)
+                numberOfSong.getAndIncrement();
+            songText.setText(listOfSongs.getSong(numberOfSong.get()).toStringGUI());
         });
         previousSong.setOnAction(e ->{
-            try {
-                if (radioIndex > 1) {
-                    while (operateOnDataBase.selectOne(--radioIndex).equals("")) {
-                        i.getAndIncrement();
-                        if (i.get() > 10)
-                            break;
-                    }
-                    if (i.get() < 10)
-                        songText.setText(operateOnDataBase.selectOne(radioIndex));
-                    else
-                        radioIndex += i.get();
-                    i.set(0);
-                    if (isMusicPlaying)
-                        stopSong.fire();
-                    System.out.println(radioIndex);
-                }
-            } catch(SQLException ex){
-                    ex.printStackTrace();
-                }
+            if(isMusicPlaying)
+                stopSong.fire();
+            if(numberOfSong.get() > 0)
+                numberOfSong.getAndDecrement();
+            else {
+                numberOfSong.set(0);
+            }
+            songText.setText(listOfSongs.getSong(numberOfSong.get()).toStringGUI());
+
         });
         startSong.setOnAction(e ->{
             if(!isMusicPlaying) {
-                try {
-                    song = new Media(new File(operateOnDataBase.getTitle(radioIndex)).toURI().toString() + ".mp3");
-                    isMusicPlaying = true;
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                song = new Media(new File(listOfSongs.getSong(Integer.parseInt(numberOfSong.toString())).getTitle()).toURI().toString() + ".mp3");
+                isMusicPlaying = true;
                 mediaPlayer = new MediaPlayer(song);
             }
             mediaPlayer.play();
@@ -844,22 +830,35 @@ public class Gui extends Application {
         pauseSong.setOnAction(e ->{
             mediaPlayer.pause();
         });
-        addSong.setOnAction(e -> InsertingBox.displayNewSongStage("Podaj parametry dla nowego utworu", operateOnDataBase));
-        deleteSong.setOnAction(e -> InsertingBox.displayDeleteSongStage("Podaj id utworu", operateOnDataBase));
+
+        addSong.setOnAction(e -> {
+            if(isDBworking)
+                InsertingBox.displayNewSongStage("Podaj parametry dla nowego utworu", operateOnDataBase, listOfSongs);
+            else
+                AlertBox.display("Błąd bazy danych", "Baza danych jest niedostępna, nie można dodać piosenki.");
+        });
+        deleteSong.setOnAction(e -> {
+            if(isDBworking)
+                InsertingBox.displayDeleteSongStage("Podaj id utworu", operateOnDataBase, listOfSongs);
+            else
+                AlertBox.display("Błąd bazy danych", "Baza danych jest niedostępna, nie można usunąć piosenki.");
+        });
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
             operateOnFiles.saveToXmlFile("Próba.xml", mileage);
             operateOnFiles.saveToXmlFile("Config.xml", settings);
+            operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
         });
         exit.setOnAction(e->{
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
                 operateOnFiles.saveToXmlFile("Config.xml", settings);
+                operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                 System.exit(0);
             }
         });
-        settingsItem.setOnAction(e->{settings.display(); System.out.println("Kupa");});
+        settingsItem.setOnAction(e->{settings.display();});
 
         programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
 
@@ -870,6 +869,7 @@ public class Gui extends Application {
             if(answer) {
                 operateOnFiles.saveToXmlFile("Próba.xml", mileage);
                 operateOnFiles.saveToXmlFile("Config.xml", settings);
+                operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                 System.exit(0);
             }
         });

@@ -1,0 +1,25 @@
+<warstwaDanych.ListOfSongs>
+  <songs>
+    <warstwaDanych.Song>
+      <title>Make Me Fade</title>
+      <artist>K.Flay</artist>
+      <album>Tunesdays</album>
+      <duration>00:04:39</duration>
+      <ID>1</ID>
+    </warstwaDanych.Song>
+    <warstwaDanych.Song>
+      <title>FML</title>
+      <artist>aaa</artist>
+      <album>aaa</album>
+      <duration>01:11:11</duration>
+      <ID>4</ID>
+    </warstwaDanych.Song>
+    <warstwaDanych.Song>
+      <title>Get Free</title>
+      <artist>Lana Del Rey</artist>
+      <album>Lust For Life</album>
+      <duration>00:05:34</duration>
+      <ID>2</ID>
+    </warstwaDanych.Song>
+  </songs>
+</warstwaDanych.ListOfSongs>

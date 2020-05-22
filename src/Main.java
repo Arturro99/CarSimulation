@@ -1,7 +1,7 @@
+import warstwaDanych.ListOfSongs;
 import warstwaDanych.Mileage;
 import warstwaDanych.OperateOnFiles;
 
-import warstwaLogiki.pl.exceptions.OutOfFrequencyException;
 import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
 
 import warstwaDanych.OperateOnDataBase;
@@ -13,7 +13,7 @@ public class Main {
     static Mileage mileage = new Mileage();
     static OperateOnFiles operateOnFiles = new OperateOnFiles();
     static OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
-    public static void main(String[] args) throws OutOfFrequencyException, SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
 //        LightingSystem system = new LightingSystem();
 //        Indicator turningLeft = new Indicator(Side.left);
 //        Indicator turningRight = new Indicator(Side.right);
@@ -78,21 +78,26 @@ public class Main {
             System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
         mileage.checkData();
 
+        showListOfSongs();
 
-        showMenu();
 
         char option;
         do {
+            showMenu();
             option = (char) System.in.read();
+            clearScreen();
             switch (option) {
                 case '1':
                     System.out.println("Ta opcja jeszcze nie działa");
+                    goBack();
                     break;
                 case '2':
                     showMileage();
+                    goBack();
                     break;
                 case '3':
                     showListOfSongs();
+                    goBack();
                     break;
                 case '6':
                     System.out.println("Wyłączanie programu");
@@ -103,6 +108,9 @@ public class Main {
         }while(option != '6');
     }
 
+    public static void goBack() throws IOException {
+        System.in.read();
+    }
 
     public static void showMenu(){
         System.out.println("Wybierz opcję i zatwierdź enterem:");
@@ -113,17 +121,28 @@ public class Main {
         System.out.println("");
     }
 
-    public static void showListOfSongs() {
-        try {
-            Object[][] outt = operateOnDataBase.selectAll();
-            for (Object[] row : outt) {
-                System.out.format("%15s%15s%15s%7s%3s\n", row);
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
+    public static void showListOfSongs() throws SQLException {
+//        try {
+//            Object[][] outt = operateOnDataBase.selectAll();
+//            for (Object[] row : outt) {
+//                System.out.format("%15s%15s%15s%7s%3s\n", row);
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e);
+//        }
+        ListOfSongs tmp = new ListOfSongs();
+        operateOnDataBase.fromDBToListOfSongs(tmp);
+        //tmp.sortByDuration();
+        System.out.println(tmp.toString());
+        tmp.sortByArtist();
+        System.out.println(tmp.toString());
+        tmp.sortByTitle();
+        System.out.println(tmp.toString());
     }
-
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
     public static void showMileage(){
         System.out.println("Przebieg całkowity: " + mileage.getTotalMileage());
         System.out.println("Przebieg dzienny: " + mileage.getDailyMileage());

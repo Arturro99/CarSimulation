@@ -42,24 +42,26 @@ public class OperateOnDataBase {
         tab[0][2] = "                     Album";
         tab[0][3] = "                         Długość";
         tab[0][4] = "   ID";
-        ResultSetMetaData rsmd = result.getMetaData();
         for(int j = 0; j < numberOfSongs; j++){
             result.next();
-            //if(j != 0) {
-                for (int i = 1; i < 6; i++) {
-                    if (i != 4)
-                        tab[j + 1][i - 1] = (result.getString(i));
-                    else
-                        tab[j + 1][i - 1] = (result.getString(i).substring(0, 8));
-                }
-            //}
-//            else {
-//                for (int i = 1; i < 6; i++) {
-//                    tab[j][i-1] = rsmd.getColumnName(i);
-//                }
-//            }
+            for (int i = 1; i < 6; i++) {
+                if (i != 4)
+                    tab[j + 1][i - 1] = (result.getString(i));
+                else
+                    tab[j + 1][i - 1] = (result.getString(i).substring(0, 8));
+            }
         }
         return tab;
+    }
+
+    public void fromDBToListOfSongs(ListOfSongs list) throws SQLException {
+        con = DriverManager.getConnection(dbURL, user, password);
+        statement = con.createStatement();
+        ResultSet result = statement.executeQuery("SELECT * FROM piosenki");
+        while(result.next()){
+            Song tmp = new Song(result.getString(1).strip(), result.getString(2).strip(), result.getString(3).strip(), result.getTime(4), result.getInt(5));
+            list.addSong(tmp);
+        }
     }
 
     /**
