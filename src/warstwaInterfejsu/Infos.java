@@ -9,10 +9,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Infos {
-    static Stage window = new Stage();
-    static Scene scene;
-
     public static void displayProgramInfo(String title){
+        Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setWidth(800);
@@ -37,7 +35,7 @@ public class Infos {
         text.setFont(new Font("Verdana", 12));
         grid.getChildren().add(text);
 
-        scene = new Scene(grid);
+        Scene scene = new Scene(grid);
         window.setScene(scene);
         window.show();
     }
