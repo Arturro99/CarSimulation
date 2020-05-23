@@ -1,5 +1,6 @@
 package warstwaInterfejsu;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -7,6 +8,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Infos {
     public static void displayProgramInfo(String title){
@@ -32,6 +37,60 @@ public class Infos {
                 "- obsługa świateł pozycyjnych/mijania/drogowych/dziennych/przeciwmgielnych\n" +
                 "Ponadto istnieje możliwość odtwarzania utworów *.mp3, dodawania ich oraz usuwania." +
                 "");
+        text.setFont(new Font("Verdana", 12));
+        grid.getChildren().add(text);
+
+        Scene scene = new Scene(grid);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public static void displayAutoInfo(String title){
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setWidth(350);
+        window.setMinHeight(400);
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        Text text = new Text("Producent: Fiat\n" +
+                "Model: 126p\n" +
+                "Kraj produkcji: Polska\n" +
+                "Rok produkcji: 1980\n" +
+                "Liczba drzwi: 3\n" +
+                "Rodzaj paliwa: Benzyna\n" +
+                "Pojemność silnika: 703cm^3\n" +
+                "Moc silnika: 25,2KM\n" +
+                "Skrzynia biegów: 6-biegowa manualna\n" +
+                "Napęd: Tylny\n" +
+                "Wymiary: \n" +
+                "  Długość: 3054 mm\n" +
+                "  Szerokość: 1377 mm\n" +
+                "  Wysokość: 1335 mm\n" +
+                "Masa własna: 590kg: \n" +
+                "Liczba miejsc: 4\n" +
+                "Ładowność: 320kg\n" +
+                "Bagażnik: 100L\n" +
+                "");
+        text.setFont(new Font("Verdana", 12));
+        grid.getChildren().add(text);
+
+        Scene scene = new Scene(grid);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public static void displayWarrantyInfo(String title){
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setWidth(350);
+        window.setMinHeight(200);
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        LocalDate warrantyDate = LocalDate.of(2020, 07,21);
+        Text text = new Text("Gwarancja trwa do: " + warrantyDate.toString() + "\n" +
+                             "Do końca gwarancji zostało: "+ DAYS.between(LocalDate.now(), warrantyDate) + " dni");
         text.setFont(new Font("Verdana", 12));
         grid.getChildren().add(text);
 
