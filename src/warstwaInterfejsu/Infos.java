@@ -79,7 +79,7 @@ public class Infos {
                 "  Wysokość: 1335 mm\n" +
                 "Masa własna: 590kg: \n" +
                 "Liczba miejsc: 4\n" +
-                "Ładowność: 320kg\n" +
+                "Ladowność: 320kg\n" +
                 "Bagażnik: 100L\n" +
                 "");
         text.setFont(new Font("Verdana", 12));

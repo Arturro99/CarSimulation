@@ -11,11 +11,11 @@ import warstwaLogiki.pl.pedals.Clutch;
 import java.util.ArrayList;
 
 /**
- * Klasa ta służy do przeprowadzania operacji zwiazanych ze skrzynia biegow
+ * Klasa ta sluzy do przeprowadzania operacji zwiazanych ze skrzynia biegow
  */
 public class Gears {
     /**
-     * Sprawdzanie, czy wrzucony bieg znajduje się w bezpiecznym przedziale(czy silnik nie ulega przegrzaniu)
+     * Sprawdzanie, czy wrzucony bieg znajduje sie w bezpiecznym przedziale(czy silnik nie ulega przegrzaniu)
      * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
      * @param listOfDiods - lista diod odpowiadajacych odpowiednim biegom
      * @param mainColor - glowny kolor w aplikacji
