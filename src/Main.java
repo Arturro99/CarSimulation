@@ -171,6 +171,7 @@ public class Main {
                     else {
                         System.out.println("Baza danych jest niedostępna, nie można dodać piosenki.");
                     }
+                    goBack();
                     break;
                 case '6': //usuwanie piosenki
                     if (isDBworking) {
@@ -187,6 +188,7 @@ public class Main {
                     else {
                         System.out.println("Baza danych jest niedostępna, nie można usunąć piosenki.");
                     }
+                    goBack();
                     break;
                 case '7':
                     break;
