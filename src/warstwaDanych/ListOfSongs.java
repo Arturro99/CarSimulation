@@ -8,59 +8,59 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
 /**
- *
- * Operowanie plikami do zapisywania i wczytywania piosenek
- *
+ * Klasa przechowuje objekty klasy Song w liscie i odpowiada za podstawowe operacje:
+ * zapisywania, usuwania i sortowania piosenek na liscie.
  */
-
 public class ListOfSongs {
     private ArrayList<Song> songs = new ArrayList<>();
+
     /**
-     * Porownuje nazwy artystow
-     * @param c1 Pierwsza piosenka
-     * @param c2 Druga piosenka
-     * @return
-     */
-    public int compare(Song c1, Song c2)
-    {
-        return (c1.getArtist().compareTo(c2.getArtist()));
-    }
-    /**
-     *
-     *  Dodaje piosenke do listy
-     *
+     * Metoda dodaje piosenke do listy
+     * @param title - Tytul piosenki
+     * @param artist - Artysta wykonujacy piosenke
+     * @param album - Album piosenki
+     * @param duration - Dlugosc piosenki (format HH:MM:SS)
+     * @param ID - Unikalne ID piosenki
      */
     public void addSong(String title, String artist, String album, Time duration, int ID)
     {
         songs.add(new Song(title, artist, album, duration, ID));
         System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
+    /**
+     * Metoda dodaje piosenke do listy
+     * @param title - Tytul piosenki
+     * @param artist - Artysta wykonujacy piosenke
+     * @param album - Album piosenki
+     * @param duration - Dlugosc piosenki (format HH:MM:SS)
+     * @param ID - Unikalne ID piosenki
+     */
     public void addSong(String title, String artist, String album, String duration, int ID)
     {
         songs.add(new Song(title, artist, album, duration, ID));
         System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
+
     /**
-     *
-     *  Dodaje piosenke do listy
-     *
+     * Metoda dodaje piosenke do listy
+     * @param song - Objekt klasy Song
      */
     public void addSong(Song song)
     {
         songs.add(song);
-        //System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
     /**
-     *
-     *  Usuwa piosenke do listy
-     *
+     * Metoda usuwa piosenke z listy
+     * @param song - Objekt klasy Song
      */
     public void deleteSong(Song song)
     {
         songs.remove(song);
-        //System.out.println("Usunieto piosenke: " + song.toString());
     }
-
+    /**
+     * Metoda usuwa piosenke z listy
+     * @param id - Unikalne ID piosenki, ktora ma byc usunieta
+     */
     public void deleteSongWithID(int id)
     {
         for (int i = 0; i<songs.size(); i++){
@@ -69,18 +69,26 @@ public class ListOfSongs {
                 break;
             }
         }
-        //System.out.println("Usunieto piosenke: " + song.toString());
     }
 
+    /**
+     * Metoda zwracajaca ilosc elementow na liscie
+     * @return Ilosc elementow na liscie
+     */
     public int getSize() {return songs.size(); }
+
+    /**
+     * Metoda zwraca objekt klasy Song znajdujacy sie na podanym miejscu listy
+     * @param index - Indeks piosenki na liscie
+     * @return Objekt klasy Song
+     */
     public Song getSong(int index) {
         return songs.get(index);
     }
 
     /**
-     *
-     *  Zwraca wszystkie piosenki z listy
-     *
+     * Metoda wypisuje prowizoryczna tabele zawierajaca wszystkie piosenki znajdujace sie na liscie
+     * @return Lancuch znakowy z tabela zawierajaca liste piosenek
      */
     @Override
     public String toString()
@@ -93,24 +101,16 @@ public class ListOfSongs {
     }
 
 
-
-
     /**
-     *
-     *  Segreguje piosenki po nazwie
-     *
+     * Metoda segreguje piosenki po nazwie
      */
     public void sortByTitle() {Collections.sort(songs, new SortByTitle());}
     /**
-     *
-     *  Segreguje piosenki po artyscie
-     *
+     *  Metoda segreguje piosenki po artyscie
      */
-    public void sortByArtist() {Collections.sort(songs, Comparator.comparing(Song::getArtist));}
+    public void sortByArtist() {Collections.sort(songs, Comparator.comparing(Song::getArtist).reversed());}
     /**
-     *
-     *  Segreguje po dlugosci piosenki
-     *
+     *  Metoda segreguje po dlugosci piosenki
      */
     public void sortByDuration() {Collections.sort(songs, new SortByDuration());}
 }

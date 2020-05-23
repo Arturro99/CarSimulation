@@ -27,7 +27,8 @@ public class Main {
         }
         catch(SuchFileDoesNotExist exc) {
             System.err.println(exc);
-            System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
+            //System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");
+        }
         mileage.checkData();
 
 
@@ -105,7 +106,7 @@ public class Main {
         } catch (SQLException e) {
             System.err.println(e);
             try{
-                operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
+                listOfSongs = operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
                 System.out.println("Wczytano piosenki z pliku xml");
             } catch (SuchFileDoesNotExist ee) {
                 System.err.println(ee);
