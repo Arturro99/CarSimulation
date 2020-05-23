@@ -8,11 +8,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
- *
- *  Wyswietla nowe okno z podanym komunikatem
- *
+ * Klasa wyswietla nowe okno z podanym komunikatem
  */
 public class AlertBox {
+    /**
+     * Metoda wyswietla nowe okno z podanych tytulem i komunikatem
+     * @param title - Tytul okna
+     * @param message - Wiadomosc
+     */
     public static void display(String title, String message){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

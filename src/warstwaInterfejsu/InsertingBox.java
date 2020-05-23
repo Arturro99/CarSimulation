@@ -18,6 +18,9 @@ import warstwaDanych.OperateOnDataBase;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Klasa odpowiedzialna za okna do dodawania i usuwania piosenek
+ */
 public class InsertingBox {
     static ArrayList<TextField>list = new ArrayList<>();
     static TextField textTitle;
@@ -26,6 +29,13 @@ public class InsertingBox {
     static TextField textId;
     static TextField textPerformer;
 
+    /**
+     * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce dodac
+     * i metoda dodaje te piosenke do bazy danych i do listy w listOfSongs
+     * @param title - Tytul okna
+     * @param operateOnDataBase - Objekt klasy OperateOnDataBase
+     * @param listOfSongs - Objekt klasy ListOfSongs
+     */
     public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -95,7 +105,13 @@ public class InsertingBox {
         window.show();
 
     }
-
+    /**
+     * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce usunac
+     * i metoda usuwa te piosenke z bazy danych i z listy w listOfSongs
+     * @param title - Tytul okna
+     * @param operateOnDataBase - Objekt klasy OperateOnDataBase
+     * @param listOfSongs - Objekt klasy ListOfSongs
+     */
     public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -141,6 +157,10 @@ public class InsertingBox {
 
     }
 
+    /**
+     * Metoda, ktora sprawdza czy wypelnione zostaly wszystkie pola
+     * @return True albo False
+     */
     private static boolean validate(){
         for(TextField i : list){
             if(i.getText().equals("")){
@@ -150,22 +170,38 @@ public class InsertingBox {
         return true;
     }
 
+    /**
+     * Metoda zwraca wpisana przez uzytkownika nazwe piosenki
+     * @return Nazwe piosenki
+     */
     public static String getTextTitle() {
         return textTitle.getText();
     }
-
+    /**
+     * Metoda zwraca wpisany przez uzytkownika album piosenki
+     * @return Album piosenki
+     */
     public static String getTextAlbum() {
         return textAlbum.getText();
     }
-
+    /**
+     * Metoda zwraca wpisana przez uzytkownika dlugosc piosenki
+     * @return Dlugosc piosenki
+     */
     public static String getTextDuration() {
         return textDuration.getText();
     }
-
+    /**
+     * Metoda zwraca wpisane przez uzytkownika ID piosenki
+     * @return ID piosenki
+     */
     public static Integer getTextId() {
         return Integer.parseInt(textId.getText());
     }
-
+    /**
+     * Metoda zwraca wpisana przez uzytkownika wykonawce piosenki
+     * @return Wykonawce piosenki
+     */
     public static String getTextPerformer() {
         return textPerformer.getText();
     }

@@ -36,6 +36,9 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Klasa odpowiada za cale okno aplikacji
+ */
 public class Gui extends Application {
     static BorderPane wholeGrid = new BorderPane();
 
@@ -146,6 +149,10 @@ public class Gui extends Application {
 
     static GridPane grid = new GridPane();
 
+    /**
+     * Metoda uruchamiajaca GUI
+     * @param stage - Obiekt klasy Stage, pozwalajacy na stworzenie okna aplikacji
+     */
     @Override
     public void start(Stage stage) {
         /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
@@ -886,9 +893,7 @@ public class Gui extends Application {
     }
 
     /**
-     *
-     *     Rysuje wszystkie elementy kokpitu
-     *
+     *  Metoda rysuje wszystkie elementy deski rozdzielczej
      */
     static void drawAll(){
         drawArrows(mainColor, Arrows.leftArrow);
@@ -897,10 +902,11 @@ public class Gui extends Application {
         drawDiodes(mainColor);
     }
 
+
     /**
-     *
-     *     Rysuje kierunkowskazy
-     *
+     * Metoda rysujaca kierunkowskazy
+     * @param color - Kolor wypelnienia strzalki
+     * @param arrow - Enum, przechowujacy informacje, ktory kierunkowskaz powinien byc wlaczony
      */
     private static void drawArrows(Color color, Arrows arrow){
 
@@ -929,9 +935,7 @@ public class Gui extends Application {
     }
 
     /**
-     *
-     *     Pokazuje prędkość pojazdu
-     *
+     *  Metoda aktualizuje wyswietlcz prędkosci pojazdu
      */
     static void showVelocity(){
         velocity.setText(Accelerator.getPower() + " km/h");
@@ -940,9 +944,7 @@ public class Gui extends Application {
     }
 
     /**
-     *
-     *     Pokazuje parametry pojazdu
-     *
+     *  Metoda aktualizuje wyswietlane parametry pojazdu
      */
     private void showStatistics() {
         avgSpeed.setText("Prędkość średnia: " + String.format("%.1f", Statistics.calculateAvgSpeed(Accelerator.getPower())) + " km/h");
@@ -950,25 +952,16 @@ public class Gui extends Application {
         avgSpeed.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         maxSpeed.setText("Prędkość maksymalna: " + Statistics.getMaxSpeed(Accelerator.getPower()) + " km/h");
-
-
         travelTime.setText("Czas podróży: " + String.format("%.2f", RunningTime.getRunningEngineTime()) + " minut");
-
-
         travelDistance.setText("Przebyty dystans: " + String.format("%.2f", Statistics.getTravelDistance(Accelerator.getPower(), mileage)) + " km");
-
-
         avgFuelConsumption.setText("Średnie spalanie: " + String.format("%.2f", Statistics.getAvgFuelConsumption(Statistics.getAvgSpeed())) + " l/100km");
-
 
         totalMileage.setText("Przebieg całkowity: " + String.format("%.2f", mileage.getTotalMileage()) + " km");
         totalMileage.setFill(additionalColor);
         totalMileage.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         dailyMileage.setText("Przebieg dzienny: " + String.format("%.2f", mileage.getDailyMileage()) + " km");
-
         userMileage.setText("Przebieg użytkownika: " + String.format("%.2f", mileage.getUserMileage()) + " km");
-
         tempomatSpeedText.setText(tempomatSpeedValue + " km/h");
 
         radioTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -977,9 +970,8 @@ public class Gui extends Application {
     }
 
     /**
-     *
-     *     Rysuje kontrolki biegów
-     *
+     *  Metoda rysuje kontrolki biegów
+     *  @param color - Kolor wypelnienia kontorlki
      */
     private static void drawGears(Color color){
         for(Circle i: listOfGearsControls) {
@@ -989,9 +981,8 @@ public class Gui extends Application {
     }
 
     /**
-     *
-     *     Rysuje diody
-     *
+     * Metoda rysuje diody
+     * @param color - Kolor wypelnienia diody
      */
     private static void drawDiodes(Color color){
         for(Circle i: diodes){
@@ -1000,9 +991,8 @@ public class Gui extends Application {
         }
     }
     /**
-     *
-     *     Rysuje obrazki kontrolek
-     *
+     * Metoda wyswietla obrazki kontrolek
+     * @param color - Kolor tla
      */
     static void showImages(Color color) {
         VBox tmp = new VBox();
@@ -1031,6 +1021,5 @@ public class Gui extends Application {
         else
             tmp.getChildren().add(tempomatczarnobiale);
         wholeGrid.setLeft(tmp);
-
     }
 }

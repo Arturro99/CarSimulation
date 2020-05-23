@@ -6,13 +6,17 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 /**
- *
- *  Wyswietla nowe okno z podanym komunikatem i zwraca odp. Tak lub Nie
- *
+ *  Klasa wyswietla nowe okno z podanym komunikatem i zwraca odp. Tak lub Nie
  */
 public class ConfirmBox {
     static boolean answer;
 
+    /**
+     * Metoda wyswietla nowe okno z podanych tytulem i komunikatem, uzytkownik wybiera jedna z opcji: TAK lub NIE
+     * @param title - Tytul okna
+     * @param message - Wiadomosc
+     * @return Odpowiedz uzytkownika - TAK lub NIE (true/false)
+     */
     public static boolean display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

@@ -13,7 +13,14 @@ import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Klasa odpowiedziana za okna informacyjne o programie i pojezdzie
+ */
 public class Infos {
+    /**
+     * Metoda wyswietla nowe okno z informacjami dotyczacymi programu
+     * @param title - Tytul okna
+     */
     public static void displayProgramInfo(String title){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -44,7 +51,10 @@ public class Infos {
         window.setScene(scene);
         window.show();
     }
-
+    /**
+     * Metoda wyswietla nowe okno z informacjami dotyczacymi auta
+     * @param title - Tytul okna
+     */
     public static void displayAutoInfo(String title){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -79,7 +89,10 @@ public class Infos {
         window.setScene(scene);
         window.show();
     }
-
+    /**
+     * Metoda wyswietla nowe okno z informacjami dotyczacymi gwarancji auta
+     * @param title - Tytul okna
+     */
     public static void displayWarrantyInfo(String title){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

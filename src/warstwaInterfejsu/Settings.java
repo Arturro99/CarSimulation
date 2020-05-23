@@ -13,12 +13,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import warstwaLogiki.RunningTime;
 
+/**
+ * Klasa odpowiada za wyswietlenie okna ustawien i nimi zarzadza
+ */
 public class Settings {
     private boolean darkOn = false;
-    boolean lightOn = false;
+    private boolean lightOn = false;
     private boolean retroOn = true;
     private boolean englishFormatOn = false;
     private boolean normalFormatOn = true;
+
+    /**
+     * Metoda odpowiada za wyswietlenie okna ustawien
+     */
     public void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -121,6 +128,10 @@ public class Settings {
         window.show();
     }
 
+    /**
+     * Metoda na podstawie wybranego koloru motywu zwraca kolor tla aplikacji
+     * @return Kolor tla aplikacji
+     */
     public Color getMainColor() {
         if(darkOn)
             return Color.DIMGRAY;
@@ -129,6 +140,11 @@ public class Settings {
         else
             return Color.AZURE;
     }
+
+    /**
+     * Metoda na podstawie wybranego koloru motywu zwraca kolor tekstu
+     * @return Kolor tekstu
+     */
     public Color getAdditionalColor() {
         if(darkOn)
             return Color.DARKBLUE;
@@ -137,8 +153,16 @@ public class Settings {
         else
             return Color.CORAL;
     }
+
+    /**
+     * Metoda zwraca wartosc boolean, czy zastosowany jest zegar 12-godzinny
+     * @return True - jesli zegar 12-godzinny, False - jesli zegar 24-godzinny
+     */
     public boolean getEnglishSystem() {return englishFormatOn;}
 
+    /**
+     * Metoda pomagajaca narysowac wiele elementow w GUI
+     */
     private void drawStuff(){
         Gui.drawAll();
         Gui.showVelocity();
