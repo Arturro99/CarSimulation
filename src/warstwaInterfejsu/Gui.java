@@ -285,7 +285,7 @@ public class Gui extends Application {
         //fogLightsRadio.setFocusTraversable(false);
 
         /////////////////////////////////Ustawianie w odpowiednim miejscu na siatce////////////////////////////////
-        ///////////////////////KIERUNKOWSKAZY I PRĘDKOŚĆ
+        ///////////////////////KIERUNKOWSKAZY I PREDKOSC
         GridPane.setConstraints(leftArrow, 0, 0);
         GridPane.setConstraints(rightArrow, 3, 0);
         GridPane.setConstraints(velocity, 1, 0, 2, 1);
@@ -297,7 +297,7 @@ public class Gui extends Application {
         GridPane.setConstraints(buttonsHBox, 1,2);
         GridPane.setConstraints(resetUserMileageButton, 1,5);
 
-        /////////////////////////ŚWIATŁA
+        /////////////////////////ŚWIATLA
         VBox lightsVBox = new VBox();
         lightsVBox.setSpacing(5);
         lightsVBox.getChildren().addAll(noLights, positionLightsRadio, passingLightsRadio, headlightsRadio, dayLightsRadio, fogLightsRadio);
@@ -824,7 +824,7 @@ public class Gui extends Application {
         });
         startSong.setOnAction(e ->{
             if(!isMusicPlaying) {
-                song = new Media(new File(listOfSongs.getSong(Integer.parseInt(numberOfSong.toString())).getTitle()).toURI().toString() + ".mp3");
+                song = new Media(new File("utwory/" + listOfSongs.getSong(Integer.parseInt(numberOfSong.toString())).getTitle()).toURI().toString() + ".mp3");
                 isMusicPlaying = true;
                 mediaPlayer = new MediaPlayer(song);
             }
