@@ -5,70 +5,22 @@ import warstwaDanych.OperateOnFiles;
 import warstwaLogiki.pl.exceptions.SuchFileDoesNotExist;
 
 import warstwaDanych.OperateOnDataBase;
+import warstwaLogiki.pl.lights.Indicator;
+import warstwaLogiki.pl.lights.Side;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
     static Mileage mileage = new Mileage();
     static OperateOnFiles operateOnFiles = new OperateOnFiles();
     static OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
-    public static void main(String[] args) throws SQLException, IOException {
-//        LightingSystem system = new LightingSystem();
-//        Indicator turningLeft = new Indicator(Side.left);
-//        Indicator turningRight = new Indicator(Side.right);
-//        PassingLights passingLights = new PassingLights();
-//        Headlights headlights = new Headlights();
-//        system.addToList(turningLeft);
-//        system.addToList(turningRight);
-//        system.addToList(passingLights);
-//        system.addToList(headlights);
-//
-//        Accelerator acc = new Accelerator();
-//        Brake brk  = new Brake();
-//        Clutch clt = new Clutch();
-//
-//        Radio radio = new Radio();
-//        try{radio.adjustFrequency(250);}
-//        catch(OutOfFrequencyException exc) {System.err.println(exc);}
-//
-//        try{acc.pressPedal(100);}
-//        catch(TooFastException exc) {System.err.println(exc);}
-////        acc.pressPedal(20);
-////        acc.pressPedal(50);
-////        acc.releasePedal(40);
-////
-//        brk.pressPedal(20);
-//
-//        clt.pressPedal(null);
-//        clt.releasePedal(null);
-//
-//        turningLeft.turnOn();
-//        turningRight.turnOn();
-//        passingLights.turnOn();
-//        headlights.turnOn();
-//        headlights.turnOff();
-//        turningLeft.turnOff();
-//        turningRight.turnOff();
-//        System.out.println(system.info());
-
-//        OperateOnDataBase operate = new OperateOnDataBase();
-//        String out = operate.selectAll();
-//        System.out.println(out);
-//        System.out.println();
-//        //operate.insert("Zupa Romana", "Roman", "Winiary", "0:3:54");
-//        //operate.delete(6);
-//        operate.updateTitle(1, "Make me Fade");
-//        operate.updateAlbum(1, "Tuesdays");
-//        operate.updatePerformer(1, "Klej");
-////        String one = operate.selectOne(1);
-////        System.out.println(one);
-//        //operate.insert("Secrets", "One Republic", "Waking Up", "0:3:45", 11);
-//        //operate.delete(3);
-//        //operate.updateIndexes();
-//        operate.insert("Astronomia", "Vicetone & Tony Igy", "Astronomia", "0:3:18", 2);
-//        String out2 = operate.selectAll();
-//        System.out.println(out2);
+    static ListOfSongs listOfSongs = new ListOfSongs();
+    static boolean isDBworking = false;
+    static Indicator left = new Indicator(Side.left);
+    static Indicator right = new Indicator(Side.right);
+    public static void main(String[] args) {
 
         try {
             mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
@@ -78,14 +30,16 @@ public class Main {
             System.out.println("Nie podano pliku do wczytania danych lub podany plik nie istnieje");}
         mileage.checkData();
 
-        showListOfSongs();
 
-
-        char option;
+        char option = 0;
         do {
             showMenu();
-            option = (char) System.in.read();
-            clearScreen();
+            try {
+                option = (char) System.in.read();
+                System.in.skip(1);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
             switch (option) {
                 case '1':
                     System.out.println("Ta opcja jeszcze nie działa");
@@ -99,50 +53,148 @@ public class Main {
                     showListOfSongs();
                     goBack();
                     break;
-                case '6':
+                case '4':
+                    if(left.getIsOn() && right.getIsOn()){
+                        left.turnOff();
+                        right.turnOff();
+                        System.out.println("Światła awaryjne zostały wyłączone");
+                    }
+                    else {
+                        left.turnOn();
+                        right.turnOn();
+                        System.out.println("Światła awaryjne zostały włączone");
+                    }
+                    goBack();
+                    break;
+                case '5':
                     System.out.println("Wyłączanie programu");
+                    operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                     break;
                 default:
                     System.out.println("Wybrano złą opcję");
             }
-        }while(option != '6');
+        }while(option != '5');
     }
 
-    public static void goBack() throws IOException {
-        System.in.read();
+    public static void goBack(){
+        System.out.println("Wciśnij enter by kontynuować");
+        try {
+            System.in.skip(1);
+            System.in.read();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     public static void showMenu(){
         System.out.println("Wybierz opcję i zatwierdź enterem:");
         System.out.println("1 - Włącz samochód");
         System.out.println("2 - Wyświetl statystyki auta");
-        System.out.println("3 - Wyświetl listę piosenek");
-        System.out.println("6 - Wyłącz program");
+        System.out.println("3 - Lista piosenek");
+        System.out.println("4 - Włącz/wyłącz światła awaryjne");
+        System.out.println("5 - Wyłącz program");
         System.out.println("");
     }
 
-    public static void showListOfSongs() throws SQLException {
-//        try {
-//            Object[][] outt = operateOnDataBase.selectAll();
-//            for (Object[] row : outt) {
-//                System.out.format("%15s%15s%15s%7s%3s\n", row);
-//            }
-//        } catch (SQLException e) {
-//            System.err.println(e);
-//        }
-        ListOfSongs tmp = new ListOfSongs();
-        operateOnDataBase.fromDBToListOfSongs(tmp);
-        //tmp.sortByDuration();
-        System.out.println(tmp.toString());
-        tmp.sortByArtist();
-        System.out.println(tmp.toString());
-        tmp.sortByTitle();
-        System.out.println(tmp.toString());
+    public static void showListOfSongs() {
+        try {
+            operateOnDataBase.fromDBToListOfSongs(listOfSongs);
+            operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
+            System.out.println("Wczytano piosenki z bazy danych");
+            isDBworking = true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            try{
+                operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
+                System.out.println("Wczytano piosenki z pliku xml");
+            } catch (SuchFileDoesNotExist ee) {
+                System.err.println(ee);
+                System.out.println("Nie udało się wczytać piosenek z bazy danych i pliku xml");
+            }
+        }
+        char option = 0;
+        do {
+            System.out.println("Wybierz opcję i zatwierdź enterem:");
+            System.out.println("1 - Lista piosenek nieposortowana");
+            System.out.println("2 - Lista piosenek posortowana według tytułu");
+            System.out.println("3 - Lista piosenek posortowana według artysty");
+            System.out.println("4 - Lista piosenek posortowana według długości");
+            System.out.println("5 - Dodaj nową piosenkę");
+            System.out.println("6 - Usuń piosenkę");
+            System.out.println("7 - Powrót do menu");
+            try {
+                option = (char) System.in.read();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+            switch (option) {
+                case '1':
+                    System.out.println(listOfSongs.toString());
+                    goBack();
+                    break;
+                case '2':
+                    listOfSongs.sortByTitle();
+                    System.out.println(listOfSongs.toString());
+                    goBack();
+                    break;
+                case '3':
+                    listOfSongs.sortByArtist();
+                    System.out.println(listOfSongs.toString());
+                    goBack();
+                    break;
+                case '4':
+                    listOfSongs.sortByDuration();
+                    System.out.println(listOfSongs.toString());
+                    goBack();
+                    break;
+                case '5': //dodawanie piosenki
+                    if (isDBworking) {
+                        Scanner in = new Scanner(System.in);
+                        System.out.println("Podaj nazwę piosenki:");
+                        String title = in.next();
+                        System.out.println("Podaj artystę:");
+                        String artist = in.next();
+                        System.out.println("Podaj nazwę albumu:");
+                        String album = in.next();
+                        System.out.println("Podaj długość piosenki (w formacie HH:MM:SS):");
+                        String duration = in.next();
+                        System.out.println("Podaj ID piosenki:");
+                        Integer index = Integer.parseInt(in.next());
+                        try{
+                            operateOnDataBase.insert(title, artist, album, duration, index);
+                            listOfSongs.addSong(title, artist, album, duration, index);
+                        } catch (SQLException e) {
+                            System.err.println(e);
+                        }
+                    }
+                    else {
+                        System.out.println("Baza danych jest niedostępna, nie można dodać piosenki.");
+                    }
+                    break;
+                case '6': //usuwanie piosenki
+                    if (isDBworking) {
+                        Scanner in = new Scanner(System.in);
+                        System.out.println("Podaj ID piosenki do usunięcia:");
+                        Integer index = Integer.parseInt(in.next());
+                        try{
+                            operateOnDataBase.delete(index);
+                            listOfSongs.deleteSongWithID(index);
+                        } catch (SQLException e) {
+                            System.err.println(e);
+                        }
+                    }
+                    else {
+                        System.out.println("Baza danych jest niedostępna, nie można usunąć piosenki.");
+                    }
+                    break;
+                case '7':
+                    break;
+                default:
+                    System.out.println("Wybrano złą opcję");
+            }
+        } while(option != '7');
     }
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+
     public static void showMileage(){
         System.out.println("Przebieg całkowity: " + mileage.getTotalMileage());
         System.out.println("Przebieg dzienny: " + mileage.getDailyMileage());

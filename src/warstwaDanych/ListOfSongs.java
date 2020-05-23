@@ -61,6 +61,17 @@ public class ListOfSongs {
         //System.out.println("Usunieto piosenke: " + song.toString());
     }
 
+    public void deleteSongWithID(int id)
+    {
+        for (int i = 0; i<songs.size(); i++){
+            if(songs.get(i).getID() == id) {
+                deleteSong(songs.get(i));
+                break;
+            }
+        }
+        //System.out.println("Usunieto piosenke: " + song.toString());
+    }
+
     public int getSize() {return songs.size(); }
     public Song getSong(int index) {
         return songs.get(index);

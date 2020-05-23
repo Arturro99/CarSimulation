@@ -147,7 +147,7 @@ public class Gui extends Application {
     static GridPane grid = new GridPane();
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
         try {
             mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
@@ -164,8 +164,13 @@ public class Gui extends Application {
             isDBworking = true;
         } catch (SQLException e) {
             System.err.println(e);
-            operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
-            System.out.println("Wczytano piosenki z pliku xml");
+            try{
+                operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
+                System.out.println("Wczytano piosenki z pliku xml");
+            } catch (SuchFileDoesNotExist ee) {
+                System.err.println(e);
+                System.out.println("Nie udało się wczytać piosenek z bazy danych i pliku xml");
+            }
         }
 
 
