@@ -11,11 +11,14 @@ import warstwaLogiki.pl.pedals.Clutch;
 import java.util.ArrayList;
 
 /**
- * Klasa ta służy do przechowywania operacji związanych ze skrzynią biegów
+ * Klasa ta służy do przeprowadzania operacji zwiazanych ze skrzynia biegow
  */
 public class Gears {
     /**
-     *Sprawdzanie, czy wrzucony bieg znajduje się w bezpiecznym przedziale(czy silnik nie ulega przegrzaniu)
+     * Sprawdzanie, czy wrzucony bieg znajduje się w bezpiecznym przedziale(czy silnik nie ulega przegrzaniu)
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @param listOfDiods - lista diod odpowiadajacych odpowiednim biegom
+     * @param mainColor - glowny kolor w aplikacji
      */
     public static void checkEngineSpeed(ArrayList<Boolean> listOfGears, ArrayList<Circle> listOfDiods, Color mainColor){
         if(listOfGears.get(0) && Accelerator.getPower() > 20 ||
@@ -31,7 +34,9 @@ public class Gears {
     }
 
     /**
-     *Sprawdzanie wartości prędkości, przy której można zmienić bieg na wyzszy
+     * Sprawdzanie wartosci predkosci, przy ktorej mozna zmienic bieg na wyzszy
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @return - zwraca "true" jesli mozna zmienic bieg, w przeciwnym razie - "false"
      */
     public static boolean isGearInProperRangeUP(ArrayList<Boolean> listOfGears){
         return listOfGears.get(1) && Accelerator.getPower() >= 5 ||
@@ -40,8 +45,11 @@ public class Gears {
                 listOfGears.get(4) && Accelerator.getPower() >= 90 ||
                 listOfGears.get(5) && Accelerator.getPower() >= 120;
     }
+
     /**
-     *Sprawdzanie wartości prędkości, przy której można zmienić bieg na nizszy
+     * Sprawdzanie wartosci predkosci, przy ktorej mozna zmienic bieg na nizszy
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @return - zwraca "true" jesli mozna zmienic bieg, w przeciwnym razie - "false"
      */
     public static boolean isGearInProperRangeDOWN(ArrayList<Boolean> listOfGears){
         return listOfGears.get(2) && Accelerator.getPower() < 30 ||
@@ -52,7 +60,9 @@ public class Gears {
     }
 
     /**
-     *Sprawdzanie, czy na danym biegu można szybciej/wolniej pojechać
+     * Sprawdzanie, czy na danym biegu mozna szybciej/wolniej pojechac
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @return - zwraca "true" jesli mozna szybciej pojechac, w przeciwnym razie - "false"
      */
     public static boolean canGoFurtherOnGear(ArrayList<Boolean> listOfGears){
         return listOfGears.get(0) && Accelerator.getPower() < 30 ||
@@ -65,7 +75,10 @@ public class Gears {
     }
 
     /**
-     *Sprawdzanie, czy na danym biegu można zwiekszyc/zmniejszyć predkosc na tempomacie
+     * Sprawdzanie, czy na danym biegu mozna szybciej/wolniej pojechac wykorzystujac do tego tempomat
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @param speed - wartosc predkosci tempomatu
+     * @return - zwraca "true" jesli mozna szybciej pojechac, w przeciwnym razie - "false"
      */
     public static boolean canGoFurtherOnGear(ArrayList<Boolean> listOfGears, int speed){
          if(listOfGears.get(0) && Accelerator.getPower() < 30 ||
@@ -81,7 +94,12 @@ public class Gears {
     }
 
     /**
-     *Zmiana biegów
+     * Metoda sluzy do obslugi zmiany biegow
+     * @param key - informuje, ktory przycisk na klawiaturze zostal nacisniety
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @param listOfGearsControls - lista diod odpowiadajacych odpowiednim biegom
+     * @param listOfGearsCaption - lista podpisow dla odpowiednich biegow
+     * @param mainColor - glowny kolor w aplikacji
      */
     public static void setGear(KeyEvent key, ArrayList<Boolean> listOfGears, ArrayList<Circle> listOfGearsControls, ArrayList<Text> listOfGearsCaption, Color mainColor){
         if(key.getCode() == KeyCode.NUMPAD8) {
@@ -115,6 +133,11 @@ public class Gears {
         }
     }
 
+    /**
+     * Metoda kalkuluje obroty silnika w zaleznosci od wartosci predkosci
+     * @param listOfGears - lista biegow, flaga ustawiona jest na "true" jesli dany bieg jest wlaczony
+     * @return - zwracana wartosc oznacza ilosc obrotow na minute silnika samochodowego
+     */
     public static double calculateEngineSpeed(ArrayList<Boolean>listOfGears){
         if(listOfGears.get(1) || listOfGears.get(0))
             return Accelerator.getPower()*226.66 + 200;

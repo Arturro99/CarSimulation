@@ -1,47 +1,47 @@
 package warstwaLogiki;
 
 import warstwaDanych.Mileage;
+
 /**
- *
- *  Odpowiada za statystyki
- *
+ * Klasa odpowiada za zarzadzanie statystykami
  */
 public class Statistics {
     private static double[] forAvgSpeed = {1.0,0.0};
     private static int maxSpeed = 0;
     private static double travelDistance = 0;
+
     /**
-     *
-     *  Oblicza srednia predkosc pojazdu
-     *
+     *  Metoda oblicza srednia predkosc pojazdu
      */
     public static double calculateAvgSpeed(int power) {
         forAvgSpeed[1]+=power;
         forAvgSpeed[0]+=1;
         return forAvgSpeed[1]/forAvgSpeed[0];
     }
+
     /**
-     *
-     *  Zwraca srednia predkosc pojazdu
-     *
+     * Metoda zwraca srednia predkosc pojazdu
+     * @return - srednia predkosc pojazdu
      */
     public static double getAvgSpeed() {
         return forAvgSpeed[1]/forAvgSpeed[0];
     }
+
     /**
-     *
-     *  Sprawdza czy maksymalna predkosc się zmienila
-     *
+     * Metoda sprawdza aktualna maksymalna predkosc
+     * @param power - aktualna predkosc
+     * @return - maksymalna predkosc
      */
     public static int getMaxSpeed(int power) {
         if(power>maxSpeed)
             maxSpeed = power;
         return maxSpeed;
     }
+
     /**
-     *
-     *  Zwraca przebyty dystans
-     *
+     * Metoda zwraca srednie zuzycie paliwa na okreslona chwile
+     * @param avgSpeed - srednia predkosc na dany moment jazdy
+     * @return - wartosc spalanego paliwa na 100 km
      */
     public static double getAvgFuelConsumption(double avgSpeed) {
         if(!RunningTime.getIsEngineOn())
@@ -51,10 +51,12 @@ public class Statistics {
         else
             return 0.0727272*avgSpeed-1.545454;
     }
+
     /**
-     *
-     *  Zwraca srednie zuzycie paliwa
-     *
+     * Metoda zwraca przebyta odleglosc
+     * @param power - predkosc pojazdu
+     * @param mileage - obiekt, do ktorego zostanie zapisana przebyta odleglosc
+     * @return - wartosc przebytej odleglosci
      */
     public static double getTravelDistance(int power, Mileage mileage) {
         double tmp = power*(0.1/60.0/60.0);
@@ -62,10 +64,9 @@ public class Statistics {
         mileage.addToMileage(tmp);
         return travelDistance;
     }
+
     /**
-     *
-     *  Resetuje statystyki biezace
-     *
+     * Metoda resetujaca statystyki biezace
      */
     public static void resetAvgAndMaxSpeed() {
         forAvgSpeed[0] = 1.0;
