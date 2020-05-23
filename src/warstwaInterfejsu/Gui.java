@@ -193,7 +193,9 @@ public class Gui extends Application {
         MenuItem programInfo = new MenuItem("Informacje o programie");
         helpMenu.getItems().addAll(programInfo);
         Menu infoMenu = new Menu("Info");
-        infoMenu.getItems().addAll(new MenuItem("Informacje o samochodzie"), new MenuItem("Gwarancja"));
+        MenuItem autoInfo = new MenuItem("Informacje o samochodzie");
+        MenuItem warrantyInfo = new MenuItem("Gwarancja");
+        infoMenu.getItems().addAll(autoInfo, warrantyInfo);
         Menu settingsMenu = new Menu("Ustawienia");
         MenuItem settingsItem = new MenuItem("Dostosuj");
         Menu changeTheme = new Menu("Zmień motyw");
@@ -868,7 +870,8 @@ public class Gui extends Application {
         settingsItem.setOnAction(e->{settings.display();});
 
         programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
-
+        autoInfo.setOnAction(e->Infos.displayAutoInfo("Informacje o samochodzie"));
+        warrantyInfo.setOnAction(e->Infos.displayWarrantyInfo("Informacje o gwarancji"));
 ///////////////////////////////Obsługa zamykaniFsea symbolem "X" oraz skrótem ALT+F4/////////////////////////////////////
         stage.setOnCloseRequest(e -> {
             e.consume();
