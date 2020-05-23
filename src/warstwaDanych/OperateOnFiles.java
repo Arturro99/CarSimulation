@@ -9,16 +9,13 @@ import java.io.*;
 import java.sql.Time;
 import java.util.ArrayList;
 /**
- *
- *  Pozwala na zapisywanie i odczytywanie z pliku
- *
+ *  Klasa pozwala na zapisywanie i odczytywanie z plików xml/txt
  */
 public class OperateOnFiles {
-    private static boolean wasLoaded = false;
     /**
-     *
-     *  Zapisywanie do pliku XML
-     *
+     * Metoda zapisuje do pliku XML pola podanego objektu
+     * @param nazwa - Nazwa pliku XML do ktorego zapisujemy
+     * @param obj - Objekt, ktory chcemy zapisac do pliku XML
      */
     public void saveToXmlFile(String nazwa, Object obj)
     {
@@ -40,16 +37,18 @@ public class OperateOnFiles {
         catch (Exception se)
         {System.err.println("blad sec");}
     }
+
     /**
-     *
-     *  Wczytywanie z pliku XML do Mileage
-     *
+     * Metoda wczytuje dane z pliku XML do obiektu klasy Mileage
+     * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
+     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @return Obiekt klasy Mileage
+     * @throws SuchFileDoesNotExist
      */
     public Mileage loadFromXmlFile(String nazwa, Mileage obj) throws SuchFileDoesNotExist {
         XStream xstream = new XStream(new DomDriver());
         File file = new File(nazwa);
         if(file.exists()) {
-            wasLoaded = true;
             obj = (Mileage)xstream.fromXML(file);
         }
         else
@@ -57,15 +56,16 @@ public class OperateOnFiles {
         return obj;
     }
     /**
-     *
-     *  Wczytywanie z pliku XML do Settings
-     *
+     * Metoda wczytuje dane z pliku XML do obiektu klasy Settings
+     * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
+     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @return Obiekt klasy Settings
+     * @throws SuchFileDoesNotExist
      */
     public Settings loadFromXmlFile(String nazwa, Settings obj) throws SuchFileDoesNotExist {
         XStream xstream = new XStream(new DomDriver());
         File file = new File(nazwa);
         if(file.exists()) {
-            wasLoaded = true;
             obj = (Settings)xstream.fromXML(file);
         }
         else
@@ -73,15 +73,16 @@ public class OperateOnFiles {
         return obj;
     }
     /**
-     *
-     *  Wczytywanie z pliku XML do ListOfSongs
-     *
+     * Metoda wczytuje dane z pliku XML do obiektu klasy ListOfSongs
+     * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
+     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @return Obiekt klasy ListOfSongs
+     * @throws SuchFileDoesNotExist
      */
     public ListOfSongs loadFromXmlFile(String nazwa, ListOfSongs obj) throws SuchFileDoesNotExist {
         XStream xstream = new XStream(new DomDriver());
         File file = new File(nazwa);
         if(file.exists()) {
-            wasLoaded = true;
             obj = (ListOfSongs) xstream.fromXML(file);
         }
         else
@@ -89,28 +90,29 @@ public class OperateOnFiles {
         return obj;
     }
 
+
     /**
-     *
-     *  Zapisuje piosenki do pliku tekstowego
-     *
+     * Metoda zapisuje liste piosenek do pliku txt
+     * @param nazwa - Nazwa pliku, do ktorego chcemy zapisac dane
+     * @param obj - Objekt klasy ListOfSongs
      */
-    public void saveToTxtFile(String nazwa)
+    public void saveToTxtFile(String nazwa, ListOfSongs obj)
     {
         File file = new File(nazwa);
 
         try{
             file.createNewFile();
             FileWriter streamOut = new FileWriter(file);
-            streamOut.write(this.toString());
+            streamOut.write(obj.toString());
             streamOut.close();
         }
         catch(IOException io){System.out.println(io.getMessage());}
         catch(Exception se){System.err.println("blad sec");}
     }
     /**
-     *
-     *  Wczytuje piosenki z pliku tekstowego
-     *
+     * Metoda wczytuje liste piosenek z pliku txt
+     * @param nazwa - Nazwa pliku, z ktorego chcemy wczytac dane
+     * @param obj - Objekt klasy ListOfSongs
      */
     public void readFromTxtFile(String nazwa, ListOfSongs obj)
     {

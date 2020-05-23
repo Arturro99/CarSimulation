@@ -2,9 +2,7 @@ package warstwaDanych;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
- *
- *  Odpowiada za przebiegi w samochodzie
- *
+ *  Klasa odpowiada za przebiegi w samochodzie
  */
 public class Mileage {
     private double totalMileage = 0;
@@ -12,9 +10,8 @@ public class Mileage {
     private double userMileage = 0;
     private LocalDate data = LocalDate.now();
     /**
-     *
-     *  Dodaje przebyty dystans do wszystkich przebiegow
-     *
+     * Metoda dodaje przebyty dystans do wszystkich przebiegow
+     * @param distance - Dystans, ktory dodajemy pod wszystkich dystansow
      */
     public void addToMileage(double distance) {
         totalMileage += distance;
@@ -30,21 +27,15 @@ public class Mileage {
         userMileage += distance;
     }
     /**
-     *
-     *  Zwraca przebieg calkowity
-     *
+     * Metoda zwraca przebieg calkowity pojazdu
+     * @return Przebieg calkowity pojazdu
      */
     public double getTotalMileage() {
         return totalMileage;
     }
-
-    public void setTotalMileage(double totalMileage) {
-        this.totalMileage = totalMileage;
-    }
     /**
-     *
-     *  Zwraca przebieg dzienny
-     *
+     * Metoda zwraca przebieg dzienny pojazdu
+     * @return Przebieg dzienny pojazdu
      */
     public double getDailyMileage() {
         return dailyMileage;
@@ -54,28 +45,29 @@ public class Mileage {
      *  Ustawia przebieg dzienny
      *
      */
+    /**
+     * Metoda ustawia przebieg dzienny
+     * @param dailyMileage - Przebieg, ktory ma byc ustawiony
+     */
     public void setDailyMileage(double dailyMileage) {
         this.dailyMileage = dailyMileage;
     }
     /**
-     *
-     *  Zwraca przebieg uzytkownika
-     *
+     * Metoda zwraca przebieg uzytkownika pojazdu
+     * @return Przebieg uzytkownika pojazdu
      */
     public double getUserMileage() {
         return userMileage;
     }
     /**
-     *
-     *  Ustawia przebieg uzytkownika
-     *
+     * Metoda ustawia przebieg uzytkownika
+     * @param userMileage - Przebieg, ktory ma byc ustawiony
      */
     public void setUserMileage(double userMileage) {
         this.userMileage = userMileage;
     }
     /**
-     *
-     *  Sprawdza czy dzien w przebiegu dziennym z pliku XML jest taki sam jak
+     *  Metoda sprawdza czy dzien w przebiegu dziennym z pliku XML jest taki sam jak
      *  dzisiejszy, jeśli nie to zeruje przebieg dzienny
      */
     public void checkData() {
