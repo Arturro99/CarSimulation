@@ -1,15 +1,13 @@
 package warstwaLogiki.pl.pedals;
+
 /**
- *
- *  Klasa odpowiadajaca za hamulce samochodowe
- *
+ *  Klasa odpowiadajaca za dzialanie pedalu hamulca
  */
 public class Brake implements Pedals {
 
     /**
-     *
-     *  Hamowanie samochodu
-     *
+     * Metoda odpowiadajaca za wywolywanie nacisku na pedal
+     * @param powerInPercentage - sila, z jaka bedzie sie oddzialywac na pedal
      */
     @Override
     public void pressPedal(Integer powerInPercentage){
@@ -23,10 +21,10 @@ public class Brake implements Pedals {
             else if(Accelerator.getPower() == 0)
                 System.out.println("Samochód stoi w miejscu.");
     }
+
     /**
-     *
-     *  Zwalnianie pedalu hamulca
-     *
+     * Metoda odpowiadajaca za zmniejszenie nacisku na pedal
+     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu hamulca
      */
     @Override
     public void releasePedal(Integer powerInPercentage){

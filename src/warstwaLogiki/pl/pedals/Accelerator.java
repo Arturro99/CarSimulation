@@ -2,11 +2,22 @@ package warstwaLogiki.pl.pedals;
 
 import warstwaLogiki.pl.exceptions.TooFastException;
 
+/**
+ * Klasa odpowiadajaca za dzialanie pedalu gazu
+ */
 public class Accelerator implements Pedals {
     private static int power = 0;
 
+    /**
+     * Domyslny konstruktor pedalu gazu
+     */
     public Accelerator(){}
 
+    /**
+     * Metoda odpowiadajaca za wywolywanie nacisku na pedal
+     * @param powerInPercentage - sila, z jaka bedzie sie oddzialywac na pedal
+     * @throws TooFastException - wyjatek zostanie rzucony w przypadku przekroczenia pewnej okreslonej predkosci
+     */
     @Override
     public void pressPedal(Integer powerInPercentage) throws TooFastException {
             if (power + powerInPercentage > 250) {
@@ -18,6 +29,10 @@ public class Accelerator implements Pedals {
             }
     }
 
+    /**
+     * Metoda odpowiadajaca za zmniejszenie nacisku na pedal
+     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu gazu
+     */
     @Override
     public void releasePedal(Integer powerInPercentage) {
         if(power == 0)
@@ -32,10 +47,18 @@ public class Accelerator implements Pedals {
         }
     }
 
+    /**
+     * Metoda zwracajaca predkosc pojazdu
+     * @return - predkosc pojazdu
+     */
     public static int getPower() {
         return power;
     }
 
+    /**
+     * Metoda ustawiajaca predkosc pojazdu
+     * @param valueInPercentage - wartosc, o jaka nalezy zwiekszyc predkosc pojazdu
+     */
     static void setPower(int valueInPercentage){
         power += valueInPercentage;
     }

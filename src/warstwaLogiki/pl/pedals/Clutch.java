@@ -1,8 +1,15 @@
 package warstwaLogiki.pl.pedals;
 
+/**
+ * Klasa odpowiadajaca za dzialanie pedalu sprzegla
+ */
 public class Clutch implements Pedals {
     static boolean isOn = false;   //zmienna pokazuje, czy sprzęgło zostało wciśnięte -> możliwa ewentualna zmiana biegu
 
+    /**
+     * Metoda odpowiadajaca za wywolywanie nacisku na pedal
+     * @param powerInPercentage - sila, z jaka bedzie sie oddzialywac na pedal
+     */
     @Override
     public void pressPedal(Integer powerInPercentage)
     {
@@ -14,6 +21,10 @@ public class Clutch implements Pedals {
                 System.out.println("Pedał sprzęgła jest już wciśnięty.");
         }
 
+    /**
+     * Metoda odpowiadajaca za zmniejszenie nacisku na pedal
+     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu gazu
+     */
     @Override
     public void releasePedal(Integer powerInPercentage)
     {
@@ -25,5 +36,9 @@ public class Clutch implements Pedals {
         }
     }
 
+    /**
+     * Metoda pobierajaca informacje o stanie sprzegla (wlaczone/wylaczone)
+     * @return - stan sprzegla
+     */
     public static boolean getIsOn() {return isOn;}
     }

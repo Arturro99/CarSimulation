@@ -1,20 +1,20 @@
 package warstwaLogiki.pl.pedals;
+
 /**
- *
- *  Interfejs samochodowych pedalow
- *
+ * Interfejs samochodowych pedalow ( ͡° ͜ʖ ͡°)
  */
 public interface Pedals {
+
     /**
-     *
-     *  Nacisniecie pedalu samochodowego
-     *
+     * Wcisniecie pedalu
+     * @param powerInPercentage - sila, z jaka oddzialuje sie na pedal
+     * @throws Exception - wyjatek zostanie rzucony w chwili przekroczenia pewnej okreslonej predkosci
      */
     public void pressPedal(Integer powerInPercentage) throws Exception;
+
     /**
-     *
-     *  Zwolnienie pedalu samochodowego
-     *
+     * Zmniejszenie sily nacisku na pedal
+     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu
      */
     public void releasePedal(Integer powerInPercentage);
 }

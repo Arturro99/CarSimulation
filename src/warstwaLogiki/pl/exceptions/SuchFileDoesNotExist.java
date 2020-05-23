@@ -1,7 +1,7 @@
 package warstwaLogiki.pl.exceptions;
 /**
  *
- *  Wyjatek nie pozwalajacy otworzyć nieistniejącego pliku
+ *  Wyjatek, ktory nie pozwala otworzyć nieistniejącego pliku
  *
  */
 public class SuchFileDoesNotExist extends Exception {

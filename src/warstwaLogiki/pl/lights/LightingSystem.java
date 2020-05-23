@@ -4,24 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 /**
- *
  *  Klasa bazowa dla wszystkich swiatel
- *
  */
 public class LightingSystem {
     private ArrayList<LightingSystem>list = new ArrayList<>();  //Lista istniejących świateł w samochodzie
     protected boolean isOn = false;                         //Zmienna przechowująca informację o tym, czy dane światła są włączone
     static private int numberOfTurningSignals = 0;        //Zmienna statyczna licząca ilość włączonych kierunkowskazów
+
     /**
-     *
-     *  Dodaje swiatlo do listy
-     *
+     * Metoda dodaje swiatla do listy
+     * @param obj - obiekt reprezentujacy swiatlo
      */
     public void addToList(LightingSystem obj) { list.add(obj); }
+
     /**
-     *
-     *  Wypisuje informacje o swiatlach
-     *
+     *  Metoda zwraca informacje o swiatlach
+     * @return - informacje o wlaczonych swiatlach
      */
     public String info()
     {
@@ -57,28 +55,26 @@ public class LightingSystem {
         out = Arrays.stream(out.split("\n")).distinct().collect(Collectors.joining("\n"));      //Aby nie powtarzały się światła awaryjne w oucie
         return "Włączone światła:\n" + out;
     }
+
     /**
-     *
      *  Inkrementacja statycznego pola liczacego ilosc wlaczonych kierunkowskazow
-     *
      */
     protected static void incrementNumberOfTurningSignals()     //inkrementacja statycznego pola liczącego ilość włączonych kierunkowskazów
     {
         numberOfTurningSignals++;
     }
+
     /**
-     *
      *  Dekrementacja statycznego pola liczacego ilosc wlaczonych kierunkowskazow
-     *
      */
     protected static void decrementNumberOfTurningSignals()     //dekrementacja -------------------------||-------------------------------
     {
         numberOfTurningSignals--;
     }
+
     /**
-     *
-     *  Zwraca ilość włączonych kierunkowskazów
-     *
+     * Metoda zwraca ilosc wlaczonych kierunkowskazow
+     * @return - ilosc wloczonych kierunkowskazow
      */
     public static int getNumberOfTurningSignals() {
         return numberOfTurningSignals;

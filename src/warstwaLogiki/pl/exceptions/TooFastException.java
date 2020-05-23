@@ -1,7 +1,7 @@
 package warstwaLogiki.pl.exceptions;
 /**
  *
- *  Wyjatek nie pozwalajacy na predkosc poza przedzialem
+ *  Wyjatek, ktory nie pozwala na predkosc poza przedzialem
  *
  */
 public class TooFastException extends Exception{

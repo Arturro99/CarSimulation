@@ -1,9 +1,18 @@
 package warstwaLogiki.pl.lights;
 
+/**
+ * Klasa odpowiada za obsluge swiatel pozycyjnych
+ */
 public class PositionLights extends LightingSystem implements Lights{
 
+    /**
+     * Domyslny konstruktor klasy
+     */
     public PositionLights() {}
 
+    /**
+     * Metoda wlaczajaca swiatla - ustawia flage wlaczania swiatla w klasie nadrzednej na wartosc "true"
+     */
     @Override
     public void turnOn()
     {
@@ -14,6 +23,9 @@ public class PositionLights extends LightingSystem implements Lights{
             System.out.println("Swiatła pozycyjne są już włączone.");
     }
 
+    /**
+     * Metoda wylaczajaca swiatla - ustawia flage wlaczania swiatla w klasie nadrzednej na wartosc "false"
+     */
     @Override
     public void turnOff()
     {
@@ -25,9 +37,18 @@ public class PositionLights extends LightingSystem implements Lights{
             System.out.println("Swiatła pozycyjne nie są włączone");
     }
 
+    /**
+     * Metoda wypisuje inforamcje o rodzaju swiatla
+     * @return - podpis swiatel
+     */
     public String toString()
     {
         return "Swiatła pozycyjne";
     }
+
+    /**
+     * Metoda zwraca stan dzialania swiatel (true/false)
+     * @return - flaga wlaczania swiatla
+     */
     public boolean getIsOn() {return isOn;}
 }

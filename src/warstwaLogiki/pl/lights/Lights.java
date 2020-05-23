@@ -1,20 +1,17 @@
 package warstwaLogiki.pl.lights;
+
 /**
- *
- *  Interfejs swiatla
- *
+ *  Interfejs stworzony z mysla o swiatlach
  */
 public interface Lights {
+
     /**
-     *
-     *  Wlacza swiatlo
-     *
+     * Metoda wlacza swiatla
      */
     public void turnOn();
+
     /**
-     *
-     *  Wylacza swiatlo
-     *
+     * Metoda wylacza swiatla
      */
     public void turnOff();
 
