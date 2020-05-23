@@ -165,7 +165,7 @@ public class Gui extends Application {
         } catch (SQLException e) {
             System.err.println(e);
             try{
-                operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
+                listOfSongs = operateOnFiles.loadFromXmlFile("listOfSongs.xml", listOfSongs);
                 System.out.println("Wczytano piosenki z pliku xml");
             } catch (SuchFileDoesNotExist ee) {
                 System.err.println(e);
