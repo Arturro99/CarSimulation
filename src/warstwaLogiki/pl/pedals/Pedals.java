@@ -1,7 +1,7 @@
 package warstwaLogiki.pl.pedals;
 
 /**
- * Interfejs samochodowych pedalow ( ͡° ͜ʖ ͡°)
+ * Interfejs samochodowych pedalow
  */
 public interface Pedals {
 
