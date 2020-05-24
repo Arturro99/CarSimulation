@@ -20,8 +20,17 @@ import java.time.format.DateTimeFormatter;
  *  @author Wojciech Sowa
  */
 public class RunningTime {
+    /**
+     * Zmienna przechowujaca informacje o momencie wlaczenia silnika
+     */
     private static long startCountingEngine;
+    /**
+     * Zmienna przechowujaca informacje o stanie silnika (wlaczony/wylaczony)
+     */
     private static boolean IsEngineOn = false;
+    /**
+     * Zmienna przechowujaca obiekt sluzacy do zarzadzania czasem w samochodzie
+     */
     private static Timeline clock;
 
     /**

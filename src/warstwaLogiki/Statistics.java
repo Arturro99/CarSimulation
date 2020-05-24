@@ -8,8 +8,17 @@ import warstwaDanych.Mileage;
  *  @author Wojciech Sowa
  */
 public class Statistics {
+    /**
+     * Zmienna przechowujaca tablice potrzebna do wyliczenia sredniej predkosci pojazdu
+     */
     private static double[] forAvgSpeed = {1.0,0.0};
+    /**
+     * Zmienna przechowujaca maksymalna do danej chwili predkosc pojazdu
+     */
     private static int maxSpeed = 0;
+    /**
+     * Zmienna przechowujaca przebyta odleglosc
+     */
     private static double travelDistance = 0;
 
     /**
