@@ -1,3 +1,5 @@
+package warstwaLogiki;
+
 import warstwaDanych.ListOfSongs;
 import warstwaDanych.Mileage;
 import warstwaDanych.OperateOnFiles;
@@ -17,7 +19,7 @@ import java.util.Scanner;
  *  @author Artur Madaj
  *  @author Wojciech Sowa
  */
-public class Main {
+public class Console {
     /**
      * Zmienna przechowujaca obiekt sluzacy do zarzadzania przebiegiem pojazdu
      */
@@ -54,7 +56,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
+            mileage = operateOnFiles.loadFromXmlFile("Mileage.xml", mileage);
         }
         catch(SuchFileDoesNotExist exc) {
             System.err.println(exc);

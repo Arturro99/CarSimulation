@@ -374,7 +374,7 @@ public class Gui extends Application {
     public void start(Stage stage) {
         /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
         try {
-            mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
+            mileage = operateOnFiles.loadFromXmlFile("Mileage.xml", mileage);
             settings = operateOnFiles.loadFromXmlFile("Config.xml");
         }
         catch(SuchFileDoesNotExist exc) {
@@ -1070,14 +1070,14 @@ public class Gui extends Application {
         });
 ///////////////////////////////////////////////////////Obsługa menu//////////////////////////////////////////////
         save.setOnAction(e->{
-            operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+            operateOnFiles.saveToXmlFile("Mileage.xml", mileage);
             operateOnFiles.saveToXmlFile("Config.xml", settings);
             operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
         });
         exit.setOnAction(e->{
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
-                operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+                operateOnFiles.saveToXmlFile("Mileage.xml", mileage);
                 operateOnFiles.saveToXmlFile("Config.xml", settings);
                 operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                 System.exit(0);
@@ -1093,7 +1093,7 @@ public class Gui extends Application {
             e.consume();
             boolean answer = ConfirmBox.display("Alert", "Czy na pewno chcesz zamknąć program?");
             if(answer) {
-                operateOnFiles.saveToXmlFile("Próba.xml", mileage);
+                operateOnFiles.saveToXmlFile("Mileage.xml", mileage);
                 operateOnFiles.saveToXmlFile("Config.xml", settings);
                 operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                 System.exit(0);
