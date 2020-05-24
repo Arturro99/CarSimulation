@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 /**
  * Klasa odpowiedzialna za okna do dodawania i usuwania piosenek
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class InsertingBox {
     static ArrayList<TextField>list = new ArrayList<>();

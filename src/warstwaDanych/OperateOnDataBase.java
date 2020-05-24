@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * Klasa odpowiada za operacje w bazie danych
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class OperateOnDataBase {
 

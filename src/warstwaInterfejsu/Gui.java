@@ -38,6 +38,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Klasa odpowiada za cale okno aplikacji
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Gui extends Application {
     static BorderPane wholeGrid = new BorderPane();

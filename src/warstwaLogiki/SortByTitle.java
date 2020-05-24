@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 /**
  * Klasa implementuje interfejs "Comparator", sluzy do sortowania piosenek w zaleznosci od tytulu utworu
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class SortByTitle implements Comparator<Song>
 {

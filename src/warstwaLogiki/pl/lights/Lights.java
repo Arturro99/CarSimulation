@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  *  Interfejs stworzony z mysla o swiatlach
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public interface Lights {
 

@@ -15,6 +15,8 @@ import warstwaLogiki.RunningTime;
 
 /**
  * Klasa odpowiada za wyswietlenie okna ustawien i nimi zarzadza
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Settings {
     private boolean darkOn = false;

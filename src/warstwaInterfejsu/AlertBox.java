@@ -9,6 +9,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
  * Klasa wyswietla nowe okno z podanym komunikatem
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class AlertBox {
     /**

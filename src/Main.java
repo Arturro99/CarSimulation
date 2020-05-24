@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * Klasa odpowiedzialna za obsluge programu w trybie tekstowym
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
+ */
 public class Main {
     static Mileage mileage = new Mileage();
     static OperateOnFiles operateOnFiles = new OperateOnFiles();
@@ -20,6 +25,11 @@ public class Main {
     static boolean isDBworking = false;
     static Indicator left = new Indicator(Side.left);
     static Indicator right = new Indicator(Side.right);
+
+    /**
+     * Glowna metoda pozwalajaca na uruchomienie okna tekstowego i operowanie na nim
+     * @param args - aargumenty wywolania programu
+     */
     public static void main(String[] args) {
 
         try {
@@ -77,7 +87,10 @@ public class Main {
         }while(option != '5');
     }
 
-    public static void goBack(){
+    /**
+     * Metoda pomagajaca w zarzadzaniu wprowadzanymi znakami
+     */
+    private static void goBack(){
         System.out.println("Wciśnij enter by kontynuować");
         try {
             System.in.skip(1);
@@ -87,6 +100,9 @@ public class Main {
         }
     }
 
+    /**
+     * Metoda pokazujaca menu programu
+     */
     public static void showMenu(){
         System.out.println("Wybierz opcję i zatwierdź enterem:");
         System.out.println("1 - Włącz samochód");
@@ -97,6 +113,9 @@ public class Main {
         System.out.println("");
     }
 
+    /**
+     * Metoda wypisujaca liste utworow muzycznych oraz umozliwiajaca zarzadzanie nimi
+     */
     public static void showListOfSongs() {
         try {
             operateOnDataBase.fromDBToListOfSongs(listOfSongs);
@@ -198,6 +217,9 @@ public class Main {
         } while(option != '7');
     }
 
+    /**
+     * Metoda pokazujaca przebiegi pojazdu
+     */
     public static void showMileage(){
         System.out.println("Przebieg całkowity: " + mileage.getTotalMileage());
         System.out.println("Przebieg dzienny: " + mileage.getDailyMileage());

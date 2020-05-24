@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge swiatel przeciwmgielnych
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class FogLights extends LightingSystem implements Lights {
     /**

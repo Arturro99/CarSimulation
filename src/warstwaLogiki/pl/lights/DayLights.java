@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge swiatel dziennych
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class DayLights extends LightingSystem implements Lights{
     /**

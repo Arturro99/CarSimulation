@@ -6,6 +6,8 @@ import java.sql.Time;
 
 /**
  * Klasa odpowiadajaca za obsluge piosenek
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Song {
     private String title;

@@ -15,6 +15,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Klasa odpowiedziana za okna informacyjne o programie i pojezdzie
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Infos {
     /**

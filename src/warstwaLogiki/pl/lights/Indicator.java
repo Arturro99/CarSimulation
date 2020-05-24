@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge kierunkowskazow
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Indicator extends LightingSystem implements Lights {
     Side side;

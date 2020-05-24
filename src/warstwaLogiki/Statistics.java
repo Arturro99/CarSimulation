@@ -4,6 +4,8 @@ import warstwaDanych.Mileage;
 
 /**
  * Klasa odpowiada za zarzadzanie statystykami
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Statistics {
     private static double[] forAvgSpeed = {1.0,0.0};

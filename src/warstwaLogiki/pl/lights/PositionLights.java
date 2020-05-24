@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge swiatel pozycyjnych
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class PositionLights extends LightingSystem implements Lights{
 

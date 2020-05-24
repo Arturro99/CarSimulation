@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 /**
  *  Klasa wyswietla nowe okno z podanym komunikatem i zwraca odp. Tak lub Nie
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class ConfirmBox {
     static boolean answer;

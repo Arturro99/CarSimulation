@@ -17,7 +17,8 @@ import java.util.Date;
 /**
  *
  *  Klasa jest odpowiedzialna za zarzadzanie czasem oraz silnikiem w programie
- *
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class RunningTime {
     private static long startCountingEngine;

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 /**
  * Klasa ta sluzy do przeprowadzania operacji zwiazanych ze skrzynia biegow
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Gears {
     /**

@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
  *  Klasa odpowiada za przebiegi w samochodzie
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Mileage {
     private double totalMileage = 0;

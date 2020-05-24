@@ -2,6 +2,8 @@ package warstwaLogiki.pl.pedals;
 
 /**
  * Klasa odpowiadajaca za dzialanie pedalu sprzegla
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Clutch implements Pedals {
     static boolean isOn = false;   //zmienna pokazuje, czy sprzęgło zostało wciśnięte -> możliwa ewentualna zmiana biegu

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 /**
  *  Klasa bazowa dla wszystkich swiatel
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class LightingSystem {
     private ArrayList<LightingSystem>list = new ArrayList<>();  //Lista istniejących świateł w samochodzie

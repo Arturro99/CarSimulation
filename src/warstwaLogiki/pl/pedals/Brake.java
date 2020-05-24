@@ -2,6 +2,8 @@ package warstwaLogiki.pl.pedals;
 
 /**
  *  Klasa odpowiadajaca za dzialanie pedalu hamulca
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Brake implements Pedals {
 

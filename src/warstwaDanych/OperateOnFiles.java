@@ -10,6 +10,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 /**
  *  Klasa pozwala na zapisywanie i odczytywanie z plików xml/txt
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class OperateOnFiles {
     /**

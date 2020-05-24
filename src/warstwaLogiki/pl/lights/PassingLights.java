@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge swiatel mijania
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class PassingLights extends LightingSystem implements Lights {
 

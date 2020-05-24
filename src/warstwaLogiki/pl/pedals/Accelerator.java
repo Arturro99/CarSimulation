@@ -4,6 +4,8 @@ import warstwaLogiki.pl.exceptions.TooFastException;
 
 /**
  * Klasa odpowiadajaca za dzialanie pedalu gazu
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Accelerator implements Pedals {
     private static int power = 0;

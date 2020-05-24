@@ -2,6 +2,8 @@ package warstwaLogiki.pl.lights;
 
 /**
  * Klasa odpowiada za obsluge swiatel drogowych
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class Headlights extends LightingSystem implements Lights {
 

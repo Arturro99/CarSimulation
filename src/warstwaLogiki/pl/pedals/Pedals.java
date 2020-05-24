@@ -2,6 +2,8 @@ package warstwaLogiki.pl.pedals;
 
 /**
  * Interfejs samochodowych pedalow
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public interface Pedals {
 

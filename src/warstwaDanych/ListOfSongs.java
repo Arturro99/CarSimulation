@@ -10,6 +10,8 @@ import java.util.Collections;
 /**
  * Klasa przechowuje objekty klasy Song w liscie i odpowiada za podstawowe operacje:
  * zapisywania, usuwania i sortowania piosenek na liscie.
+ *  @author Artur Madaj
+ *  @author Wojciech Sowa
  */
 public class ListOfSongs {
     private ArrayList<Song> songs = new ArrayList<>();
