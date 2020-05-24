@@ -53,18 +53,14 @@ public class Main {
             }
             switch (option) {
                 case '1':
-                    System.out.println("Ta opcja jeszcze nie działa");
-                    goBack();
-                    break;
-                case '2':
                     showMileage();
                     goBack();
                     break;
-                case '3':
+                case '2':
                     showListOfSongs();
                     goBack();
                     break;
-                case '4':
+                case '3':
                     if(left.getIsOn() && right.getIsOn()){
                         left.turnOff();
                         right.turnOff();
@@ -77,14 +73,14 @@ public class Main {
                     }
                     goBack();
                     break;
-                case '5':
+                case '4':
                     System.out.println("Wyłączanie programu");
                     operateOnFiles.saveToXmlFile("listOfSongs.xml", listOfSongs);
                     break;
                 default:
                     System.out.println("Wybrano złą opcję");
             }
-        }while(option != '5');
+        }while(option != '4');
     }
 
     /**
@@ -105,11 +101,10 @@ public class Main {
      */
     public static void showMenu(){
         System.out.println("Wybierz opcję i zatwierdź enterem:");
-        System.out.println("1 - Włącz samochód");
-        System.out.println("2 - Wyświetl statystyki auta");
-        System.out.println("3 - Lista piosenek");
-        System.out.println("4 - Włącz/wyłącz światła awaryjne");
-        System.out.println("5 - Wyłącz program");
+        System.out.println("1 - Wyświetl statystyki auta");
+        System.out.println("2 - Lista piosenek");
+        System.out.println("3 - Włącz/wyłącz światła awaryjne");
+        System.out.println("4 - Wyłącz program");
         System.out.println("");
     }
 
@@ -183,6 +178,7 @@ public class Main {
                         try{
                             operateOnDataBase.insert(title, artist, album, duration, index);
                             listOfSongs.addSong(title, artist, album, duration, index);
+                            System.out.println("Pomyślnie dodano piosenkę");
                         } catch (SQLException e) {
                             System.err.println(e);
                         }
@@ -200,6 +196,7 @@ public class Main {
                         try{
                             operateOnDataBase.delete(index);
                             listOfSongs.deleteSongWithID(index);
+                            System.out.println("Pomyślnie usunięto piosenkę");
                         } catch (SQLException e) {
                             System.err.println(e);
                         }
