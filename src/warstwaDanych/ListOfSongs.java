@@ -27,7 +27,6 @@ public class ListOfSongs {
     public void addSong(String title, String artist, String album, Time duration, int ID)
     {
         songs.add(new Song(title, artist, album, duration, ID));
-        System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
     /**
      * Metoda dodaje piosenke do listy
@@ -40,7 +39,6 @@ public class ListOfSongs {
     public void addSong(String title, String artist, String album, String duration, int ID)
     {
         songs.add(new Song(title, artist, album, duration, ID));
-        System.out.println("Dodano piosenke: " + songs.get(songs.size()-1));
     }
 
     /**
