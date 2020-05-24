@@ -5,14 +5,15 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  *  Klasa wyswietla nowe okno z podanym komunikatem i zwraca odp. Tak lub Nie
  *  @author Artur Madaj
  *  @author Wojciech Sowa
  */
 public class ConfirmBox {
-    static boolean answer;
-
     /**
      * Metoda wyswietla nowe okno z podanych tytulem i komunikatem, uzytkownik wybiera jedna z opcji: TAK lub NIE
      * @param title - Tytul okna
@@ -20,6 +21,7 @@ public class ConfirmBox {
      * @return Odpowiedz uzytkownika - TAK lub NIE (true/false)
      */
     public static boolean display(String title, String message) {
+        AtomicBoolean answer = new AtomicBoolean(false);
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
@@ -33,11 +35,11 @@ public class ConfirmBox {
         Button noButton = new Button("NIE");
 
         yesButton.setOnAction(e -> {
-            answer = true;
+            answer.set(true);
             window.close();
         });
         noButton.setOnAction(e -> {
-            answer = false;
+            answer.set(false);
             window.close();
         });
 
@@ -52,7 +54,7 @@ public class ConfirmBox {
         window.setScene(scene);
         window.showAndWait();
 
-        return answer;
+        return answer.get();
     }
 
 }

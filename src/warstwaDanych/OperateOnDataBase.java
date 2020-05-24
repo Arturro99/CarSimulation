@@ -42,7 +42,7 @@ public class OperateOnDataBase {
 
     /**
      * Metoda zapisuje wszystkie rekordy z bazy danych do listy piosenek z klasy ListOfSongs
-     * @param list - Objekt klasy ListOfSongs
+     * @param list - Obiekt klasy ListOfSongs
      * @throws SQLException
      */
     public void fromDBToListOfSongs(ListOfSongs list) throws SQLException {

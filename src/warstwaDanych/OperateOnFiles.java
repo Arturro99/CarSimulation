@@ -15,9 +15,9 @@ import java.util.ArrayList;
  */
 public class OperateOnFiles {
     /**
-     * Metoda zapisuje do pliku XML pola podanego objektu
+     * Metoda zapisuje do pliku XML pola podanego obiektu
      * @param nazwa - Nazwa pliku XML do ktorego zapisujemy
-     * @param obj - Objekt, ktory chcemy zapisac do pliku XML
+     * @param obj - Obiekt, ktory chcemy zapisac do pliku XML
      */
     public void saveToXmlFile(String nazwa, Object obj)
     {
@@ -43,7 +43,7 @@ public class OperateOnFiles {
     /**
      * Metoda wczytuje dane z pliku XML do obiektu klasy Mileage
      * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
-     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @param obj - Obiekt, do ktorego chcemy wczytac dane z XMLa
      * @return Obiekt klasy Mileage
      * @throws SuchFileDoesNotExist
      */
@@ -60,7 +60,7 @@ public class OperateOnFiles {
     /**
      * Metoda wczytuje dane z pliku XML do obiektu klasy Settings
      * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
-     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @param obj - Obiekt, do ktorego chcemy wczytac dane z XMLa
      * @return Obiekt klasy Settings
      * @throws SuchFileDoesNotExist
      */
@@ -77,7 +77,7 @@ public class OperateOnFiles {
     /**
      * Metoda wczytuje dane z pliku XML do obiektu klasy ListOfSongs
      * @param nazwa - Nazwa pliku XML z ktorego wczytujemy
-     * @param obj - Objekt, do ktorego chcemy wczytac dane z XMLa
+     * @param obj - Obiekt, do ktorego chcemy wczytac dane z XMLa
      * @return Obiekt klasy ListOfSongs
      * @throws SuchFileDoesNotExist
      */
@@ -96,7 +96,7 @@ public class OperateOnFiles {
     /**
      * Metoda zapisuje liste piosenek do pliku txt
      * @param nazwa - Nazwa pliku, do ktorego chcemy zapisac dane
-     * @param obj - Objekt klasy ListOfSongs
+     * @param obj - Obiekt klasy ListOfSongs
      */
     public void saveToTxtFile(String nazwa, ListOfSongs obj)
     {
@@ -114,7 +114,7 @@ public class OperateOnFiles {
     /**
      * Metoda wczytuje liste piosenek z pliku txt
      * @param nazwa - Nazwa pliku, z ktorego chcemy wczytac dane
-     * @param obj - Objekt klasy ListOfSongs
+     * @param obj - Obiekt klasy ListOfSongs
      */
     public void readFromTxtFile(String nazwa, ListOfSongs obj)
     {

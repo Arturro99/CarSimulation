@@ -8,12 +8,15 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
 /**
- * Klasa przechowuje objekty klasy Song w liscie i odpowiada za podstawowe operacje:
+ * Klasa przechowuje obiekty klasy Song w liscie i odpowiada za podstawowe operacje:
  * zapisywania, usuwania i sortowania piosenek na liscie.
  *  @author Artur Madaj
  *  @author Wojciech Sowa
  */
 public class ListOfSongs {
+    /**
+     * Lista przechowujaca obiekty klasy Song
+     */
     private ArrayList<Song> songs = new ArrayList<>();
 
     /**
@@ -43,7 +46,7 @@ public class ListOfSongs {
 
     /**
      * Metoda dodaje piosenke do listy
-     * @param song - Objekt klasy Song
+     * @param song - Obiekt klasy Song
      */
     public void addSong(Song song)
     {
@@ -51,7 +54,7 @@ public class ListOfSongs {
     }
     /**
      * Metoda usuwa piosenke z listy
-     * @param song - Objekt klasy Song
+     * @param song - Obiekt klasy Song
      */
     public void deleteSong(Song song)
     {
@@ -78,9 +81,9 @@ public class ListOfSongs {
     public int getSize() {return songs.size(); }
 
     /**
-     * Metoda zwraca objekt klasy Song znajdujacy sie na podanym miejscu listy
+     * Metoda zwraca obiekt klasy Song znajdujacy sie na podanym miejscu listy
      * @param index - Indeks piosenki na liscie
-     * @return Objekt klasy Song
+     * @return Obiekt klasy Song
      */
     public Song getSong(int index) {
         return songs.get(index);

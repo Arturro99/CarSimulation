@@ -19,11 +19,14 @@ import warstwaLogiki.RunningTime;
  *  @author Wojciech Sowa
  */
 public class Settings {
-    private boolean darkOn = false;
-    private boolean lightOn = false;
-    private boolean retroOn = true;
-    private boolean englishFormatOn = false;
-    private boolean normalFormatOn = true;
+    /**
+     * Zmienna przechowujaca, ktory motyw aplikacji zostal wybrany, jesli zostal wybrany to wartosc ustawiona jest na True
+     */
+    private boolean darkOn, lightOn, retroOn;
+    /**
+     * Zmienna przechowujaca, ktory format czasu zostal wybrany, jesli zostal wybrany to wartosc ustawiana jest na True
+     */
+    private boolean englishFormatOn,  normalFormatOn;
 
     /**
      * Metoda odpowiada za wyswietlenie okna ustawien

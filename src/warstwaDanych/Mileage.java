@@ -7,10 +7,22 @@ import java.time.LocalDateTime;
  *  @author Wojciech Sowa
  */
 public class Mileage {
+    /**
+     * Zmienna odpowiadajaca za calkowity przebieg pojazdu
+     */
     private double totalMileage = 0;
+    /**
+     * Zmienna odpowiadajaca za dzienny przebieg pojazdu
+     */
     private double dailyMileage = 0;
+    /**
+     * Zmienna odpowiadajaca za przebieg uzytkownika
+     */
     private double userMileage = 0;
-    private LocalDate data = LocalDate.now();
+    /**
+     * Zmienna odpowiadajaca za date, pomaga zidentyfikowac, czy wczytany przebieg jest z tego samego dnia
+     */
+    private LocalDate date = LocalDate.now();
     /**
      * Metoda dodaje przebyty dystans do wszystkich przebiegow
      * @param distance - Dystans, ktory dodajemy pod wszystkich dystansow
@@ -70,12 +82,12 @@ public class Mileage {
     }
     /**
      *  Metoda sprawdza czy dzien w przebiegu dziennym z pliku XML jest taki sam jak
-     *  dzisiejszy, jeśli nie to zeruje przebieg dzienny
+     *  dzisiejszy, jesli nie to zeruje przebieg dzienny
      */
     public void checkData() {
-        if(data.getDayOfMonth() != LocalDateTime.now().getDayOfMonth()) {
+        if(date.getDayOfMonth() != LocalDateTime.now().getDayOfMonth()) {
             setDailyMileage(0.0);
-            this.data = LocalDate.now();
+            this.date = LocalDate.now();
         }
     }
 }

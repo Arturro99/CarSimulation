@@ -10,10 +10,25 @@ import java.sql.Time;
  *  @author Wojciech Sowa
  */
 public class Song {
+    /**
+     * Zmienna przechowujaca tytul piosenki
+     */
     private String title;
+    /**
+     * Zmienna przechowujaca wykonawce piosenki
+     */
     private String artist;
+    /**
+     * Zmienna przechowujaca album piosenki
+     */
     private String album;
+    /**
+     * Zmienna przechowujaca dlugosc piosenki
+     */
     private Time duration;
+    /**
+     * Zmienna przechowujaca unikalne ID piosenki
+     */
     private int ID;
 
     /**

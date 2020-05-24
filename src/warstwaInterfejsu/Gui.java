@@ -42,33 +42,102 @@ import java.util.concurrent.atomic.AtomicInteger;
  *  @author Wojciech Sowa
  */
 public class Gui extends Application {
+    /**
+     * Zmienna odpowiadajaca za uklad aplikacji
+     */
     static BorderPane wholeGrid = new BorderPane();
-
+    /**
+     * Zmienna rowna True, jesli tempomat jest wlaczony, a False w przeciwnym wypadku
+     */
     static boolean isTempomatOn = false;
+    /**
+     * Zmienna rowna True, jesli swiatla przeciwmgielne sa wlaczone, a False w przeciwnym wypadku
+     */
     static boolean isFogLightsOn = false;
+    /**
+     * Zmienna rowna True, jesli muzyka jest wlaczona, a False w przeciwnym wypadku
+     */
     boolean isMusicPlaying = false;
+    /**
+     * Zmienna rowna True, jesli 12 godzinny zegar jest wlaczony, a False w przeciwnym wypadku
+     */
     static boolean englishSystem = false;
+    /**
+     * Zmienna przechowuje, ktore aktualnie swiatlo jest wlaczone
+     */
     static int whichLightOn = 0;
+    /**
+     * Zmienna przechowuje wartosc ustawiona na tempomacie
+     */
     int tempomatSpeedValue = 0;
+    /**
+     * Zmienna rowna True, jesli baza danych zostala wlaczona, a False w przeciwnym wypadku
+     */
     boolean isDBworking = false;
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk wlaczania/wylaczania tempomatu
+     */
     Button tempomatButton = new Button("Włącz tempomat");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "+" do obslugi tempomatu
+     */
     Button plusButton = new Button("+");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "-" do obslugi tempomatu
+     */
     Button minusButton = new Button("-");
 
     ////////////////MP3//////////////////////
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst "Odtwarzacz MP3"
+     */
     Text radioTitle = new Text("Odtwarzacz MP3");
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy danych piosenki w odtwarzaczu MP3
+     */
     Text songText = new Text("Piosenka");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Poprzednia" do obslugi odtwarzacza MP3
+     */
     Button previousSong = new Button("Poprzednia");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Nastepna" do obslugi odtwarzacza MP3
+     */
     Button nextSong = new Button("Następna");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Start" do obslugi odtwarzacza MP3
+     */
     Button startSong = new Button("Start");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Pause" do obslugi odtwarzacza MP3
+     */
     Button pauseSong = new Button("Pause");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Stop" do obslugi odtwarzacza MP3
+     */
     Button stopSong = new Button("Stop");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Dodaj utwor" do obslugi odtwarzacza MP3
+     */
     Button addSong = new Button("Dodaj utwór");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Usun utwor" do obslugi odtwarzacza MP3
+     */
     Button deleteSong = new Button("Usuń utwór");
+
     ///////////////Kierunkowskazy//////////////
+    /**
+     * Zmienna odpowiadajaca za rysowanie prawiego kierunkowskazu
+     */
     static Polygon rightArrow = new Polygon();
+    /**
+     * Zmienna odpowiadajaca za rysowanie prawiego kierunkowskazu
+     */
     static Polygon leftArrow = new Polygon();
     ///////////////Swiatla/////////////////////
+    /**
+     * Zmienna przechowuje okiekt klasy ImageView zawierajacy obrazek odpowiajacy jej nazwie
+     */
     static ImageView dlugie, dlugieczarnobiale, dzienne, dzienneczarnobiale, mijania, mijaniaczarnobiale, pozycyjne, pozycyjneczarnobiale,
     przeciwmgielne, przeciwmgielneczarnobiale, tempomat, tempomatczarnobiale;
 
@@ -90,65 +159,211 @@ public class Gui extends Application {
             e.printStackTrace();
         }
     }
+    /**
+     * Zmienna przechowuje obiekt klasy VBox, ktory pozwala usytuowac obrazki w pozycji pionowej
+     */
     static VBox images = new VBox();
 
     //////////////Podpisy//////////////////////
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy predkosci pojazdu
+     */
     static Text velocity = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy sredniej predkosci pojazdu
+     */
     Text avgSpeed = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy maksymalnej predkosci pojazdu
+     */
     Text maxSpeed = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy biezacego czasu podrozy
+     */
     Text travelTime = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy biezacego przebytego dystansu
+     */
     Text travelDistance = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy sredniego spalania
+     */
     Text avgFuelConsumption = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy calkowitego przebytego dystansu
+     */
     Text totalMileage = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy dziennego przebytego dystansu
+     */
     Text dailyMileage = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy dystansu uzytkownika
+     */
     Text userMileage = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany czas
+     */
     static Text time = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy obrotomierza
+     */
     Text engineSpeed = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst "Biegi:"
+     */
     static Text gearsCaption = new Text();
+    /**
+     * Zmienna przechowujaca obiekt klasy Text odpowiadajacy za wyswietlany tekst dotyczacy predkosci tempomatu
+     */
     static Text tempomatSpeedText;
 
     ////////////////////////Interakcje z użytkownikiem////////////////////////////////////
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Wlacz/wylacz silnik"
+     */
     Button engineButton = new Button("Włącz silnik");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Swiatla awaryjne"
+     */
     Button emergencyLightsButton = new Button("Światła awaryjne");
+    /**
+     * Zmienna przechowujaca obiekt klasy Button odpowiadajacy za przycisk "Zresetuj przebieg", ktory resetuje przebieg uzytkownika
+     */
     Button resetUserMileageButton = new Button("Zresetuj przebieg");
+    /**
+     * Zmienna przechowujaca obiekt klasy RadioButton odpowiadajacy za przycisk "Swiatla wylaczone" do obslugi swiatel
+     */
     RadioButton noLights = new RadioButton("Światła wyłączone");
+    /**
+     * Zmienna przechowujaca obiekt klasy RadioButton odpowiadajacy za przycisk "Swiatla pozycyjne" do obslugi swiatel
+     */
     RadioButton positionLightsRadio = new RadioButton("Światła pozycyjne");
+    /**
+     * Zmienna przechowujaca obiekt klasy RadioButton odpowiadajacy za przycisk "Swiatla mijania" do obslugi swiatel
+     */
     RadioButton passingLightsRadio = new RadioButton("Światła mijania");
+    /**
+     * Zmienna przechowujaca obiekt klasy RadioButton odpowiadajacy za przycisk "Swiatla dlugie" do obslugi swiatel
+     */
     RadioButton headlightsRadio = new RadioButton("Światła długie");
+    /**
+     * Zmienna przechowujaca obiekt klasy RadioButton odpowiadajacy za przycisk "Swiatla dzienne" do obslugi swiatel
+     */
     RadioButton dayLightsRadio = new RadioButton("Światła dzienne");
+    /**
+     * Zmienna przechowujaca obiekt klasy CheckBox odpowiadajacy za przycisk "Swiatla przeciwmgielne" do obslugi swiatel
+     */
     CheckBox fogLightsRadio = new CheckBox("Światła przeciwmgielne");
+    /**
+     * Zmienna przechowujaca obiekt klasy ToggleGroup odpowiadajacy za dodanie do jednej grupy wszystkich RadioButton odpowiadajacych za swiatla
+     */
     ToggleGroup groupOfLights = new ToggleGroup();
 
     /////////////////////Listy pomocnicze do grupowania elementów/////////////////////////
+    /**
+     * Zmienna przechowujaca liste diod symbolizujacy wlaczony bieg
+     */
     static ArrayList<Circle> listOfGearsControls = new ArrayList<>();
+    /**
+     * Zmienna przechowujaca liste biegow - wlaczony bieg posiada wartosc True
+     */
     ArrayList<Boolean> listOfGears = new ArrayList<>();
+    /**
+     * Zmienna przechowujaca opisy biegow
+     */
     static ArrayList<Text> listOfGearsCaption = new ArrayList<>();
+    /**
+     * Zmienna przechowujaca liste diod odpowiedzialnych za obrazowanie stanu pojazdu
+     */
     static ArrayList<Circle> diodes = new ArrayList<>();
+    /**
+     * Zmienna przechowujaca opisy diod odpowiedzialnych za obrazowanie stanu pojazdu
+     */
     static ArrayList<Text> diodesCaption = new ArrayList<>();
 
     ////////////////////////Obiekty klas z innych plików///////////////////////////////////
+    /**
+     * Zmienna przechowujaca obiekt klasy Accelerator symbolizujacy pedal gazu
+     */
     Accelerator accelerator = new Accelerator();
+    /**
+     * Zmienna przechowujaca obiekt klasy Brake symbolizujacy pedal hamowania
+     */
     Brake brake = new Brake();
+    /**
+     * Zmienna przechowujaca obiekt klasy Clutch symbolizujacy pedal sprzegla
+     */
     Clutch clutch = new Clutch();
+    /**
+     * Zmienna przechowujaca obiekt klasy Indicator symbolizujacy lewy kierunkowskaz
+     */
     Indicator left = new Indicator(Side.left);
+    /**
+     * Zmienna przechowujaca obiekt klasy Indicator symbolizujacy prawy kierunkowskaz
+     */
     Indicator right = new Indicator(Side.right);
+    /**
+     * Zmienna przechowujaca obiekt klasy PositionLights symbolizujacy swiatla pozycyjne
+     */
     PositionLights positionLights = new PositionLights();
+    /**
+     * Zmienna przechowujaca obiekt klasy PassingLights symbolizujacy swiatla mijania
+     */
     PassingLights passingLights = new PassingLights();
+    /**
+     * Zmienna przechowujaca obiekt klasy FogLights symbolizujacy swiatla przeciwmgielne
+     */
     FogLights fogLights = new FogLights();
+    /**
+     * Zmienna przechowujaca obiekt klasy Headlights symbolizujacy swiatla dlugie
+     */
     Headlights headlights = new Headlights();
+    /**
+     * Zmienna przechowujaca obiekt klasy DayLights symbolizujacy swiatla dzienne
+     */
     DayLights dayLights = new DayLights();
+    /**
+     * Zmienna przechowujaca obiekt klasy Mileage odpowiadajacy za przebiegi auta
+     */
     Mileage mileage = new Mileage();
+    /**
+     * Zmienna przechowujaca obiekt klasy OperateOnFiles odpowiedzialny za operacje na plikach
+     */
     OperateOnFiles operateOnFiles = new OperateOnFiles();
+    /**
+     * Zmienna przechowujaca obiekt klasy OperateOnDataBase odpowiedzialny za operacje w bazie danych
+     */
     OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
+    /**
+     * Zmienna przechowujaca obiekt klasy ListOfSongs odpowiedzialny za liste utworow
+     */
     ListOfSongs listOfSongs = new ListOfSongs();
+    /**
+     * Zmienna przechowujaca obiekt klasy Media, ktora przechowuje utwor muzyczny
+     */
     Media song;
+    /**
+     * Zmienna przechowujaca obiekt klasy MediaPlayer, ktora umozliwia odtwarzanie muzyki
+     */
     MediaPlayer mediaPlayer;
+    /**
+     * Zmienna przechowujaca obiekt klasy Settings odpowiedzialny za ustawienia pojazdu
+     */
     Settings  settings = new Settings();
 
     ////////////Kolory w programie///////////////
+    /**
+     * Zmienna przechowujaca obiekt klasy Color odpowiedzalny za kolor tla w aplikacji
+     */
     static Color mainColor;
+    /**
+     * Zmienna przechowujaca obiekt klasy Color odpowiedzalny za kolor czcionki w aplikacji
+     */
     static Color additionalColor;
-
+    /**
+     * Zmienna przechowujaca obiekt klasy GridPane odpowiedzialny za uklad srodkowej czesci aplikacji
+     */
     static GridPane grid = new GridPane();
 
     /**
