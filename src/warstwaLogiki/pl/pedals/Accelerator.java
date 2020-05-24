@@ -8,6 +8,9 @@ import warstwaLogiki.pl.exceptions.TooFastException;
  *  @author Wojciech Sowa
  */
 public class Accelerator implements Pedals {
+    /**
+     * Zmienna przechowujaca predkosc pojazdu
+     */
     private static int power = 0;
 
     /**

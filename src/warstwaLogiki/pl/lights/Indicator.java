@@ -6,6 +6,9 @@ package warstwaLogiki.pl.lights;
  *  @author Wojciech Sowa
  */
 public class Indicator extends LightingSystem implements Lights {
+    /**
+     * Zmienna przechowujaca informacje o rodzaju kierunkowskazu (lewy/prawy)
+     */
     Side side;
 
     /**

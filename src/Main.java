@@ -18,12 +18,33 @@ import java.util.Scanner;
  *  @author Wojciech Sowa
  */
 public class Main {
+    /**
+     * Zmienna przechowujaca obiekt sluzacy do zarzadzania przebiegiem pojazdu
+     */
     static Mileage mileage = new Mileage();
+    /**
+     * Zmienna przechowujaca obiekt sluzacy do zarzadzania plikami w programie
+     */
     static OperateOnFiles operateOnFiles = new OperateOnFiles();
+    /**
+     * Zmienna przechowujaca obiekt sluzacy do zarzadzania baza danych w programie
+     */
     static OperateOnDataBase operateOnDataBase = new OperateOnDataBase();
+    /**
+     * Zmienna przechowujaca obiekt sluzacy do zarzadzania utworami
+     */
     static ListOfSongs listOfSongs = new ListOfSongs();
+    /**
+     * Zmienna przechowujaca informacje o stanie polaczenia z baza danych
+     */
     static boolean isDBworking = false;
+    /**
+     * Zmienna przechowujaca obiekt lewego kierunkowskazu
+     */
     static Indicator left = new Indicator(Side.left);
+    /**
+     * Zmienna przechowujaca obiekt prawego kierunkowskazu
+     */
     static Indicator right = new Indicator(Side.right);
 
     /**

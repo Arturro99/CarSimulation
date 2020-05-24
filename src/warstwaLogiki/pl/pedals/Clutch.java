@@ -6,6 +6,9 @@ package warstwaLogiki.pl.pedals;
  *  @author Wojciech Sowa
  */
 public class Clutch implements Pedals {
+    /**
+     * Zmienna przechowujaca informacje o stanie wlaczenia sprzegla
+     */
     static boolean isOn = false;   //zmienna pokazuje, czy sprzęgło zostało wciśnięte -> możliwa ewentualna zmiana biegu
 
     /**

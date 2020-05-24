@@ -9,8 +9,17 @@ import java.util.stream.Collectors;
  *  @author Wojciech Sowa
  */
 public class LightingSystem {
+    /**
+     * Zmienna przechowujaca liste istniejacych swiatel w samochodzie
+     */
     private ArrayList<LightingSystem>list = new ArrayList<>();  //Lista istniejących świateł w samochodzie
+    /**
+     * Zmienna przechowujaca informacje o stanie danych swiatel (wlaczone/wylaczone)
+     */
     protected boolean isOn = false;                         //Zmienna przechowująca informację o tym, czy dane światła są włączone
+    /**
+     * Zmienna przechowujaca o liczbie wlaczonych kierunkowskazow
+     */
     static private int numberOfTurningSignals = 0;        //Zmienna statyczna licząca ilość włączonych kierunkowskazów
 
     /**
