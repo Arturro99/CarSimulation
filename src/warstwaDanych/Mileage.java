@@ -25,7 +25,7 @@ public class Mileage {
     private LocalDate date = LocalDate.now();
     /**
      * Metoda dodaje przebyty dystans do wszystkich przebiegow
-     * @param distance - Dystans, ktory dodajemy pod wszystkich dystansow
+     * @param distance  Dystans, ktory dodajemy do wszystkich dystansow
      */
     public void addToMileage(double distance) {
         totalMileage += distance;
@@ -54,14 +54,10 @@ public class Mileage {
     public double getDailyMileage() {
         return dailyMileage;
     }
-    /**
-     *
-     *  Ustawia przebieg dzienny
-     *
-     */
+
     /**
      * Metoda ustawia przebieg dzienny
-     * @param dailyMileage - Przebieg, ktory ma byc ustawiony
+     * @param dailyMileage  Przebieg, ktory ma byc ustawiony
      */
     public void setDailyMileage(double dailyMileage) {
         this.dailyMileage = dailyMileage;
@@ -75,7 +71,7 @@ public class Mileage {
     }
     /**
      * Metoda ustawia przebieg uzytkownika
-     * @param userMileage - Przebieg, ktory ma byc ustawiony
+     * @param userMileage  Przebieg, ktory ma byc ustawiony
      */
     public void setUserMileage(double userMileage) {
         this.userMileage = userMileage;

@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ConfirmBox {
     /**
      * Metoda wyswietla nowe okno z podanych tytulem i komunikatem, uzytkownik wybiera jedna z opcji: TAK lub NIE
-     * @param title - Tytul okna
-     * @param message - Wiadomosc
+     * @param title  Tytul okna
+     * @param message  Wiadomosc
      * @return Odpowiedz uzytkownika - TAK lub NIE (true/false)
      */
     public static boolean display(String title, String message) {

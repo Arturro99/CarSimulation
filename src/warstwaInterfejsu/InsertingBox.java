@@ -34,9 +34,9 @@ public class InsertingBox {
     /**
      * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce dodac
      * i metoda dodaje te piosenke do bazy danych i do listy w listOfSongs
-     * @param title - Tytul okna
-     * @param operateOnDataBase - Obiekt klasy OperateOnDataBase
-     * @param listOfSongs - Obiekt klasy ListOfSongs
+     * @param title Tytul okna
+     * @param operateOnDataBase Obiekt klasy OperateOnDataBase
+     * @param listOfSongs Obiekt klasy ListOfSongs
      */
     public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
@@ -110,9 +110,9 @@ public class InsertingBox {
     /**
      * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce usunac
      * i metoda usuwa te piosenke z bazy danych i z listy w listOfSongs
-     * @param title - Tytul okna
-     * @param operateOnDataBase - Obiekt klasy OperateOnDataBase
-     * @param listOfSongs - Obiekt klasy ListOfSongs
+     * @param title  Tytul okna
+     * @param operateOnDataBase  Obiekt klasy OperateOnDataBase
+     * @param listOfSongs  Obiekt klasy ListOfSongs
      */
     public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();

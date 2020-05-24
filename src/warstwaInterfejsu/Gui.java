@@ -368,14 +368,14 @@ public class Gui extends Application {
 
     /**
      * Metoda uruchamiajaca GUI
-     * @param stage - Obiekt klasy Stage, pozwalajacy na stworzenie okna aplikacji
+     * @param stage  Obiekt klasy Stage, pozwalajacy na stworzenie okna aplikacji
      */
     @Override
     public void start(Stage stage) {
         /////////////////////////////////////////////Wczytywanie danych z pliku////////////////////////////////
         try {
             mileage = operateOnFiles.loadFromXmlFile("Próba.xml", mileage);
-            settings = operateOnFiles.loadFromXmlFile("Config.xml", settings);
+            settings = operateOnFiles.loadFromXmlFile("Config.xml");
         }
         catch(SuchFileDoesNotExist exc) {
             System.err.println(exc);
@@ -422,7 +422,6 @@ public class Gui extends Application {
         infoMenu.getItems().addAll(autoInfo, warrantyInfo);
         Menu settingsMenu = new Menu("Ustawienia");
         MenuItem settingsItem = new MenuItem("Dostosuj");
-        Menu changeTheme = new Menu("Zmień motyw");
         Menu changeTimeFormat = new Menu("Zmień format czasu");
         MenuItem englishFormat = new MenuItem("12 - godzinny");
         MenuItem normalFormat = new MenuItem("24 - godzinny");
@@ -591,7 +590,7 @@ public class Gui extends Application {
         HBox tempomatHBox = new HBox();
         tempomatHBox.setSpacing(10);
         tempomatHBox.getChildren().addAll(tempomatButton, minusButton, plusButton, tempomatSpeedText);
-        grid.setConstraints(tempomatHBox, 1,6);
+        GridPane.setConstraints(tempomatHBox, 1,6);
 
         ////////////////////////// MP3
         HBox radioTitleHBox = new HBox();   radioTitleHBox.setSpacing(7.5);
@@ -604,7 +603,7 @@ public class Gui extends Application {
         radio2HBox.getChildren().add(songText);
         radio3HBox.getChildren().addAll(pauseSong, startSong, stopSong, addSong, deleteSong);
         radioVBox.getChildren().addAll(radioTitleHBox, radio1HBox, radio2HBox, radio3HBox);
-        grid.setConstraints(radioVBox, 1, 8);
+        GridPane.setConstraints(radioVBox, 1, 8);
 
 
         /////////////////////////////////Dodawanie elemenntów do siatki///////////////////////////////////////
@@ -668,8 +667,6 @@ public class Gui extends Application {
             ////////////////////////Przyspieszenie/////////////////////////////////////////
             if(key.getCode() == KeyCode.UP && !Clutch.getIsOn() && RunningTime.getIsEngineOn() && Gears.canGoFurtherOnGear(listOfGears)) {
                 try {
-                    if(turnOff[0])
-                        engineButton.fire();
                     Gears.checkEngineSpeed(listOfGears, diodes, mainColor);
                     accelerator.pressPedal(1);
                     showVelocity();
@@ -843,9 +840,7 @@ public class Gui extends Application {
             }
         });
         ////////////Resetowanie przebiegu/////////////////
-        resetUserMileageButton.setOnAction(e ->{
-            mileage.setUserMileage(0.0);
-        });
+        resetUserMileageButton.setOnAction(e -> mileage.setUserMileage(0.0));
 
         //////////////////Światła awaryjne/////////////////////////////
         ArrayList<Timer>tmp3 = new ArrayList<>();
@@ -989,8 +984,7 @@ public class Gui extends Application {
             else {
                 isTempomatOn = false;
                 tempomatButton.setText("Włącz tempomat");
-                    for (int i = 0; i < tmp5.size(); i++)
-                        tmp5.get(i).cancel();
+                for (Timer timer : tmp5) timer.cancel();
                 Timer tmpTmer = new Timer();
                 tmp2.clear();
                 tmp2.add(tmpTmer);
@@ -1060,9 +1054,7 @@ public class Gui extends Application {
             mediaPlayer.stop();
             isMusicPlaying = false;
         });
-        pauseSong.setOnAction(e ->{
-            mediaPlayer.pause();
-        });
+        pauseSong.setOnAction(e ->mediaPlayer.pause());
 
         addSong.setOnAction(e -> {
             if(isDBworking)
@@ -1091,7 +1083,7 @@ public class Gui extends Application {
                 System.exit(0);
             }
         });
-        settingsItem.setOnAction(e->{settings.display();});
+        settingsItem.setOnAction(e->settings.display());
 
         programInfo.setOnAction(e->Infos.displayProgramInfo("Info o programie"));
         autoInfo.setOnAction(e->Infos.displayAutoInfo("Informacje o samochodzie"));
@@ -1122,8 +1114,8 @@ public class Gui extends Application {
 
     /**
      * Metoda rysujaca kierunkowskazy
-     * @param color - Kolor wypelnienia strzalki
-     * @param arrow - Enum, przechowujacy informacje, ktory kierunkowskaz powinien byc wlaczony
+     * @param color  Kolor wypelnienia strzalki
+     * @param arrow  Enum, przechowujacy informacje, ktory kierunkowskaz powinien byc wlaczony
      */
     private static void drawArrows(Color color, Arrows arrow){
 
@@ -1188,7 +1180,7 @@ public class Gui extends Application {
 
     /**
      *  Metoda rysuje kontrolki biegów
-     *  @param color - Kolor wypelnienia kontorlki
+     *  @param color  Kolor wypelnienia kontorlki
      */
     private static void drawGears(Color color){
         for(Circle i: listOfGearsControls) {
@@ -1199,17 +1191,17 @@ public class Gui extends Application {
 
     /**
      * Metoda rysuje diody
-     * @param color - Kolor wypelnienia diody
+     * @param color  Kolor wypelnienia diody
      */
     private static void drawDiodes(Color color){
         for(Circle i: diodes){
             i.setFill(color);
-            i.setStroke(color.BLACK);
+            i.setStroke(Color.BLACK);
         }
     }
     /**
      * Metoda wyswietla obrazki kontrolek
-     * @param color - Kolor tla
+     * @param color  Kolor tla
      */
     static void showImages(Color color) {
         VBox tmp = new VBox();

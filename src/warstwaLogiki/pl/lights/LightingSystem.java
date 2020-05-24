@@ -15,46 +15,46 @@ public class LightingSystem {
 
     /**
      * Metoda dodaje swiatla do listy
-     * @param obj - obiekt reprezentujacy swiatlo
+     * @param obj  Obiekt reprezentujacy swiatlo
      */
     public void addToList(LightingSystem obj) { list.add(obj); }
 
     /**
      *  Metoda zwraca informacje o swiatlach
-     * @return - informacje o wlaczonych swiatlach
+     * @return  Informacje o wlaczonych swiatlach
      */
     public String info()
     {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         System.out.println(list.size());
         for(LightingSystem obj : list)
         {
             if (obj.isOn) {
                 if (obj instanceof PassingLights) {             //Jeśli obiekt z listy należy do klasy PassingLights
                     PassingLights passing = (PassingLights) obj;
-                    out += passing.toString() + "\n";
+                    out.append(passing.toString()).append("\n");
                 } else if (obj instanceof Indicator && numberOfTurningSignals == 1) {      //Jeśli obiekt należy do klasy TurnSignal i jest włączony tylko jeden kierunkowskaz
                     Indicator indicator = (Indicator) obj;
-                    out += indicator.toString() + "\n";
+                    out.append(indicator.toString()).append("\n");
                 }
                 else if(obj instanceof Indicator && numberOfTurningSignals == 2) {         //Włączone dwa kierunkowskazy -> światła awaryjne
-                    out += "Awaryjne\n";
+                    out.append("Awaryjne\n");
                 }
                 else if(obj instanceof Headlights){         //Jeśli obiekt z listy należy do klasy Headlights
                     Headlights heads = (Headlights)obj;
-                    out += obj.toString() + "\n";
+                    out.append(heads.toString()).append("\n");
                 }
                 else if(obj instanceof DayLights){         //Jeśli obiekt z listy należy do klasy Headlights
-                    DayLights heads = (DayLights)obj;
-                    out += obj.toString() + "\n";
+                    DayLights day = (DayLights)obj;
+                    out.append(day.toString()).append("\n");
                 }
                 else if(obj instanceof FogLights){         //Jeśli obiekt z listy należy do klasy FogLights
-                    FogLights heads = (FogLights) obj;
-                    out += obj.toString() + "\n";
+                    FogLights fog = (FogLights) obj;
+                    out.append(fog.toString()).append("\n");
                 }
             }
         }
-        out = Arrays.stream(out.split("\n")).distinct().collect(Collectors.joining("\n"));      //Aby nie powtarzały się światła awaryjne w oucie
+        out = new StringBuilder(Arrays.stream(out.toString().split("\n")).distinct().collect(Collectors.joining("\n")));      //Aby nie powtarzały się światła awaryjne w oucie
         return "Włączone światła:\n" + out;
     }
 
@@ -76,7 +76,7 @@ public class LightingSystem {
 
     /**
      * Metoda zwraca ilosc wlaczonych kierunkowskazow
-     * @return - ilosc wloczonych kierunkowskazow
+     * @return  Ilosc wloczonych kierunkowskazow
      */
     public static int getNumberOfTurningSignals() {
         return numberOfTurningSignals;

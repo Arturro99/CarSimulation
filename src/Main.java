@@ -28,7 +28,7 @@ public class Main {
 
     /**
      * Glowna metoda pozwalajaca na uruchomienie okna tekstowego i operowanie na nim
-     * @param args - aargumenty wywolania programu
+     * @param args  Aargumenty wywolania programu
      */
     public static void main(String[] args) {
 
@@ -192,7 +192,7 @@ public class Main {
                     if (isDBworking) {
                         Scanner in = new Scanner(System.in);
                         System.out.println("Podaj ID piosenki do usunięcia:");
-                        Integer index = Integer.parseInt(in.next());
+                        int index = Integer.parseInt(in.next());
                         try{
                             operateOnDataBase.delete(index);
                             listOfSongs.deleteSongWithID(index);

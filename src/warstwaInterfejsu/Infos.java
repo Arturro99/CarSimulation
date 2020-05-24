@@ -3,7 +3,6 @@ package warstwaInterfejsu;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -21,7 +20,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class Infos {
     /**
      * Metoda wyswietla nowe okno z informacjami dotyczacymi programu
-     * @param title - Tytul okna
+     * @param title  Tytul okna
      */
     public static void displayProgramInfo(String title){
         Stage window = new Stage();
@@ -55,7 +54,7 @@ public class Infos {
     }
     /**
      * Metoda wyswietla nowe okno z informacjami dotyczacymi auta
-     * @param title - Tytul okna
+     * @param title  Tytul okna
      */
     public static void displayAutoInfo(String title){
         Stage window = new Stage();
@@ -93,7 +92,7 @@ public class Infos {
     }
     /**
      * Metoda wyswietla nowe okno z informacjami dotyczacymi gwarancji auta
-     * @param title - Tytul okna
+     * @param title  Tytul okna
      */
     public static void displayWarrantyInfo(String title){
         Stage window = new Stage();
@@ -103,7 +102,7 @@ public class Infos {
         window.setMinHeight(200);
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        LocalDate warrantyDate = LocalDate.of(2020, 07,21);
+        LocalDate warrantyDate = LocalDate.of(2020, 7,21);
         Text text = new Text("Gwarancja trwa do: " + warrantyDate.toString() + "\n" +
                              "Do końca gwarancji zostało: "+ DAYS.between(LocalDate.now(), warrantyDate) + " dni");
         text.setFont(new Font("Verdana", 12));

@@ -40,7 +40,7 @@ public class FogLights extends LightingSystem implements Lights {
 
     /**
      * Metoda wypisuje inforamcje o rodzaju swiatla
-     * @return - podpis swiatel
+     * @return  Podpis swiatel
      */
     public String toString()
     {
@@ -49,7 +49,7 @@ public class FogLights extends LightingSystem implements Lights {
 
     /**
      * Metoda zwraca stan dzialania swiatel (true/false)
-     * @return - flaga wlaczania swiatla
+     * @return  Flaga wlaczania swiatla
      */
     public boolean getIsOn() {return isOn;}
 }

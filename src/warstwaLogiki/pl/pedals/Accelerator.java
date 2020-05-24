@@ -17,13 +17,13 @@ public class Accelerator implements Pedals {
 
     /**
      * Metoda odpowiadajaca za wywolywanie nacisku na pedal
-     * @param powerInPercentage - sila, z jaka bedzie sie oddzialywac na pedal
-     * @throws TooFastException - wyjatek zostanie rzucony w przypadku przekroczenia pewnej okreslonej predkosci
+     * @param powerInPercentage  Sila, z jaka bedzie sie oddzialywac na pedal
+     * @throws TooFastException  Wyjatek zostanie rzucony w przypadku przekroczenia pewnej okreslonej predkosci
      */
     @Override
     public void pressPedal(Integer powerInPercentage) throws TooFastException {
             if (power + powerInPercentage > 250) {
-                throw new TooFastException("Maksymalna wartość prędkości nie może przekroczyć 250 km/h (" + (int)(power + powerInPercentage) + " km/h");
+                throw new TooFastException("Maksymalna wartość prędkości nie może przekroczyć 250 km/h (" + (power + powerInPercentage) + " km/h)");
             }
             else {
                 power += powerInPercentage;
@@ -33,7 +33,7 @@ public class Accelerator implements Pedals {
 
     /**
      * Metoda odpowiadajaca za zmniejszenie nacisku na pedal
-     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu gazu
+     * @param powerInPercentage  Ilosc sily nacisku zdjetej z pedalu gazu
      */
     @Override
     public void releasePedal(Integer powerInPercentage) {
@@ -51,7 +51,7 @@ public class Accelerator implements Pedals {
 
     /**
      * Metoda zwracajaca predkosc pojazdu
-     * @return - predkosc pojazdu
+     * @return  Predkosc pojazdu
      */
     public static int getPower() {
         return power;
@@ -59,7 +59,7 @@ public class Accelerator implements Pedals {
 
     /**
      * Metoda ustawiajaca predkosc pojazdu
-     * @param valueInPercentage - wartosc, o jaka nalezy zwiekszyc predkosc pojazdu
+     * @param valueInPercentage  Wartosc, o jaka nalezy zwiekszyc predkosc pojazdu
      */
     static void setPower(int valueInPercentage){
         power += valueInPercentage;
