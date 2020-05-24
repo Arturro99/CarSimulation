@@ -18,34 +18,34 @@ public class Song {
 
     /**
      * Metoda dodaje piosenke
-     * @param title - Tytul piosenki
-     * @param artist - Artysta wykonujacy piosenke
-     * @param album - Album piosenki
-     * @param duration - Dlugosc piosenki (format HH:MM:SS)
-     * @param ID - Unikalne ID piosenki
+     * @param title  Tytul piosenki
+     * @param artist  Artysta wykonujacy piosenke
+     * @param album  Album piosenki
+     * @param duration  Dlugosc piosenki (format HH:MM:SS)
+     * @param ID  Unikalne ID piosenki
      */
     public Song(String title, String artist, String album, String duration, int ID)
     {
         this.title = title;
         this.artist = artist;
         this.album = album;
-        this.duration = Time.valueOf(duration);;
+        this.duration = Time.valueOf(duration);
         this.ID = ID;
     }
     /**
      * Metoda dodaje piosenke
-     * @param title - Tytul piosenki
-     * @param artist - Artysta wykonujacy piosenke
-     * @param album - Album piosenki
-     * @param duration - Dlugosc piosenki (format HH:MM:SS)
-     * @param ID - Unikalne ID piosenki
+     * @param title  Tytul piosenki
+     * @param artist  Artysta wykonujacy piosenke
+     * @param album  Album piosenki
+     * @param duration  Dlugosc piosenki (format HH:MM:SS)
+     * @param ID  Unikalne ID piosenki
      */
     public Song(String title, String artist, String album, Time duration, int ID)
     {
         this.title = title;
         this.artist = artist;
         this.album = album;
-        this.duration = duration;;
+        this.duration = duration;
         this.ID = ID;
     }
 

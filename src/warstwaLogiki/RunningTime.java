@@ -12,8 +12,7 @@ import javafx.scene.paint.Color;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.util.Date;
+
 /**
  *
  *  Klasa jest odpowiedzialna za zarzadzanie czasem oraz silnikiem w programie
@@ -34,7 +33,7 @@ public class RunningTime {
 
     /**
      * Pobieranie czasu dzialania silnika
-     * @return - zwracana wartosc to czas dzialania silnika samochodowego
+     * @return  Zwracana wartosc to czas dzialania silnika samochodowego
      */
     public static double getRunningEngineTime() {
         long end = Instant.now().toEpochMilli();
@@ -46,9 +45,9 @@ public class RunningTime {
 
     /**
      * Metoda ustawiajaca czas w odpowiednim formacie oraz o odpowiedniej wartosci
-     * @param timeText - miejsce, w ktorym czas bedzie pokazywany
-     * @param color - kolor, w jakim czas bedzie pokazany (kolor dodatkowy programu)
-     * @param englishFormat - flaga informujaca o formacie godziny ("true" - 12-godzinny, "false" - 24-godzinny)
+     * @param timeText  Miejsce, w ktorym czas bedzie pokazywany
+     * @param color  Kolor, w jakim czas bedzie pokazany (kolor dodatkowy programu)
+     * @param englishFormat  Flaga informujaca o formacie godziny ("true" - 12-godzinny, "false" - 24-godzinny)
      */
     public static void showTime(Text timeText, Color color, boolean englishFormat){
         clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -72,13 +71,13 @@ public class RunningTime {
 
     /**
      * Metoda wlaczajaca/wylaczajaca silnik
-     * @param bool - flaga informujaca czy silnik ma byc wylaczony("false") lub wlaczony("true")
+     * @param bool  Flaga informujaca czy silnik ma byc wylaczony("false") lub wlaczony("true")
      */
     public static void setIsEngineOn(boolean bool) {IsEngineOn = bool;}
 
     /**
      * Metoda zwraca stan silnika
-     * @return - zwraca wartosc "true" jesli silnik jest wlaczony, w przciwnym wypadku - "false"
+     * @return  Zwraca wartosc "true" jesli silnik jest wlaczony, w przciwnym wypadku - "false"
      */
     public static boolean getIsEngineOn() {return IsEngineOn;}
 

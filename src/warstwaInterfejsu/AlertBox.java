@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 public class AlertBox {
     /**
      * Metoda wyswietla nowe okno z podanych tytulem i komunikatem
-     * @param title - Tytul okna
-     * @param message - Wiadomosc
+     * @param title  Tytul okna
+     * @param message  Wiadomosc
      */
     public static void display(String title, String message){
         Stage window = new Stage();

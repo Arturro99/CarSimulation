@@ -5,4 +5,4 @@ package warstwaInterfejsu;
  *  @author Artur Madaj
  *  @author Wojciech Sowa
  */
-public enum Arrows{rightArrow, leftArrow};
+public enum Arrows{rightArrow, leftArrow}

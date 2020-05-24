@@ -9,7 +9,7 @@ public class Brake implements Pedals {
 
     /**
      * Metoda odpowiadajaca za wywolywanie nacisku na pedal
-     * @param powerInPercentage - sila, z jaka bedzie sie oddzialywac na pedal
+     * @param powerInPercentage  Sila, z jaka bedzie sie oddzialywac na pedal
      */
     @Override
     public void pressPedal(Integer powerInPercentage){
@@ -26,7 +26,7 @@ public class Brake implements Pedals {
 
     /**
      * Metoda odpowiadajaca za zmniejszenie nacisku na pedal
-     * @param powerInPercentage - ilosc sily nacisku zdjetej z pedalu hamulca
+     * @param powerInPercentage  Ilosc sily nacisku zdjetej z pedalu hamulca
      */
     @Override
     public void releasePedal(Integer powerInPercentage){

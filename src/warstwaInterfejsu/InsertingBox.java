@@ -1,15 +1,11 @@
 package warstwaInterfejsu;
 
-import javafx.css.Styleable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Path;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import warstwaDanych.ListOfSongs;
@@ -34,9 +30,9 @@ public class InsertingBox {
     /**
      * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce dodac
      * i metoda dodaje te piosenke do bazy danych i do listy w listOfSongs
-     * @param title - Tytul okna
-     * @param operateOnDataBase - Objekt klasy OperateOnDataBase
-     * @param listOfSongs - Objekt klasy ListOfSongs
+     * @param title  Tytul okna
+     * @param operateOnDataBase  Objekt klasy OperateOnDataBase
+     * @param listOfSongs  Objekt klasy ListOfSongs
      */
     public static void displayNewSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();
@@ -110,9 +106,9 @@ public class InsertingBox {
     /**
      * Metoda wyswietla nowe okno, w ktorym uzytkownik wprowadza dane piosenki, ktora chce usunac
      * i metoda usuwa te piosenke z bazy danych i z listy w listOfSongs
-     * @param title - Tytul okna
-     * @param operateOnDataBase - Objekt klasy OperateOnDataBase
-     * @param listOfSongs - Objekt klasy ListOfSongs
+     * @param title  Tytul okna
+     * @param operateOnDataBase  Objekt klasy OperateOnDataBase
+     * @param listOfSongs  Objekt klasy ListOfSongs
      */
     public static void displayDeleteSongStage(String title, OperateOnDataBase operateOnDataBase, ListOfSongs listOfSongs){
         Stage window = new Stage();

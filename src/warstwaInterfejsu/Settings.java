@@ -3,11 +3,9 @@ package warstwaInterfejsu;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -57,13 +55,13 @@ public class Settings {
         grid.getChildren().addAll(themeText, dark, light, retro, formatText, englishFormat, normalFormat);
         grid.setHgap(200);
 
-        grid.setConstraints(themeText, 0, 0);
-        grid.setConstraints(dark, 0, 1);
-        grid.setConstraints(light, 0, 2);
-        grid.setConstraints(retro, 0, 3);
-        grid.setConstraints(formatText, 1, 0);
-        grid.setConstraints(englishFormat, 1, 1);
-        grid.setConstraints(normalFormat, 1, 2);
+        GridPane.setConstraints(themeText, 0, 0);
+        GridPane.setConstraints(dark, 0, 1);
+        GridPane.setConstraints(light, 0, 2);
+        GridPane.setConstraints(retro, 0, 3);
+        GridPane.setConstraints(formatText, 1, 0);
+        GridPane.setConstraints(englishFormat, 1, 1);
+        GridPane.setConstraints(normalFormat, 1, 2);
 
         normalFormat.setSelected(normalFormatOn);
         englishFormat.setSelected(englishFormatOn);

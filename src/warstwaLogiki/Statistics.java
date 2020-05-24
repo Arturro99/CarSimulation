@@ -23,7 +23,7 @@ public class Statistics {
 
     /**
      * Metoda zwraca srednia predkosc pojazdu
-     * @return - srednia predkosc pojazdu
+     * @return  Srednia predkosc pojazdu
      */
     public static double getAvgSpeed() {
         return forAvgSpeed[1]/forAvgSpeed[0];
@@ -31,8 +31,8 @@ public class Statistics {
 
     /**
      * Metoda sprawdza aktualna maksymalna predkosc
-     * @param power - aktualna predkosc
-     * @return - maksymalna predkosc
+     * @param power  Aktualna predkosc
+     * @return  Maksymalna predkosc
      */
     public static int getMaxSpeed(int power) {
         if(power>maxSpeed)
@@ -42,8 +42,8 @@ public class Statistics {
 
     /**
      * Metoda zwraca srednie zuzycie paliwa na okreslona chwile
-     * @param avgSpeed - srednia predkosc na dany moment jazdy
-     * @return - wartosc spalanego paliwa na 100 km
+     * @param avgSpeed  Srednia predkosc na dany moment jazdy
+     * @return  Wartosc spalanego paliwa na 100 km
      */
     public static double getAvgFuelConsumption(double avgSpeed) {
         if(!RunningTime.getIsEngineOn())
@@ -56,9 +56,9 @@ public class Statistics {
 
     /**
      * Metoda zwraca przebyta odleglosc
-     * @param power - predkosc pojazdu
-     * @param mileage - obiekt, do ktorego zostanie zapisana przebyta odleglosc
-     * @return - wartosc przebytej odleglosci
+     * @param power  Predkosc pojazdu
+     * @param mileage  Obiekt, do ktorego zostanie zapisana przebyta odleglosc
+     * @return  Wartosc przebytej odleglosci
      */
     public static double getTravelDistance(int power, Mileage mileage) {
         double tmp = power*(0.1/60.0/60.0);

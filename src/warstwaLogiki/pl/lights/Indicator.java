@@ -10,7 +10,7 @@ public class Indicator extends LightingSystem implements Lights {
 
     /**
      * Konstruktor kierunkowskazu
-     * @param side - wybor pomiedzy prawym/lewym kierunkowskazem
+     * @param side  Wybor pomiedzy prawym/lewym kierunkowskazem
      */
     public Indicator(Side side) {this.side = side; }
 
@@ -45,7 +45,7 @@ public class Indicator extends LightingSystem implements Lights {
 
     /**
      * Metoda wypisuje inforamcje o rodzaju kierukowskazu
-     * @return - podpis swiatel
+     * @return  Podpis swiatel
      */
     public String toString()
     {
@@ -58,7 +58,7 @@ public class Indicator extends LightingSystem implements Lights {
 
     /**
      * Metoda zwraca stan dzialania kierunkowskazu (true/false)
-     * @return - flaga wlaczania swiatla
+     * @return  Flaga wlaczania swiatla
      */
     public boolean getIsOn() {return isOn;}
 

@@ -18,11 +18,11 @@ public class ListOfSongs {
 
     /**
      * Metoda dodaje piosenke do listy
-     * @param title - Tytul piosenki
-     * @param artist - Artysta wykonujacy piosenke
-     * @param album - Album piosenki
-     * @param duration - Dlugosc piosenki (format HH:MM:SS)
-     * @param ID - Unikalne ID piosenki
+     * @param title  Tytul piosenki
+     * @param artist  Artysta wykonujacy piosenke
+     * @param album  Album piosenki
+     * @param duration  Dlugosc piosenki (format HH:MM:SS)
+     * @param ID  Unikalne ID piosenki
      */
     public void addSong(String title, String artist, String album, Time duration, int ID)
     {
@@ -31,11 +31,11 @@ public class ListOfSongs {
     }
     /**
      * Metoda dodaje piosenke do listy
-     * @param title - Tytul piosenki
-     * @param artist - Artysta wykonujacy piosenke
-     * @param album - Album piosenki
-     * @param duration - Dlugosc piosenki (format HH:MM:SS)
-     * @param ID - Unikalne ID piosenki
+     * @param title  Tytul piosenki
+     * @param artist  Artysta wykonujacy piosenke
+     * @param album  Album piosenki
+     * @param duration  Dlugosc piosenki (format HH:MM:SS)
+     * @param ID  Unikalne ID piosenki
      */
     public void addSong(String title, String artist, String album, String duration, int ID)
     {
@@ -45,7 +45,7 @@ public class ListOfSongs {
 
     /**
      * Metoda dodaje piosenke do listy
-     * @param song - Objekt klasy Song
+     * @param song  Objekt klasy Song
      */
     public void addSong(Song song)
     {
@@ -53,7 +53,7 @@ public class ListOfSongs {
     }
     /**
      * Metoda usuwa piosenke z listy
-     * @param song - Objekt klasy Song
+     * @param song  Objekt klasy Song
      */
     public void deleteSong(Song song)
     {
@@ -61,13 +61,13 @@ public class ListOfSongs {
     }
     /**
      * Metoda usuwa piosenke z listy
-     * @param id - Unikalne ID piosenki, ktora ma byc usunieta
+     * @param id  Unikalne ID piosenki, ktora ma byc usunieta
      */
     public void deleteSongWithID(int id)
     {
-        for (int i = 0; i<songs.size(); i++){
-            if(songs.get(i).getID() == id) {
-                deleteSong(songs.get(i));
+        for (Song song : songs) {
+            if (song.getID() == id) {
+                deleteSong(song);
                 break;
             }
         }
@@ -81,7 +81,7 @@ public class ListOfSongs {
 
     /**
      * Metoda zwraca objekt klasy Song znajdujacy sie na podanym miejscu listy
-     * @param index - Indeks piosenki na liscie
+     * @param index  Indeks piosenki na liscie
      * @return Objekt klasy Song
      */
     public Song getSong(int index) {
@@ -95,11 +95,10 @@ public class ListOfSongs {
     @Override
     public String toString()
     {
-        String tmp = "";
-        tmp += String.format("|%-23s|%-23s|%-23s|%-12s|%-5s| \n", "Title", "Artist", "Album", "Duration", "ID");
-        for(int i = 0; i < songs.size(); i++)
-            tmp += songs.get(i).toString() + "\n";
-        return tmp;
+        StringBuilder tmp = new StringBuilder();
+        tmp.append(String.format("|%-23s|%-23s|%-23s|%-12s|%-5s| \n", "Title", "Artist", "Album", "Duration", "ID"));
+        for (Song song : songs) tmp.append(song.toString()).append("\n");
+        return tmp.toString();
     }
 
 

@@ -10,11 +10,11 @@ public interface Lights {
     /**
      * Metoda wlacza swiatla
      */
-    public void turnOn();
+    void turnOn();
 
     /**
      * Metoda wylacza swiatla
      */
-    public void turnOff();
+    void turnOff();
 
 }
