@@ -10,12 +10,26 @@ import java.util.ArrayList;
  */
 public class OperateOnDataBase {
 
+    /**
+     * Zmienna przechowuje adres serwera bazy danych
+     */
     String dbURL = "jdbc:sqlserver://TWIERDZA\\ARTURROSERVER; databaseName = bazaUtworow";
+    /**
+     * Zmienna przechowuje nazwe uzytkownika
+     */
     String user = "proba";
+    /**
+     * Zmienna przechowuje haslo do konta w bazie danych
+     */
     String password = "proba1234";
+    /**
+     * Zmienna przechowuje obiekt sluzacy do laczenia sie z baza danych
+     */
     Connection con;
+    /**
+     * Zmienna przechowuje obiekt sluzacy do formulowania zapytan w bazie danych
+     */
     Statement statement;
-    ArrayList<Integer> listOfDeletedSongs = new ArrayList<>();
 
 
     /**
@@ -136,7 +150,6 @@ public class OperateOnDataBase {
         con = DriverManager.getConnection(dbURL, user, password);
         statement = con.createStatement();
         statement.executeUpdate("DELETE FROM piosenki WHERE id = " + "'" + id + "'");
-        listOfDeletedSongs.add(id);
     }
 
     /**

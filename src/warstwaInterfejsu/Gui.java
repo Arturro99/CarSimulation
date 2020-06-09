@@ -1144,7 +1144,7 @@ public class Gui extends Application {
     }
 
     /**
-     *  Metoda aktualizuje wyswietlcz prędkosci pojazdu
+     *  Metoda aktualizuje wyswietlcz predkosci pojazdu
      */
     static void showVelocity(){
         velocity.setText(Accelerator.getPower() + " km/h");
@@ -1179,7 +1179,7 @@ public class Gui extends Application {
     }
 
     /**
-     *  Metoda rysuje kontrolki biegów
+     *  Metoda rysuje kontrolki biegow
      *  @param color  Kolor wypelnienia kontorlki
      */
     private static void drawGears(Color color){
