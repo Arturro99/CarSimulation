@@ -104,7 +104,8 @@ public class Infos {
         grid.setAlignment(Pos.CENTER);
         LocalDate warrantyDate = LocalDate.of(2020, 7,21);
         Text text = new Text("Gwarancja trwa do: " + warrantyDate.toString() + "\n" +
-                             "Do końca gwarancji zostało: "+ DAYS.between(LocalDate.now(), warrantyDate) + " dni");
+                             "Do końca gwarancji zostało: "+ DAYS.between(LocalDate.now(), warrantyDate) + " dni" +
+                "\nGwaranci:\nCopyright © 2020 Artur Madaj, 224363,\nCopyright © 2020 Wojciech Sowa, 224429");
         text.setFont(new Font("Verdana", 12));
         grid.getChildren().add(text);
 
