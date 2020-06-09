@@ -15,7 +15,6 @@ public class OperateOnDataBase {
     String password = "proba1234";
     Connection con;
     Statement statement;
-    ArrayList<Integer> listOfDeletedSongs = new ArrayList<>();
 
 
     /**
@@ -136,7 +135,6 @@ public class OperateOnDataBase {
         con = DriverManager.getConnection(dbURL, user, password);
         statement = con.createStatement();
         statement.executeUpdate("DELETE FROM piosenki WHERE id = " + "'" + id + "'");
-        listOfDeletedSongs.add(id);
     }
 
     /**

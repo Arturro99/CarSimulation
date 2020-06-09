@@ -24,11 +24,29 @@ import java.util.ArrayList;
  *  @author Wojciech Sowa
  */
 public class InsertingBox {
+    /**
+     * Lista pomocna przy ustaleniu, czy uzytkownik wypelnil wszystkie pola
+     */
     static ArrayList<TextField>list = new ArrayList<>();
+    /**
+     * Zmienna przechowujaca tytul piosenki
+     */
     static TextField textTitle;
+    /**
+     * Zmienna przechowujaca album piosenki
+     */
     static TextField textAlbum;
+    /**
+     * Zmienna przechowujaca dlugosc piosenki
+     */
     static TextField textDuration;
+    /**
+     * Zmienna przechowujaca unikalne ID piosenki
+     */
     static TextField textId;
+    /**
+     * Zmienna przechowujaca wykonawce piosenki
+     */
     static TextField textPerformer;
 
     /**
